@@ -52,9 +52,8 @@ type ApplyMsg struct {
 	SnapshotIndex int
 }
 
-// Pstate
 // A Go object implementing a single Raft peer.
-//
+
 type Pstate string
 
 const Follower Pstate = "Follower"
@@ -69,9 +68,10 @@ type Raft struct {
 	dead      int32               // set by Kill()
 
 	applyCh      chan ApplyMsg //作为leader发给apply channel来应用
+	applyCond    *sync.Cond    //用于唤醒apply channel 这里有nocopy使用引用
 	state        Pstate        //节点的状态
 	electionTime time.Time     //发起election的时间
-
+	heartbeat    time.Duration //如果为leader的心跳时间
 	// Your data here (2A, 2B, 2C).
 	//持久性状态
 	currentTerm int         //这个节点最新的term
@@ -271,6 +271,9 @@ func (rf *Raft) sendAppendEntry(server int, args *RequestVoteArgs, reply *Reques
 	ok := rf.peers[server].Call("Raft.AppendEntry", args, reply)
 	return ok
 }
+func (rf *Raft) LeaderElection() {
+
+}
 
 // Start
 // the service using Raft (e.g. a k/v server) wants to start
@@ -321,16 +324,34 @@ func (rf *Raft) killed() bool {
 // heartsbeats recently.
 func (rf *Raft) ticker() {
 	for rf.killed() == false {
-		exectime := rand.Intn(100)
 
 		// Your code here to check if a leader election should
 		// be started and to randomize sleeping time using
 		// time.Sleep().
-
+		time.Sleep(rf.heartbeat)
+		rf.mu.Lock()
+		defer rf.mu.Unlock()
+		if rf.state == Leader {
+			rf.setElectionTime()
+			//rf.AppendEntry()
+		}
+		if time.Now().After(rf.electionTime) {
+			rf.setElectionTime()
+			rf.LeaderElection()
+		}
 	}
 }
+
+//为该节点设置发起选举时间间隔
 func (rf *Raft) setElectionTime() {
-	rf.electionTime = rand.Intn()
+	now := time.Now()
+	duration := time.Duration(150+rand.Intn(50)) * time.Millisecond
+	rf.electionTime = now.Add(time.Duration(duration))
+}
+
+// Applier 将日志提交到状态机
+func (rf *Raft) applier() {
+
 }
 
 // Make
@@ -355,13 +376,25 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.dead = 0
 	rf.applyCh = applyCh
 	rf.state = Follower
+	rf.setElectionTime()
+	rf.heartbeat = 50 * time.Millisecond
+	rf.currentTerm = 0
+	rf.votedFor = -1 //这里需要初始化为-1
+	rf.log = []*logEntry{}
+	rf.commitIndex = 0
+	rf.lastApplied = 0
+	rf.nextIndex = make([]int, len(peers))
+	rf.matchIndex = make([]int, len(peers))
 
+	rf.applyCh = applyCh
+	rf.applyCond = sync.NewCond(&rf.mu)
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 
 	// start ticker goroutine to start elections
 	go rf.ticker()
-
+	//负责提交日志的
+	go rf.applier()
 	return rf
 
 }
