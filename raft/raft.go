@@ -76,7 +76,7 @@ type Raft struct {
 	//持久性状态
 	currentTerm int         //这个节点最新的term
 	votedFor    int         //当前任期的获得选票的candidate的id
-	log         []*logEntry //
+	log         Log //日志
 
 	//所有节点的易失性状态
 	commitIndex int //这个节点已经提交的最大的index
@@ -89,20 +89,18 @@ type Raft struct {
 
 }
 
-//自定义的log entry
-type logEntry struct {
-	Command interface{}
-	Term    int
-}
-
 // GetState return currentTerm and whether this server
 // believes it is the leader.
 func (rf *Raft) GetState() (int, bool) {
-
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	var term int
 	var isleader bool
 	// Your code here (2A).
-
+	if rf.state==Leader{
+		isleader = true
+	}
+	term = rf.currentTerm
 	return term, isleader
 }
 
@@ -165,115 +163,8 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 
 }
 
-// RequestVoteArgs
-// example RequestVote RPC arguments structure.
-// field names must start with capital letters!
-//
-type RequestVoteArgs struct {
-	// Your data here (2A, 2B).
-	Term         int //candidate's term
-	CandidateId  int //candidate
-	LastLogIndex int //index of this candidate's last entry
-	LastLogTerm  int //term of this candidate's last entry
-}
 
-// RequestVoteReply
-// example RequestVote RPC reply structure.
-// field names must start with capital letters!
-//
-type RequestVoteReply struct {
-	// Your data here (2A).
-	Term        int  //current term, for candidate to update itself
-	VoteGranted bool //true means candidate got a vote
-}
 
-// RequestVote
-// example RequestVote RPC handler.
-//
-func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
-	// Your code here (2A, 2B).
-	reply.VoteGranted = false
-	reply.Term = rf.currentTerm
-	//如何这个candidate当选后的term比这个节点的current term还小
-	//就不会获得vote
-	/*
-		if args.Term < rf.currentTerm {
-			reply.VoteGranted = false
-			reply.Term = rf.currentTerm
-		}
-	*/
-	//这两个if是对 at least up-to-date 的实现
-	if (rf.votedFor == 0 || rf.votedFor == args.CandidateId) &&
-		args.LastLogTerm > rf.currentTerm {
-		reply.VoteGranted = true
-	}
-	if (rf.votedFor == 0 || rf.votedFor == args.CandidateId) &&
-		args.LastLogTerm == rf.currentTerm &&
-		args.LastLogIndex >= rf.commitIndex {
-		reply.VoteGranted = true
-	}
-
-}
-
-//
-// example code to send a RequestVote RPC to a server.
-// server is the index of the target server in rf.peers[].
-// expects RPC arguments in args.
-// fills in *reply with RPC reply, so caller should
-// pass &reply.
-// the types of the args and reply passed to Call() must be
-// the same as the types of the arguments declared in the
-// handler function (including whether they are pointers).
-//
-// The labrpc package simulates a lossy network, in which servers
-// may be unreachable, and in which requests and replies may be lost.
-// Call() sends a request and waits for a reply. If a reply arrives
-// within a timeout interval, Call() returns true; otherwise
-// Call() returns false. Thus Call() may not return for a while.
-// A false return can be caused by a dead server, a live server that
-// can't be reached, a lost request, or a lost reply.
-//
-// Call() is guaranteed to return (perhaps after a delay) *except* if the
-// handler function on the server side does not return.  Thus there
-// is no need to implement your own timeouts around Call().
-//
-// look at the comments in ../labrpc/labrpc.go for more details.
-//
-// if you're having trouble getting RPC to work, check that you've
-// capitalized all field names in structs passed over RPC, and
-// that the caller passes the address of the reply struct with &, not
-// the struct itself.
-//
-func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) bool {
-	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
-	return ok
-}
-
-// AppendEntryArgs
-//append entry消息的定义
-type AppendEntryArgs struct {
-	Term         int        //leader 的term
-	LeaderId     int        //leader在peers中的索引，这样follower就可以返回
-	PrevLogIndex int        //新的日志项的前一个
-	PrevLogTerm  int        //新的日志项的前一个的term
-	Entries      []logEntry //用于对齐log，作为心跳的时候为[]
-	LeaderCommit int        //leader的commitIndex
-}
-type AppendEntryReply struct {
-	Term    int  //follower的current term
-	Success bool //true：f包含prevLogIndex和prevLogTerm
-}
-
-func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *RequestVoteReply) {
-
-}
-func (rf *Raft) sendAppendEntry(server int, args *RequestVoteArgs, reply *RequestVoteReply) bool {
-	ok := rf.peers[server].Call("Raft.AppendEntry", args, reply)
-	return ok
-}
-func (rf *Raft) LeaderElection() {
-
-}
 
 // Start
 // the service using Raft (e.g. a k/v server) wants to start
@@ -324,32 +215,34 @@ func (rf *Raft) killed() bool {
 // heartsbeats recently.
 func (rf *Raft) ticker() {
 	for rf.killed() == false {
-
 		// Your code here to check if a leader election should
 		// be started and to randomize sleeping time using
 		// time.Sleep().
 		time.Sleep(rf.heartbeat)
 		rf.mu.Lock()
-		defer rf.mu.Unlock()
+	
 		if rf.state == Leader {
 			rf.setElectionTime()
-			//rf.AppendEntry()
+			rf.LeaderAppendEntry()
 		}
+
+		//这里直接比较now是否after就可以了因为follower在收到heartbeat的时候又会set一次electiontime
 		if time.Now().After(rf.electionTime) {
 			rf.setElectionTime()
 			rf.LeaderElection()
 		}
+		rf.mu.Unlock()
 	}
 }
 
-//为该节点设置发起选举时间间隔
+//为该节点设置发起选举时间间隔(这个设置是以now为基准，提供发起election的时间)
 func (rf *Raft) setElectionTime() {
 	now := time.Now()
 	duration := time.Duration(150+rand.Intn(50)) * time.Millisecond
 	rf.electionTime = now.Add(time.Duration(duration))
 }
 
-// Applier 将日志提交到状态机
+// Applier 将日志提交到状态机(eg k-v server)
 func (rf *Raft) applier() {
 
 }
@@ -380,7 +273,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.heartbeat = 50 * time.Millisecond
 	rf.currentTerm = 0
 	rf.votedFor = -1 //这里需要初始化为-1
-	rf.log = []*logEntry{}
+	rf.log = Log{Entries: []*Entry{&Entry{1,"add"}}}
 	rf.commitIndex = 0
 	rf.lastApplied = 0
 	rf.nextIndex = make([]int, len(peers))
@@ -397,4 +290,13 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	go rf.applier()
 	return rf
 
+}
+
+//peer遇到了term更高的节点的行为,
+//更新自己的term为新term,
+//对于candidate：失去竞选资格(在是否晋升逻辑哪里体现)
+func (rf *Raft)MeetGreaterTerm(term int){
+	rf.currentTerm = term
+	rf.state = Follower
+	rf.votedFor = -1
 }
