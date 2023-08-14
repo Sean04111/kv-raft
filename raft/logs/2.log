@@ -1,0 +1,120 @@
+2023-08-14T14:21:30.556+0800	info	raft/raft.go:280	节点生成
+2023-08-14T14:21:30.556+0800	info	raft/raft.go:251	节点更新发起选举时间为 65ms后
+2023-08-14T14:21:30.740+0800	info	raft/election.go:41	收到 4 的投票邀请
+2023-08-14T14:21:30.740+0800	info	raft/raft.go:318	节点更新term
+2023-08-14T14:21:30.740+0800	info	raft/election.go:66	符合要求,投给 4
+2023-08-14T14:21:30.740+0800	info	raft/raft.go:251	节点更新发起选举时间为 66ms后
+2023-08-14T14:21:30.740+0800	info	raft/election.go:41	收到 1 的投票邀请
+2023-08-14T14:21:30.740+0800	info	raft/election.go:69	本节点已经投票给 4 故拒绝
+2023-08-14T14:21:30.740+0800	info	raft/election.go:41	收到 5 的投票邀请
+2023-08-14T14:21:30.740+0800	info	raft/election.go:69	本节点已经投票给 4 故拒绝
+2023-08-14T14:21:30.740+0800	info	raft/election.go:41	收到 3 的投票邀请
+2023-08-14T14:21:30.740+0800	info	raft/election.go:69	本节点已经投票给 4 故拒绝
+2023-08-14T14:21:30.987+0800	info	raft/election.go:143	发起选举
+2023-08-14T14:21:30.987+0800	info	raft/election.go:41	收到 0 的投票邀请
+2023-08-14T14:21:30.987+0800	info	raft/election.go:51	0的term不大于本节点,故拒绝放弃竞选
+2023-08-14T14:21:30.987+0800	info	raft/election.go:128	收到 3 的投票
+2023-08-14T14:21:30.987+0800	info	raft/election.go:128	收到 5 的投票
+2023-08-14T14:21:31.171+0800	info	raft/election.go:41	收到 3 的投票邀请
+2023-08-14T14:21:31.171+0800	info	raft/raft.go:318	节点更新term
+2023-08-14T14:21:31.171+0800	info	raft/election.go:66	符合要求,投给 3
+2023-08-14T14:21:31.171+0800	info	raft/raft.go:251	节点更新发起选举时间为 134ms后
+2023-08-14T14:21:31.171+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.171+0800	info	raft/raft.go:251	节点更新发起选举时间为 25ms后
+2023-08-14T14:21:31.171+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.171+0800	info	raft/raft.go:251	节点更新发起选举时间为 120ms后
+2023-08-14T14:21:31.171+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.171+0800	info	raft/raft.go:251	节点更新发起选举时间为 65ms后
+2023-08-14T14:21:31.234+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.234+0800	info	raft/raft.go:251	节点更新发起选举时间为 4ms后
+2023-08-14T14:21:31.296+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.296+0800	info	raft/raft.go:251	节点更新发起选举时间为 131ms后
+2023-08-14T14:21:31.359+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.359+0800	info	raft/raft.go:251	节点更新发起选举时间为 52ms后
+2023-08-14T14:21:31.422+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.422+0800	info	raft/raft.go:251	节点更新发起选举时间为 33ms后
+2023-08-14T14:21:31.485+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.485+0800	info	raft/raft.go:251	节点更新发起选举时间为 13ms后
+2023-08-14T14:21:31.548+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.548+0800	info	raft/raft.go:251	节点更新发起选举时间为 65ms后
+2023-08-14T14:21:31.610+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.610+0800	info	raft/raft.go:251	节点更新发起选举时间为 148ms后
+2023-08-14T14:21:31.671+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.671+0800	info	raft/raft.go:251	节点更新发起选举时间为 18ms后
+2023-08-14T14:21:31.732+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.732+0800	info	raft/raft.go:251	节点更新发起选举时间为 15ms后
+2023-08-14T14:21:31.793+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.793+0800	info	raft/raft.go:251	节点更新发起选举时间为 11ms后
+2023-08-14T14:21:31.854+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.854+0800	info	raft/raft.go:251	节点更新发起选举时间为 54ms后
+2023-08-14T14:21:31.916+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.916+0800	info	raft/raft.go:251	节点更新发起选举时间为 0ms后
+2023-08-14T14:21:31.978+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:31.978+0800	info	raft/raft.go:251	节点更新发起选举时间为 115ms后
+2023-08-14T14:21:32.039+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.039+0800	info	raft/raft.go:251	节点更新发起选举时间为 126ms后
+2023-08-14T14:21:32.100+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.100+0800	info	raft/raft.go:251	节点更新发起选举时间为 71ms后
+2023-08-14T14:21:32.161+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.161+0800	info	raft/raft.go:251	节点更新发起选举时间为 78ms后
+2023-08-14T14:21:32.223+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.223+0800	info	raft/raft.go:251	节点更新发起选举时间为 149ms后
+2023-08-14T14:21:32.284+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.284+0800	info	raft/raft.go:251	节点更新发起选举时间为 26ms后
+2023-08-14T14:21:32.345+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.345+0800	info	raft/raft.go:251	节点更新发起选举时间为 95ms后
+2023-08-14T14:21:32.406+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.406+0800	info	raft/raft.go:251	节点更新发起选举时间为 28ms后
+2023-08-14T14:21:32.466+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.466+0800	info	raft/raft.go:251	节点更新发起选举时间为 11ms后
+2023-08-14T14:21:32.529+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.529+0800	info	raft/raft.go:251	节点更新发起选举时间为 6ms后
+2023-08-14T14:21:32.592+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.592+0800	info	raft/raft.go:251	节点更新发起选举时间为 130ms后
+2023-08-14T14:21:32.654+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.654+0800	info	raft/raft.go:251	节点更新发起选举时间为 35ms后
+2023-08-14T14:21:32.716+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.716+0800	info	raft/raft.go:251	节点更新发起选举时间为 148ms后
+2023-08-14T14:21:32.778+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.778+0800	info	raft/raft.go:251	节点更新发起选举时间为 55ms后
+2023-08-14T14:21:32.841+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.841+0800	info	raft/raft.go:251	节点更新发起选举时间为 135ms后
+2023-08-14T14:21:32.903+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.903+0800	info	raft/raft.go:251	节点更新发起选举时间为 83ms后
+2023-08-14T14:21:32.966+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:32.966+0800	info	raft/raft.go:251	节点更新发起选举时间为 2ms后
+2023-08-14T14:21:33.028+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.028+0800	info	raft/raft.go:251	节点更新发起选举时间为 22ms后
+2023-08-14T14:21:33.090+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.090+0800	info	raft/raft.go:251	节点更新发起选举时间为 49ms后
+2023-08-14T14:21:33.152+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.152+0800	info	raft/raft.go:251	节点更新发起选举时间为 131ms后
+2023-08-14T14:21:33.215+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.215+0800	info	raft/raft.go:251	节点更新发起选举时间为 143ms后
+2023-08-14T14:21:33.277+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.277+0800	info	raft/raft.go:251	节点更新发起选举时间为 130ms后
+2023-08-14T14:21:33.340+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.340+0800	info	raft/raft.go:251	节点更新发起选举时间为 76ms后
+2023-08-14T14:21:33.401+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.401+0800	info	raft/raft.go:251	节点更新发起选举时间为 90ms后
+2023-08-14T14:21:33.464+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.464+0800	info	raft/raft.go:251	节点更新发起选举时间为 55ms后
+2023-08-14T14:21:33.527+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.527+0800	info	raft/raft.go:251	节点更新发起选举时间为 125ms后
+2023-08-14T14:21:33.589+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.589+0800	info	raft/raft.go:251	节点更新发起选举时间为 103ms后
+2023-08-14T14:21:33.653+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.653+0800	info	raft/raft.go:251	节点更新发起选举时间为 23ms后
+2023-08-14T14:21:33.715+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.715+0800	info	raft/raft.go:251	节点更新发起选举时间为 70ms后
+2023-08-14T14:21:33.777+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.777+0800	info	raft/raft.go:251	节点更新发起选举时间为 131ms后
+2023-08-14T14:21:33.840+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.840+0800	info	raft/raft.go:251	节点更新发起选举时间为 37ms后
+2023-08-14T14:21:33.901+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.901+0800	info	raft/raft.go:251	节点更新发起选举时间为 73ms后
+2023-08-14T14:21:33.963+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:33.963+0800	info	raft/raft.go:251	节点更新发起选举时间为 64ms后
+2023-08-14T14:21:34.025+0800	info	raft/appendentry.go:45	收到心跳,来自3
+2023-08-14T14:21:34.025+0800	info	raft/raft.go:251	节点更新发起选举时间为 129ms后
+2023-08-14T14:21:34.072+0800	info	raft/raft.go:210	节点死亡

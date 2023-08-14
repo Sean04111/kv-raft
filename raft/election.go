@@ -38,25 +38,43 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here (2A, 2B).
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	rf.logger.Info("收到 ",args.CandidateId," 的投票邀请")
 	if args.Term>rf.currentTerm{
 		rf.MeetGreaterTerm(args.Term)
 	}
-	
-	myindex:=rf.log.LastIndex()
-	myterm:=rf.log.EntryAt(myindex).Term
-	isuptodate:=args.LastLogTerm>myterm||(args.LastLogTerm==myterm&&myindex<=args.LastLogIndex)
-
-	if args.Term < rf.currentTerm{
+	if rf.state==Leader{
+		rf.logger.Info("本节点已经是权威节点，故拒绝")
 		reply.VoteGranted = false
-	}else if rf.votedFor==-1 && isuptodate{
-		reply.VoteGranted = true
-		rf.votedFor = args.CandidateId
-		rf.setElectionTime()
-	}else{
+		reply.Term = rf.currentTerm
+	}
+	if rf.state==Candidate{
+		rf.logger.Info(args.CandidateId,"的term不大于本节点,故拒绝放弃竞选")
+		reply.Term = rf.currentTerm
 		reply.VoteGranted = false
 	}
-	reply.Term = rf.currentTerm
+	if rf.state==Follower{
+			myindex:=rf.log.LastIndex()
+			myterm:=rf.log.EntryAt(myindex).Term
+			isuptodate:=args.LastLogTerm>myterm||(args.LastLogTerm==myterm&&myindex<=args.LastLogIndex)
 
+		if args.Term < rf.currentTerm{
+			reply.VoteGranted = false
+			rf.logger.Info("由于candidate的term比本节点小,拒绝投票")
+		}else if rf.votedFor==-1 && isuptodate{
+			reply.VoteGranted = true
+			rf.votedFor = args.CandidateId
+			rf.logger.Info("符合要求,投给 ",args.CandidateId)
+			rf.setElectionTime()
+		}else if rf.votedFor!=-1{
+			rf.logger.Info("本节点已经投票给 ",rf.votedFor," 故拒绝")
+			reply.VoteGranted = false
+		}else{
+			rf.logger.Info("不是uptodate,拒绝投票")
+			reply.VoteGranted = false
+		}
+		reply.Term = rf.currentTerm
+	}
+	
 }
 
 //
@@ -98,23 +116,22 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 //
 func (rf *Raft)RequestAndAdd(server int,args *RequestVoteArgs,vote *int){
 	reply:=RequestVoteReply{}
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
 	rf.sendRequestVote(server,args,&reply)
 
 
 	if reply.Term>rf.currentTerm{
-		rf.currentTerm = reply.Term
+		rf.logger.Info("发现更高的term,放弃竞选")
+		rf.MeetGreaterTerm(reply.Term)
 	}
-	if reply.VoteGranted{
+	if reply.VoteGranted && rf.state == Candidate{
 		*vote++
+		rf.logger.Info("收到 ",server," 的投票")
 		//这里判定是否达到多数派的做法是在每一次发送request请求的时候都判断一下
 		if *vote>len(rf.peers)>>1{
 			//判断一下term是否被修改了
 			//持有旧term的candidate是不能变成leader的
 			if rf.currentTerm==args.Term{
 				rf.UpGrade()
-				rf.LeaderAppendEntry()
 			}
 		}
 	}
@@ -123,6 +140,7 @@ func (rf *Raft)RequestAndAdd(server int,args *RequestVoteArgs,vote *int){
 func (rf *Raft) LeaderElection() {
 	//首先state改为candidate
 	//并且term++
+	rf.logger.Info("发起选举")
 	rf.state = Candidate
 	rf.currentTerm++
 	rf.votedFor = rf.me
@@ -137,7 +155,7 @@ func (rf *Raft) LeaderElection() {
 	//先给自己投一票
 	vote:=1
 	for k,_:=range rf.peers{
-		if k!=rf.me{
+		if k!=rf.me && rf.state==Candidate{
 			go rf.RequestAndAdd(k,args,&vote)
 		}
 	}
@@ -146,5 +164,7 @@ func (rf *Raft)UpGrade(){
 	if rf.state == Candidate{
 		rf.state=Leader
 	}
+	rf.logger.Info("节点成为leader")
+	rf.LeaderAppendEntry()
 	//成为leader后还有其他操作
 }

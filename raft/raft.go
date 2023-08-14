@@ -19,6 +19,8 @@ package raft
 
 import (
 	"math/rand"
+	"os"
+	"strconv"
 	"time"
 
 	//	"bytes"
@@ -27,6 +29,9 @@ import (
 
 	//	"6.824/labgob"
 	"kv-raft/labrpc"
+
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 // ApplyMsg
@@ -86,7 +91,7 @@ type Raft struct {
 	matchIndex []int //对于每个服务器，已知在服务器上复制的最高日志条目的索引（初始化为0，单调增加）
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
-
+	logger *zap.SugaredLogger //采用zap日志收集框架记录raft运行日志
 }
 
 // GetState return currentTerm and whether this server
@@ -202,6 +207,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 // should call killed() to check whether it should stop.
 //
 func (rf *Raft) Kill() {
+	rf.logger.Info("节点死亡")
 	atomic.StoreInt32(&rf.dead, 1)
 	// Your code here, if desired.
 }
@@ -219,27 +225,30 @@ func (rf *Raft) ticker() {
 		// be started and to randomize sleeping time using
 		// time.Sleep().
 		time.Sleep(rf.heartbeat)
-		rf.mu.Lock()
-	
 		if rf.state == Leader {
+			rf.mu.Lock()
+			rf.logger.Info("leader 发送心跳")
 			rf.setElectionTime()
 			rf.LeaderAppendEntry()
+			rf.mu.Unlock()
 		}
 
 		//这里直接比较now是否after就可以了因为follower在收到heartbeat的时候又会set一次electiontime
-		if time.Now().After(rf.electionTime) {
-			rf.setElectionTime()
+		if time.Now().After(rf.electionTime) && rf.state==Follower{
+			rf.mu.Lock()
 			rf.LeaderElection()
+			rf.mu.Unlock()
 		}
-		rf.mu.Unlock()
 	}
 }
 
 //为该节点设置发起选举时间间隔(这个设置是以now为基准，提供发起election的时间)
 func (rf *Raft) setElectionTime() {
 	now := time.Now()
-	duration := time.Duration(150+rand.Intn(50)) * time.Millisecond
+	due:=rand.Intn(150)
+	duration := time.Duration(150+due) * time.Millisecond
 	rf.electionTime = now.Add(time.Duration(duration))
+	rf.logger.Info("节点更新发起选举时间为 ",due,"ms后")
 }
 
 // Applier 将日志提交到状态机(eg k-v server)
@@ -266,6 +275,12 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.me = me
 
 	// Your initialization code here (2A, 2B, 2C).
+
+	rf.SetLogger()
+	rf.logger.Info("节点生成")
+
+
+
 	rf.dead = 0
 	rf.applyCh = applyCh
 	rf.state = Follower
@@ -281,6 +296,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	rf.applyCh = applyCh
 	rf.applyCond = sync.NewCond(&rf.mu)
+
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 
@@ -299,4 +315,18 @@ func (rf *Raft)MeetGreaterTerm(term int){
 	rf.currentTerm = term
 	rf.state = Follower
 	rf.votedFor = -1
+	rf.logger.Info("节点更新term")
+}
+//节点初始化logger
+func (rf *Raft)SetLogger(){
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	filename:="./logs/"+strconv.Itoa(rf.me)+".log"
+	file,_:=os.Create(filename)
+	filewriter:=zapcore.AddSync(file)
+	config:=zap.NewProductionEncoderConfig()
+	config.EncodeTime = zapcore.ISO8601TimeEncoder
+	encoder:=zapcore.NewConsoleEncoder(config)
+	core:=zapcore.NewCore(encoder,filewriter,zapcore.DebugLevel)
+	rf.logger = zap.New(core,zap.AddCaller()).Sugar()
 }
