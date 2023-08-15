@@ -234,8 +234,9 @@ func (rf *Raft) ticker() {
 		}
 
 		//这里直接比较now是否after就可以了因为follower在收到heartbeat的时候又会set一次electiontime
-		if time.Now().After(rf.electionTime) && rf.state==Follower{
+		if time.Now().After(rf.electionTime) {
 			rf.mu.Lock()
+			rf.setElectionTime()
 			rf.LeaderElection()
 			rf.mu.Unlock()
 		}

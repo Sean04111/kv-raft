@@ -140,11 +140,11 @@ func (rf *Raft)RequestAndAdd(server int,args *RequestVoteArgs,vote *int){
 func (rf *Raft) LeaderElection() {
 	//首先state改为candidate
 	//并且term++
-	rf.logger.Info("发起选举")
 	rf.state = Candidate
 	rf.currentTerm++
 	rf.votedFor = rf.me
 
+	rf.logger.Info("发起term为 ",rf.currentTerm," 的选举")
 
 	args:=&RequestVoteArgs{
 		Term: rf.currentTerm,
