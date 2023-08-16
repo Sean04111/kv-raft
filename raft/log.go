@@ -20,3 +20,15 @@ func (lg *Log)Append(x Entry){
 func (lg *Log)EntryAt(index int)Entry{
 	return *lg.Entries[index]
 }
+//获取去区间内的entry,左闭右开
+func (lg *Log)EntryBetween(from , end int)[]Entry{
+	ans:=[]Entry{}
+	for i:=from;i<end;i++{
+		ans = append(ans, lg.EntryAt(i))
+	}
+	return ans
+}
+//获取日志长度
+func (lg *Log)Len()int{
+	return len(lg.Entries)
+}

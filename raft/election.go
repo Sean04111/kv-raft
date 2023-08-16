@@ -160,11 +160,29 @@ func (rf *Raft) LeaderElection() {
 		}
 	}
 }
+
 func (rf *Raft)UpGrade(){
 	if rf.state == Candidate{
 		rf.state=Leader
 	}
 	rf.logger.Info("节点成为leader")
+
+
+	//初始化nextindex和matchindex
+	rf.entryIndexInitiallize()
+
+
+	//发送ap消息
 	rf.LeaderAppendEntry()
-	//成为leader后还有其他操作
+
+}
+
+//成为leader后初始化matchindex和nextindex
+func (rf *Raft)entryIndexInitiallize(){
+	rf.nextIndex = make([]int, len(rf.peers))
+	rf.matchIndex = make([]int, len(rf.peers))
+
+	for k,_:=range rf.nextIndex{
+		rf.nextIndex[k] = rf.log.LastIndex()+1
+	}
 }

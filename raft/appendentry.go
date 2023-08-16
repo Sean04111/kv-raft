@@ -15,6 +15,7 @@ type AppendEntryReply struct {
 	Success bool //true：f包含prevLogIndex和prevLogTerm
 }
 
+//AppendEntry RPC
 func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 	rf.mu.Lock()
 	if rf.state==Candidate{
@@ -53,10 +54,18 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 
 
 }
+
+
+
+//向每一个peer发送AP消息
 func (rf *Raft) sendAppendEntry(server int, args *AppendEntryArgs ,reply *AppendEntryReply) bool {
+	rf.logger.Info("给节点 ",server," 发送心跳")
 	ok := rf.peers[server].Call("Raft.AppendEntry", args, reply)
 	return ok
 }
+
+
+//leader处理发给id为server的peer的AP消息的响应
 func (rf *Raft)LeaderAP(server int,args *AppendEntryArgs){
 	reply:= &AppendEntryReply{}
 	rf.sendAppendEntry(server,args,reply)
@@ -69,11 +78,17 @@ func (rf *Raft)LeaderAP(server int,args *AppendEntryArgs){
 //leader 发送AppendEntry消息
 func (rf *Raft)LeaderAppendEntry(){
 
-	args:=&AppendEntryArgs{
-		Term:rf.currentTerm,
-		LeaderId: rf.me,
-	}
+	
 	for k,_:=range rf.peers{
+
+		args:=&AppendEntryArgs{
+			Term:rf.currentTerm,
+			LeaderId: rf.me,
+			LeaderCommit: rf.commitIndex,
+		}
+		args.PrevLogIndex = rf.nextIndex[k]-1
+		args.PrevLogTerm = rf.log.EntryAt(args.PrevLogIndex).Term
+		args.Entries = rf.log.EntryBetween(args.PrevLogIndex,rf.log.Len())
 		if k!=rf.me &&rf.state==Leader{
 			go rf.LeaderAP(k,args)
 		}

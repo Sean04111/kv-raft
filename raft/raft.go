@@ -191,7 +191,21 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	isLeader := true
 
 	// Your code here (2B).
-
+	if rf.killed()==false{
+		if rf.state==Leader{
+			index = rf.log.LastIndex()+1
+			term = rf.currentTerm
+			newentry:=Entry{
+				Term: term,
+				Cmd: command,
+			}
+			rf.log.Append(newentry)
+		}else{
+			isLeader = false
+		}
+	}else{
+		isLeader = false
+	}
 	return index, term, isLeader
 }
 
@@ -227,14 +241,13 @@ func (rf *Raft) ticker() {
 		time.Sleep(rf.heartbeat)
 		if rf.state == Leader {
 			rf.mu.Lock()
-			rf.logger.Info("leader 发送心跳")
 			rf.setElectionTime()
 			rf.LeaderAppendEntry()
 			rf.mu.Unlock()
 		}
 
 		//这里直接比较now是否after就可以了因为follower在收到heartbeat的时候又会set一次electiontime
-		if time.Now().After(rf.electionTime) {
+		if time.Now().After(rf.electionTime){
 			rf.mu.Lock()
 			rf.setElectionTime()
 			rf.LeaderElection()
@@ -292,8 +305,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.log = Log{Entries: []*Entry{&Entry{1,"add"}}}
 	rf.commitIndex = 0
 	rf.lastApplied = 0
-	rf.nextIndex = make([]int, len(peers))
-	rf.matchIndex = make([]int, len(peers))
+
+
+	
 
 	rf.applyCh = applyCh
 	rf.applyCond = sync.NewCond(&rf.mu)

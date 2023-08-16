@@ -1,183 +1,468 @@
-2023-08-15T09:00:48.883+0800	info	raft/raft.go:281	节点生成
-2023-08-15T09:00:48.883+0800	info	raft/raft.go:252	节点更新发起选举时间为 35ms后
-2023-08-15T09:00:49.058+0800	info	raft/election.go:41	收到 1 的投票邀请
-2023-08-15T09:00:49.058+0800	info	raft/raft.go:319	节点更新term
-2023-08-15T09:00:49.058+0800	info	raft/election.go:66	符合要求,投给 1
-2023-08-15T09:00:49.058+0800	info	raft/raft.go:252	节点更新发起选举时间为 37ms后
-2023-08-15T09:00:49.058+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.058+0800	info	raft/raft.go:252	节点更新发起选举时间为 0ms后
-2023-08-15T09:00:49.058+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.058+0800	info	raft/raft.go:252	节点更新发起选举时间为 72ms后
-2023-08-15T09:00:49.058+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.058+0800	info	raft/raft.go:252	节点更新发起选举时间为 136ms后
-2023-08-15T09:00:49.125+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.125+0800	info	raft/raft.go:252	节点更新发起选举时间为 11ms后
-2023-08-15T09:00:49.189+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.189+0800	info	raft/raft.go:252	节点更新发起选举时间为 49ms后
-2023-08-15T09:00:49.255+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.255+0800	info	raft/raft.go:252	节点更新发起选举时间为 39ms后
-2023-08-15T09:00:49.320+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.320+0800	info	raft/raft.go:252	节点更新发起选举时间为 69ms后
-2023-08-15T09:00:49.370+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.370+0800	info	raft/raft.go:252	节点更新发起选举时间为 131ms后
-2023-08-15T09:00:49.421+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.421+0800	info	raft/raft.go:252	节点更新发起选举时间为 133ms后
-2023-08-15T09:00:49.485+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.485+0800	info	raft/raft.go:252	节点更新发起选举时间为 90ms后
-2023-08-15T09:00:49.549+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.549+0800	info	raft/raft.go:252	节点更新发起选举时间为 145ms后
-2023-08-15T09:00:49.608+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.608+0800	info	raft/raft.go:252	节点更新发起选举时间为 12ms后
-2023-08-15T09:00:49.670+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.670+0800	info	raft/raft.go:252	节点更新发起选举时间为 13ms后
-2023-08-15T09:00:49.733+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.733+0800	info	raft/raft.go:252	节点更新发起选举时间为 84ms后
-2023-08-15T09:00:49.795+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.795+0800	info	raft/raft.go:252	节点更新发起选举时间为 17ms后
-2023-08-15T09:00:49.853+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:49.853+0800	info	raft/raft.go:252	节点更新发起选举时间为 41ms后
-2023-08-15T09:00:50.044+0800	info	raft/raft.go:252	节点更新发起选举时间为 0ms后
-2023-08-15T09:00:50.044+0800	info	raft/election.go:147	发起term为 2 的选举
-2023-08-15T09:00:50.220+0800	info	raft/raft.go:252	节点更新发起选举时间为 84ms后
-2023-08-15T09:00:50.220+0800	info	raft/election.go:147	发起term为 3 的选举
-2023-08-15T09:00:50.475+0800	info	raft/raft.go:252	节点更新发起选举时间为 97ms后
-2023-08-15T09:00:50.475+0800	info	raft/election.go:147	发起term为 4 的选举
-2023-08-15T09:00:50.774+0800	info	raft/raft.go:252	节点更新发起选举时间为 75ms后
-2023-08-15T09:00:50.774+0800	info	raft/election.go:147	发起term为 5 的选举
-2023-08-15T09:00:50.963+0800	info	raft/appendentry.go:22	收到新leader的心跳,放弃竞选
-2023-08-15T09:00:50.963+0800	info	raft/raft.go:319	节点更新term
-2023-08-15T09:00:50.963+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:50.963+0800	info	raft/raft.go:252	节点更新发起选举时间为 45ms后
-2023-08-15T09:00:50.963+0800	info	raft/appendentry.go:45	收到心跳,来自1
-2023-08-15T09:00:50.963+0800	info	raft/raft.go:252	节点更新发起选举时间为 146ms后
-2023-08-15T09:00:51.030+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:51.030+0800	info	raft/raft.go:252	节点更新发起选举时间为 124ms后
-2023-08-15T09:00:51.091+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:51.091+0800	info	raft/raft.go:252	节点更新发起选举时间为 109ms后
-2023-08-15T09:00:51.157+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:51.157+0800	info	raft/raft.go:252	节点更新发起选举时间为 116ms后
-2023-08-15T09:00:51.217+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:51.217+0800	info	raft/raft.go:252	节点更新发起选举时间为 55ms后
-2023-08-15T09:00:51.284+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:51.284+0800	info	raft/raft.go:252	节点更新发起选举时间为 13ms后
-2023-08-15T09:00:51.340+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:51.340+0800	info	raft/raft.go:252	节点更新发起选举时间为 136ms后
-2023-08-15T09:00:51.391+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:51.391+0800	info	raft/raft.go:252	节点更新发起选举时间为 120ms后
-2023-08-15T09:00:51.447+0800	info	raft/appendentry.go:45	收到心跳,来自6
-2023-08-15T09:00:51.447+0800	info	raft/raft.go:252	节点更新发起选举时间为 18ms后
-2023-08-15T09:00:51.634+0800	info	raft/raft.go:252	节点更新发起选举时间为 119ms后
-2023-08-15T09:00:51.634+0800	info	raft/election.go:147	发起term为 7 的选举
-2023-08-15T09:00:51.634+0800	info	raft/election.go:41	收到 3 的投票邀请
-2023-08-15T09:00:51.634+0800	info	raft/raft.go:319	节点更新term
-2023-08-15T09:00:51.634+0800	info	raft/election.go:66	符合要求,投给 3
-2023-08-15T09:00:51.634+0800	info	raft/raft.go:252	节点更新发起选举时间为 52ms后
-2023-08-15T09:00:51.634+0800	info	raft/appendentry.go:45	收到心跳,来自3
-2023-08-15T09:00:51.634+0800	info	raft/raft.go:252	节点更新发起选举时间为 100ms后
-2023-08-15T09:00:51.696+0800	info	raft/appendentry.go:45	收到心跳,来自3
-2023-08-15T09:00:51.696+0800	info	raft/raft.go:252	节点更新发起选举时间为 49ms后
-2023-08-15T09:00:51.758+0800	info	raft/appendentry.go:45	收到心跳,来自3
-2023-08-15T09:00:51.758+0800	info	raft/raft.go:252	节点更新发起选举时间为 0ms后
-2023-08-15T09:00:51.824+0800	info	raft/appendentry.go:45	收到心跳,来自3
-2023-08-15T09:00:51.824+0800	info	raft/raft.go:252	节点更新发起选举时间为 62ms后
-2023-08-15T09:00:51.886+0800	info	raft/appendentry.go:45	收到心跳,来自3
-2023-08-15T09:00:51.886+0800	info	raft/raft.go:252	节点更新发起选举时间为 5ms后
-2023-08-15T09:00:51.943+0800	info	raft/appendentry.go:45	收到心跳,来自3
-2023-08-15T09:00:51.943+0800	info	raft/raft.go:252	节点更新发起选举时间为 44ms后
-2023-08-15T09:00:51.999+0800	info	raft/appendentry.go:45	收到心跳,来自3
-2023-08-15T09:00:51.999+0800	info	raft/raft.go:252	节点更新发起选举时间为 142ms后
-2023-08-15T09:00:52.173+0800	info	raft/election.go:41	收到 5 的投票邀请
-2023-08-15T09:00:52.173+0800	info	raft/raft.go:319	节点更新term
-2023-08-15T09:00:52.173+0800	info	raft/election.go:66	符合要求,投给 5
-2023-08-15T09:00:52.173+0800	info	raft/raft.go:252	节点更新发起选举时间为 46ms后
-2023-08-15T09:00:52.173+0800	info	raft/appendentry.go:45	收到心跳,来自5
-2023-08-15T09:00:52.173+0800	info	raft/raft.go:252	节点更新发起选举时间为 64ms后
-2023-08-15T09:00:52.173+0800	info	raft/appendentry.go:45	收到心跳,来自5
-2023-08-15T09:00:52.173+0800	info	raft/raft.go:252	节点更新发起选举时间为 131ms后
-2023-08-15T09:00:52.173+0800	info	raft/appendentry.go:45	收到心跳,来自5
-2023-08-15T09:00:52.173+0800	info	raft/raft.go:252	节点更新发起选举时间为 136ms后
-2023-08-15T09:00:52.225+0800	info	raft/appendentry.go:45	收到心跳,来自5
-2023-08-15T09:00:52.225+0800	info	raft/raft.go:252	节点更新发起选举时间为 117ms后
-2023-08-15T09:00:52.287+0800	info	raft/appendentry.go:45	收到心跳,来自5
-2023-08-15T09:00:52.287+0800	info	raft/raft.go:252	节点更新发起选举时间为 147ms后
-2023-08-15T09:00:52.339+0800	info	raft/appendentry.go:45	收到心跳,来自5
-2023-08-15T09:00:52.339+0800	info	raft/raft.go:252	节点更新发起选举时间为 28ms后
-2023-08-15T09:00:52.406+0800	info	raft/appendentry.go:45	收到心跳,来自5
-2023-08-15T09:00:52.406+0800	info	raft/raft.go:252	节点更新发起选举时间为 65ms后
-2023-08-15T09:00:52.473+0800	info	raft/appendentry.go:45	收到心跳,来自5
-2023-08-15T09:00:52.473+0800	info	raft/raft.go:252	节点更新发起选举时间为 80ms后
-2023-08-15T09:00:52.731+0800	info	raft/raft.go:252	节点更新发起选举时间为 24ms后
-2023-08-15T09:00:52.731+0800	info	raft/election.go:147	发起term为 12 的选举
-2023-08-15T09:00:52.912+0800	info	raft/raft.go:252	节点更新发起选举时间为 32ms后
-2023-08-15T09:00:52.912+0800	info	raft/election.go:147	发起term为 13 的选举
-2023-08-15T09:00:53.104+0800	info	raft/raft.go:252	节点更新发起选举时间为 118ms后
-2023-08-15T09:00:53.104+0800	info	raft/election.go:147	发起term为 14 的选举
-2023-08-15T09:00:53.419+0800	info	raft/raft.go:252	节点更新发起选举时间为 130ms后
-2023-08-15T09:00:53.419+0800	info	raft/election.go:147	发起term为 15 的选举
-2023-08-15T09:00:53.739+0800	info	raft/raft.go:252	节点更新发起选举时间为 104ms后
-2023-08-15T09:00:53.739+0800	info	raft/election.go:147	发起term为 16 的选举
-2023-08-15T09:00:53.739+0800	info	raft/election.go:128	收到 6 的投票
-2023-08-15T09:00:53.739+0800	info	raft/election.go:128	收到 1 的投票
-2023-08-15T09:00:53.739+0800	info	raft/election.go:128	收到 3 的投票
-2023-08-15T09:00:53.739+0800	info	raft/election.go:167	节点成为leader
-2023-08-15T09:00:53.739+0800	info	raft/election.go:167	节点成为leader
-2023-08-15T09:00:53.791+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:53.791+0800	info	raft/raft.go:252	节点更新发起选举时间为 53ms后
-2023-08-15T09:00:53.853+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:53.853+0800	info	raft/raft.go:252	节点更新发起选举时间为 135ms后
-2023-08-15T09:00:53.918+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:53.918+0800	info	raft/raft.go:252	节点更新发起选举时间为 122ms后
-2023-08-15T09:00:53.985+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:53.985+0800	info	raft/raft.go:252	节点更新发起选举时间为 18ms后
-2023-08-15T09:00:54.051+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.051+0800	info	raft/raft.go:252	节点更新发起选举时间为 93ms后
-2023-08-15T09:00:54.123+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.123+0800	info	raft/raft.go:252	节点更新发起选举时间为 145ms后
-2023-08-15T09:00:54.184+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.185+0800	info	raft/raft.go:252	节点更新发起选举时间为 31ms后
-2023-08-15T09:00:54.246+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.246+0800	info	raft/raft.go:252	节点更新发起选举时间为 16ms后
-2023-08-15T09:00:54.302+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.302+0800	info	raft/raft.go:252	节点更新发起选举时间为 47ms后
-2023-08-15T09:00:54.353+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.353+0800	info	raft/raft.go:252	节点更新发起选举时间为 127ms后
-2023-08-15T09:00:54.414+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.414+0800	info	raft/raft.go:252	节点更新发起选举时间为 118ms后
-2023-08-15T09:00:54.470+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.470+0800	info	raft/raft.go:252	节点更新发起选举时间为 88ms后
-2023-08-15T09:00:54.530+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.530+0800	info	raft/raft.go:252	节点更新发起选举时间为 6ms后
-2023-08-15T09:00:54.596+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.596+0800	info	raft/raft.go:252	节点更新发起选举时间为 8ms后
-2023-08-15T09:00:54.653+0800	info	raft/raft.go:230	leader 发送心跳
-2023-08-15T09:00:54.653+0800	info	raft/raft.go:252	节点更新发起选举时间为 14ms后
-2023-08-15T09:00:54.653+0800	info	raft/election.go:41	收到 1 的投票邀请
-2023-08-15T09:00:54.653+0800	info	raft/raft.go:319	节点更新term
-2023-08-15T09:00:54.653+0800	info	raft/election.go:66	符合要求,投给 1
-2023-08-15T09:00:54.653+0800	info	raft/appendentry.go:64	遇到更大的term,leader下线
-2023-08-15T09:00:54.653+0800	info	raft/raft.go:319	节点更新term
-2023-08-15T09:00:54.653+0800	info	raft/raft.go:252	节点更新发起选举时间为 137ms后
-2023-08-15T09:00:54.775+0800	info	raft/election.go:41	收到 3 的投票邀请
-2023-08-15T09:00:54.775+0800	info	raft/election.go:66	符合要求,投给 3
-2023-08-15T09:00:54.775+0800	info	raft/raft.go:252	节点更新发起选举时间为 34ms后
-2023-08-15T09:00:54.775+0800	info	raft/election.go:41	收到 0 的投票邀请
-2023-08-15T09:00:54.775+0800	info	raft/raft.go:319	节点更新term
-2023-08-15T09:00:54.775+0800	info	raft/election.go:66	符合要求,投给 0
-2023-08-15T09:00:54.775+0800	info	raft/raft.go:252	节点更新发起选举时间为 8ms后
-2023-08-15T09:00:54.775+0800	info	raft/appendentry.go:45	收到心跳,来自3
-2023-08-15T09:00:54.775+0800	info	raft/raft.go:252	节点更新发起选举时间为 140ms后
-2023-08-15T09:00:54.775+0800	info	raft/appendentry.go:45	收到心跳,来自0
-2023-08-15T09:00:54.775+0800	info	raft/raft.go:252	节点更新发起选举时间为 141ms后
-2023-08-15T09:00:54.835+0800	info	raft/appendentry.go:45	收到心跳,来自0
-2023-08-15T09:00:54.835+0800	info	raft/raft.go:252	节点更新发起选举时间为 73ms后
-2023-08-15T09:00:54.893+0800	info	raft/appendentry.go:45	收到心跳,来自0
-2023-08-15T09:00:54.893+0800	info	raft/raft.go:252	节点更新发起选举时间为 112ms后
-2023-08-15T09:00:54.948+0800	info	raft/appendentry.go:45	收到心跳,来自0
-2023-08-15T09:00:54.948+0800	info	raft/raft.go:252	节点更新发起选举时间为 42ms后
-2023-08-15T09:00:55.011+0800	info	raft/appendentry.go:45	收到心跳,来自0
-2023-08-15T09:00:55.011+0800	info	raft/raft.go:252	节点更新发起选举时间为 0ms后
-2023-08-15T09:00:55.063+0800	info	raft/appendentry.go:45	收到心跳,来自0
-2023-08-15T09:00:55.063+0800	info	raft/raft.go:252	节点更新发起选举时间为 20ms后
-2023-08-15T09:00:55.125+0800	info	raft/appendentry.go:45	收到心跳,来自0
-2023-08-15T09:00:55.125+0800	info	raft/raft.go:252	节点更新发起选举时间为 68ms后
-2023-08-15T09:00:55.146+0800	info	raft/raft.go:210	节点死亡
+2023-08-16T17:09:47.888+0800	info	raft/raft.go:294	节点生成
+2023-08-16T17:09:47.888+0800	info	raft/raft.go:265	节点更新发起选举时间为 10ms后
+2023-08-16T17:09:48.076+0800	info	raft/raft.go:265	节点更新发起选举时间为 84ms后
+2023-08-16T17:09:48.076+0800	info	raft/election.go:147	发起term为 1 的选举
+2023-08-16T17:09:48.076+0800	info	raft/election.go:41	收到 1 的投票邀请
+2023-08-16T17:09:48.076+0800	info	raft/election.go:51	1的term不大于本节点,故拒绝放弃竞选
+2023-08-16T17:09:48.327+0800	info	raft/raft.go:265	节点更新发起选举时间为 0ms后
+2023-08-16T17:09:48.327+0800	info	raft/election.go:147	发起term为 2 的选举
+2023-08-16T17:09:48.327+0800	info	raft/election.go:128	收到 6 的投票
+2023-08-16T17:09:48.327+0800	info	raft/election.go:128	收到 2 的投票
+2023-08-16T17:09:48.328+0800	info	raft/election.go:128	收到 0 的投票
+2023-08-16T17:09:48.328+0800	info	raft/election.go:128	收到 3 的投票
+2023-08-16T17:09:48.330+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.328+0800	info	raft/election.go:128	收到 1 的投票
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.328+0800	info	raft/election.go:128	收到 5 的投票
+2023-08-16T17:09:48.331+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:48.331+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.331+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.331+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.331+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.331+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:48.331+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.389+0800	info	raft/raft.go:265	节点更新发起选举时间为 8ms后
+2023-08-16T17:09:48.389+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.389+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.389+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.389+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.389+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.389+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.448+0800	info	raft/raft.go:265	节点更新发起选举时间为 120ms后
+2023-08-16T17:09:48.448+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.448+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.448+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.448+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.448+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.448+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.511+0800	info	raft/raft.go:265	节点更新发起选举时间为 59ms后
+2023-08-16T17:09:48.511+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.511+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.511+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.511+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.511+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.511+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.574+0800	info	raft/raft.go:265	节点更新发起选举时间为 116ms后
+2023-08-16T17:09:48.574+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.574+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.574+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.574+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.574+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.574+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.637+0800	info	raft/raft.go:265	节点更新发起选举时间为 41ms后
+2023-08-16T17:09:48.637+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.637+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.637+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.637+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.637+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.637+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.699+0800	info	raft/raft.go:265	节点更新发起选举时间为 130ms后
+2023-08-16T17:09:48.699+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.699+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.699+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.699+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.699+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.699+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.761+0800	info	raft/raft.go:265	节点更新发起选举时间为 64ms后
+2023-08-16T17:09:48.761+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.761+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.761+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.761+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.761+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.761+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.824+0800	info	raft/raft.go:265	节点更新发起选举时间为 148ms后
+2023-08-16T17:09:48.824+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.824+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.824+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.824+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.824+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.824+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.885+0800	info	raft/raft.go:265	节点更新发起选举时间为 25ms后
+2023-08-16T17:09:48.885+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.885+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:48.885+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.885+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.885+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.885+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.951+0800	info	raft/raft.go:265	节点更新发起选举时间为 127ms后
+2023-08-16T17:09:48.951+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:48.951+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:48.951+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:48.951+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:48.951+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:48.951+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.013+0800	info	raft/raft.go:265	节点更新发起选举时间为 9ms后
+2023-08-16T17:09:49.013+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.013+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.013+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.013+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.013+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.013+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.074+0800	info	raft/raft.go:265	节点更新发起选举时间为 129ms后
+2023-08-16T17:09:49.074+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.074+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.074+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.074+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.074+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.074+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.137+0800	info	raft/raft.go:265	节点更新发起选举时间为 56ms后
+2023-08-16T17:09:49.137+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.137+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.137+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.137+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.137+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.137+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.200+0800	info	raft/raft.go:265	节点更新发起选举时间为 109ms后
+2023-08-16T17:09:49.200+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.200+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.200+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.200+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.200+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.200+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.262+0800	info	raft/raft.go:265	节点更新发起选举时间为 124ms后
+2023-08-16T17:09:49.262+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.262+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.262+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.262+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.262+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.262+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.325+0800	info	raft/raft.go:265	节点更新发起选举时间为 123ms后
+2023-08-16T17:09:49.325+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.325+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.325+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.325+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.325+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.325+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.387+0800	info	raft/raft.go:265	节点更新发起选举时间为 134ms后
+2023-08-16T17:09:49.387+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.387+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.387+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.387+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.387+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.387+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.448+0800	info	raft/raft.go:265	节点更新发起选举时间为 77ms后
+2023-08-16T17:09:49.448+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.448+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.448+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.448+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.448+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.448+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.509+0800	info	raft/raft.go:265	节点更新发起选举时间为 148ms后
+2023-08-16T17:09:49.509+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.509+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.509+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.509+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.509+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.509+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.570+0800	info	raft/raft.go:265	节点更新发起选举时间为 97ms后
+2023-08-16T17:09:49.570+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.570+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.570+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.570+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.570+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.570+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.631+0800	info	raft/raft.go:265	节点更新发起选举时间为 54ms后
+2023-08-16T17:09:49.631+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.631+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.631+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.631+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.631+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.631+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.694+0800	info	raft/raft.go:265	节点更新发起选举时间为 51ms后
+2023-08-16T17:09:49.694+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.694+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.694+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.694+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.694+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.694+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.756+0800	info	raft/raft.go:265	节点更新发起选举时间为 93ms后
+2023-08-16T17:09:49.756+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.756+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.756+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.756+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.756+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.756+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.817+0800	info	raft/raft.go:265	节点更新发起选举时间为 4ms后
+2023-08-16T17:09:49.817+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.817+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.817+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.817+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.817+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.817+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.881+0800	info	raft/raft.go:265	节点更新发起选举时间为 74ms后
+2023-08-16T17:09:49.881+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.881+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.881+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.881+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:49.881+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.881+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.947+0800	info	raft/raft.go:265	节点更新发起选举时间为 112ms后
+2023-08-16T17:09:49.947+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:49.947+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:49.947+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:49.947+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:49.947+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:49.947+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.009+0800	info	raft/raft.go:265	节点更新发起选举时间为 98ms后
+2023-08-16T17:09:50.009+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.009+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.009+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.009+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.009+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.009+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.070+0800	info	raft/raft.go:265	节点更新发起选举时间为 53ms后
+2023-08-16T17:09:50.070+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.070+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.070+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.070+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.070+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.070+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.133+0800	info	raft/raft.go:265	节点更新发起选举时间为 27ms后
+2023-08-16T17:09:50.133+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.133+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.133+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.133+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.133+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.133+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.195+0800	info	raft/raft.go:265	节点更新发起选举时间为 141ms后
+2023-08-16T17:09:50.195+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.195+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.195+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.195+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.195+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.195+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.256+0800	info	raft/raft.go:265	节点更新发起选举时间为 6ms后
+2023-08-16T17:09:50.256+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.256+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.256+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.256+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.256+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.256+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.320+0800	info	raft/raft.go:265	节点更新发起选举时间为 113ms后
+2023-08-16T17:09:50.320+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.320+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.320+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.320+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.320+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.320+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.382+0800	info	raft/raft.go:265	节点更新发起选举时间为 125ms后
+2023-08-16T17:09:50.382+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.382+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.382+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.382+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.382+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.382+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.444+0800	info	raft/raft.go:265	节点更新发起选举时间为 3ms后
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:34	收到新leader的心跳,leader下线
+2023-08-16T17:09:50.444+0800	info	raft/raft.go:333	节点更新term
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:46	收到心跳,来自3
+2023-08-16T17:09:50.444+0800	info	raft/raft.go:265	节点更新发起选举时间为 47ms后
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:73	遇到更大的term,leader下线
+2023-08-16T17:09:50.444+0800	info	raft/raft.go:333	节点更新term
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.444+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.688+0800	info	raft/raft.go:265	节点更新发起选举时间为 124ms后
+2023-08-16T17:09:50.688+0800	info	raft/election.go:147	发起term为 9 的选举
+2023-08-16T17:09:50.688+0800	info	raft/election.go:128	收到 3 的投票
+2023-08-16T17:09:50.688+0800	info	raft/election.go:128	收到 5 的投票
+2023-08-16T17:09:50.688+0800	info	raft/election.go:128	收到 1 的投票
+2023-08-16T17:09:50.688+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:50.688+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.688+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.688+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.688+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.688+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.688+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.750+0800	info	raft/raft.go:265	节点更新发起选举时间为 147ms后
+2023-08-16T17:09:50.750+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.750+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.750+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.750+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.750+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.750+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.812+0800	info	raft/raft.go:265	节点更新发起选举时间为 104ms后
+2023-08-16T17:09:50.812+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.812+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.812+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.812+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.812+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.812+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.874+0800	info	raft/raft.go:265	节点更新发起选举时间为 70ms后
+2023-08-16T17:09:50.874+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.874+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.874+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.874+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.874+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.874+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.936+0800	info	raft/raft.go:265	节点更新发起选举时间为 125ms后
+2023-08-16T17:09:50.936+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:50.936+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:50.936+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:50.936+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:50.936+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:50.936+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:50.936+0800	info	raft/appendentry.go:73	遇到更大的term,leader下线
+2023-08-16T17:09:50.936+0800	info	raft/raft.go:333	节点更新term
+2023-08-16T17:09:51.092+0800	info	raft/election.go:41	收到 0 的投票邀请
+2023-08-16T17:09:51.092+0800	info	raft/raft.go:333	节点更新term
+2023-08-16T17:09:51.092+0800	info	raft/election.go:66	符合要求,投给 0
+2023-08-16T17:09:51.092+0800	info	raft/raft.go:265	节点更新发起选举时间为 22ms后
+2023-08-16T17:09:51.093+0800	info	raft/appendentry.go:46	收到心跳,来自0
+2023-08-16T17:09:51.093+0800	info	raft/raft.go:265	节点更新发起选举时间为 54ms后
+2023-08-16T17:09:51.154+0800	info	raft/appendentry.go:46	收到心跳,来自0
+2023-08-16T17:09:51.154+0800	info	raft/raft.go:265	节点更新发起选举时间为 44ms后
+2023-08-16T17:09:51.218+0800	info	raft/appendentry.go:46	收到心跳,来自0
+2023-08-16T17:09:51.218+0800	info	raft/raft.go:265	节点更新发起选举时间为 40ms后
+2023-08-16T17:09:51.280+0800	info	raft/appendentry.go:46	收到心跳,来自0
+2023-08-16T17:09:51.280+0800	info	raft/raft.go:265	节点更新发起选举时间为 125ms后
+2023-08-16T17:09:51.342+0800	info	raft/appendentry.go:46	收到心跳,来自0
+2023-08-16T17:09:51.342+0800	info	raft/raft.go:265	节点更新发起选举时间为 45ms后
+2023-08-16T17:09:51.405+0800	info	raft/appendentry.go:46	收到心跳,来自0
+2023-08-16T17:09:51.405+0800	info	raft/raft.go:265	节点更新发起选举时间为 137ms后
+2023-08-16T17:09:51.559+0800	info	raft/election.go:41	收到 1 的投票邀请
+2023-08-16T17:09:51.559+0800	info	raft/raft.go:333	节点更新term
+2023-08-16T17:09:51.559+0800	info	raft/election.go:66	符合要求,投给 1
+2023-08-16T17:09:51.559+0800	info	raft/raft.go:265	节点更新发起选举时间为 69ms后
+2023-08-16T17:09:51.559+0800	info	raft/election.go:41	收到 6 的投票邀请
+2023-08-16T17:09:51.559+0800	info	raft/election.go:62	由于candidate的term比本节点小,拒绝投票
+2023-08-16T17:09:51.560+0800	info	raft/appendentry.go:46	收到心跳,来自1
+2023-08-16T17:09:51.560+0800	info	raft/raft.go:265	节点更新发起选举时间为 35ms后
+2023-08-16T17:09:51.621+0800	info	raft/appendentry.go:46	收到心跳,来自1
+2023-08-16T17:09:51.621+0800	info	raft/raft.go:265	节点更新发起选举时间为 40ms后
+2023-08-16T17:09:51.683+0800	info	raft/appendentry.go:46	收到心跳,来自1
+2023-08-16T17:09:51.683+0800	info	raft/raft.go:265	节点更新发起选举时间为 131ms后
+2023-08-16T17:09:51.746+0800	info	raft/appendentry.go:46	收到心跳,来自1
+2023-08-16T17:09:51.746+0800	info	raft/raft.go:265	节点更新发起选举时间为 125ms后
+2023-08-16T17:09:51.809+0800	info	raft/appendentry.go:46	收到心跳,来自1
+2023-08-16T17:09:51.809+0800	info	raft/raft.go:265	节点更新发起选举时间为 40ms后
+2023-08-16T17:09:51.872+0800	info	raft/appendentry.go:46	收到心跳,来自1
+2023-08-16T17:09:51.872+0800	info	raft/raft.go:265	节点更新发起选举时间为 104ms后
+2023-08-16T17:09:51.934+0800	info	raft/appendentry.go:46	收到心跳,来自1
+2023-08-16T17:09:51.934+0800	info	raft/raft.go:265	节点更新发起选举时间为 46ms后
+2023-08-16T17:09:52.006+0800	info	raft/election.go:41	收到 3 的投票邀请
+2023-08-16T17:09:52.006+0800	info	raft/raft.go:333	节点更新term
+2023-08-16T17:09:52.006+0800	info	raft/election.go:66	符合要求,投给 3
+2023-08-16T17:09:52.006+0800	info	raft/raft.go:265	节点更新发起选举时间为 122ms后
+2023-08-16T17:09:52.006+0800	info	raft/appendentry.go:46	收到心跳,来自1
+2023-08-16T17:09:52.006+0800	info	raft/raft.go:265	节点更新发起选举时间为 59ms后
+2023-08-16T17:09:52.006+0800	info	raft/appendentry.go:46	收到心跳,来自3
+2023-08-16T17:09:52.006+0800	info	raft/raft.go:265	节点更新发起选举时间为 128ms后
+2023-08-16T17:09:52.068+0800	info	raft/appendentry.go:46	收到心跳,来自3
+2023-08-16T17:09:52.068+0800	info	raft/raft.go:265	节点更新发起选举时间为 126ms后
+2023-08-16T17:09:52.131+0800	info	raft/appendentry.go:46	收到心跳,来自3
+2023-08-16T17:09:52.131+0800	info	raft/raft.go:265	节点更新发起选举时间为 95ms后
+2023-08-16T17:09:52.192+0800	info	raft/appendentry.go:46	收到心跳,来自3
+2023-08-16T17:09:52.192+0800	info	raft/raft.go:265	节点更新发起选举时间为 55ms后
+2023-08-16T17:09:52.254+0800	info	raft/appendentry.go:46	收到心跳,来自3
+2023-08-16T17:09:52.254+0800	info	raft/raft.go:265	节点更新发起选举时间为 131ms后
+2023-08-16T17:09:52.317+0800	info	raft/appendentry.go:46	收到心跳,来自3
+2023-08-16T17:09:52.317+0800	info	raft/raft.go:265	节点更新发起选举时间为 93ms后
+2023-08-16T17:09:52.379+0800	info	raft/appendentry.go:46	收到心跳,来自3
+2023-08-16T17:09:52.379+0800	info	raft/raft.go:265	节点更新发起选举时间为 21ms后
+2023-08-16T17:09:52.559+0800	info	raft/raft.go:265	节点更新发起选举时间为 64ms后
+2023-08-16T17:09:52.559+0800	info	raft/election.go:147	发起term为 14 的选举
+2023-08-16T17:09:52.811+0800	info	raft/raft.go:265	节点更新发起选举时间为 71ms后
+2023-08-16T17:09:52.811+0800	info	raft/election.go:147	发起term为 15 的选举
+2023-08-16T17:09:52.937+0800	info	raft/election.go:41	收到 5 的投票邀请
+2023-08-16T17:09:52.937+0800	info	raft/election.go:51	5的term不大于本节点,故拒绝放弃竞选
+2023-08-16T17:09:53.054+0800	info	raft/raft.go:265	节点更新发起选举时间为 33ms后
+2023-08-16T17:09:53.054+0800	info	raft/election.go:147	发起term为 16 的选举
+2023-08-16T17:09:53.054+0800	info	raft/election.go:128	收到 0 的投票
+2023-08-16T17:09:53.054+0800	info	raft/election.go:128	收到 3 的投票
+2023-08-16T17:09:53.055+0800	info	raft/election.go:128	收到 2 的投票
+2023-08-16T17:09:53.055+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/election.go:128	收到 1 的投票
+2023-08-16T17:09:53.055+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/election.go:128	收到 6 的投票
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/election.go:168	节点成为leader
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:53.116+0800	info	raft/raft.go:265	节点更新发起选举时间为 105ms后
+2023-08-16T17:09:53.116+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:53.116+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:53.116+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:53.116+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:53.116+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:53.116+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:53.179+0800	info	raft/raft.go:265	节点更新发起选举时间为 132ms后
+2023-08-16T17:09:53.179+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:53.179+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:53.179+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:53.179+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:53.179+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:53.179+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:53.241+0800	info	raft/raft.go:265	节点更新发起选举时间为 56ms后
+2023-08-16T17:09:53.241+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:53.241+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:53.241+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:53.241+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:53.241+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:53.241+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:53.305+0800	info	raft/raft.go:265	节点更新发起选举时间为 8ms后
+2023-08-16T17:09:53.305+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:53.305+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:53.305+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:53.305+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:53.305+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:53.305+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:53.369+0800	info	raft/raft.go:265	节点更新发起选举时间为 21ms后
+2023-08-16T17:09:53.369+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
+2023-08-16T17:09:53.369+0800	info	raft/appendentry.go:62	给节点 0 发送心跳
+2023-08-16T17:09:53.369+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
+2023-08-16T17:09:53.369+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
+2023-08-16T17:09:53.369+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
+2023-08-16T17:09:53.369+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
+2023-08-16T17:09:53.415+0800	info	raft/raft.go:224	节点死亡
