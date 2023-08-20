@@ -1,15 +1,15 @@
 package raft
 
-
+import "strconv"
 
 // RequestVoteArgs
 // example RequestVote RPC arguments structure.
 // field names must start with capital letters!
 //
 
-//发送RequestVote消息的args，term为参选者自己的term,CandidateId为me,
-//LastLogIndex为最后一个entry的索引,
-//LastLogTerm为最后一个term
+// 发送RequestVote消息的args，term为参选者自己的term,CandidateId为me,
+// LastLogIndex为最后一个entry的索引,
+// LastLogTerm为最后一个term
 type RequestVoteArgs struct {
 	// Your data here (2A, 2B).
 	Term         int //candidate's term
@@ -23,8 +23,8 @@ type RequestVoteArgs struct {
 // field names must start with capital letters!
 //
 
-//RequVote的返回,
-//VoteGranted代表是否获得选票
+// RequVote的返回,
+// VoteGranted代表是否获得选票
 type RequestVoteReply struct {
 	// Your data here (2A).
 	Term        int  //current term, for candidate to update itself
@@ -33,48 +33,52 @@ type RequestVoteReply struct {
 
 // RequestVote
 // example RequestVote RPC handler.
-//
 func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here (2A, 2B).
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	rf.logger.Info("收到 ",args.CandidateId," 的投票邀请")
-	if args.Term>rf.currentTerm{
+	rf.logger.Info( "收到 "+strconv.Itoa(args.CandidateId)+" 的投票邀请,term为 ",args.Term)
+	
+	if args.Term > rf.currentTerm {
 		rf.MeetGreaterTerm(args.Term)
 	}
-	if rf.state==Leader{
+	if rf.state == Leader {
 		rf.logger.Info("本节点已经是权威节点，故拒绝")
 		reply.VoteGranted = false
 		reply.Term = rf.currentTerm
 	}
-	if rf.state==Candidate{
-		rf.logger.Info(args.CandidateId,"的term不大于本节点,故拒绝放弃竞选")
+	if rf.state == Candidate {
+		rf.logger.Info(strconv.Itoa(args.CandidateId)+"的term不大于本节点,故拒绝放弃竞选")
+
 		reply.Term = rf.currentTerm
 		reply.VoteGranted = false
 	}
-	if rf.state==Follower{
-			myindex:=rf.log.LastIndex()
-			myterm:=rf.log.EntryAt(myindex).Term
-			isuptodate:=args.LastLogTerm>myterm||(args.LastLogTerm==myterm&&myindex<=args.LastLogIndex)
+	if rf.state == Follower {
+		myindex := rf.log.LastIndex()
+		myterm := rf.log.EntryAt(myindex).Term
+		isuptodate := args.LastLogTerm > myterm || (args.LastLogTerm == myterm && myindex <= args.LastLogIndex)
 
-		if args.Term < rf.currentTerm{
+		if args.Term < rf.currentTerm {
 			reply.VoteGranted = false
 			rf.logger.Info("由于candidate的term比本节点小,拒绝投票")
-		}else if rf.votedFor==-1 && isuptodate{
+
+		} else if rf.votedFor == -1 && isuptodate {
 			reply.VoteGranted = true
 			rf.votedFor = args.CandidateId
-			rf.logger.Info("符合要求,投给 ",args.CandidateId)
+
+			rf.logger.Info("符合要求,投给 "+strconv.Itoa(args.CandidateId))
+
 			rf.setElectionTime()
-		}else if rf.votedFor!=-1{
-			rf.logger.Info("本节点已经投票给 ",rf.votedFor," 故拒绝")
+		} else if rf.votedFor != -1 {
+			rf.logger.Info("本节点已经投票给 "+strconv.Itoa(rf.votedFor)+" 故拒绝")
 			reply.VoteGranted = false
-		}else{
+		} else {
 			rf.logger.Info("不是uptodate,拒绝投票")
 			reply.VoteGranted = false
 		}
 		reply.Term = rf.currentTerm
 	}
-	
+
 }
 
 //
@@ -107,82 +111,79 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 // the struct itself.
 //
 
-
-//向指定的server（在peers中的index）发送requestVote
+// 向指定的server（在peers中的index）发送requestVote
 func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) bool {
 	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
 	return ok
 }
-//
-func (rf *Raft)RequestAndAdd(server int,args *RequestVoteArgs,vote *int){
-	reply:=RequestVoteReply{}
-	rf.sendRequestVote(server,args,&reply)
 
+func (rf *Raft) RequestAndAdd(server int, args *RequestVoteArgs, vote *int) {
+	reply := RequestVoteReply{}
+	rf.sendRequestVote(server, args, &reply)
 
-	if reply.Term>rf.currentTerm{
+	if reply.Term > rf.currentTerm {
 		rf.logger.Info("发现更高的term,放弃竞选")
 		rf.MeetGreaterTerm(reply.Term)
 	}
-	if reply.VoteGranted && rf.state == Candidate{
+	if reply.VoteGranted && rf.state == Candidate {
 		*vote++
-		rf.logger.Info("收到 ",server," 的投票")
+		rf.logger.Info("收到"+strconv.Itoa(server)+"的投票")
 		//这里判定是否达到多数派的做法是在每一次发送request请求的时候都判断一下
-		if *vote>len(rf.peers)>>1{
+		if *vote > len(rf.peers)>>1 {
 			//判断一下term是否被修改了
 			//持有旧term的candidate是不能变成leader的
-			if rf.currentTerm==args.Term{
+			if rf.currentTerm == args.Term {
 				rf.UpGrade()
 			}
 		}
 	}
 }
-//follower发起选举
+
+// follower发起选举
 func (rf *Raft) LeaderElection() {
 	//首先state改为candidate
 	//并且term++
 	rf.state = Candidate
 	rf.currentTerm++
 	rf.votedFor = rf.me
+	
+	rf.logger.Info("发起term为 "+strconv.Itoa(rf.currentTerm)+" 的选举")
 
-	rf.logger.Info("发起term为 ",rf.currentTerm," 的选举")
-
-	args:=&RequestVoteArgs{
-		Term: rf.currentTerm,
-		CandidateId: rf.me,
+	args := &RequestVoteArgs{
+		Term:         rf.currentTerm,
+		CandidateId:  rf.me,
 		LastLogIndex: rf.log.LastIndex(),
-		LastLogTerm: rf.log.EntryAt(rf.log.LastIndex()).Term,
+		LastLogTerm:  rf.log.EntryAt(rf.log.LastIndex()).Term,
 	}
 	//先给自己投一票
-	vote:=1
-	for k,_:=range rf.peers{
-		if k!=rf.me && rf.state==Candidate{
-			go rf.RequestAndAdd(k,args,&vote)
+	vote := 1
+	for k, _ := range rf.peers {
+		if k != rf.me && rf.state == Candidate {
+			go rf.RequestAndAdd(k, args, &vote)
 		}
 	}
 }
 
-func (rf *Raft)UpGrade(){
-	if rf.state == Candidate{
-		rf.state=Leader
+func (rf *Raft) UpGrade() {
+	if rf.state == Candidate {
+		rf.state = Leader
 	}
 	rf.logger.Info("节点成为leader")
-
 
 	//初始化nextindex和matchindex
 	rf.entryIndexInitiallize()
 
-
 	//发送ap消息
-	rf.LeaderAppendEntry()
+	rf.LeaderAppendEntry(true)
 
 }
 
-//成为leader后初始化matchindex和nextindex
-func (rf *Raft)entryIndexInitiallize(){
+// 成为leader后初始化matchindex和nextindex
+func (rf *Raft) entryIndexInitiallize() {
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
 
-	for k,_:=range rf.nextIndex{
-		rf.nextIndex[k] = rf.log.LastIndex()+1
+	for k, _ := range rf.nextIndex {
+		rf.nextIndex[k] = rf.log.LastIndex() + 1
 	}
 }

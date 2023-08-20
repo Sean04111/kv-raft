@@ -19,7 +19,6 @@ package raft
 
 import (
 	"math/rand"
-	"os"
 	"strconv"
 	"time"
 
@@ -31,7 +30,6 @@ import (
 	"kv-raft/labrpc"
 
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
 // ApplyMsg
@@ -44,7 +42,6 @@ import (
 // in part 2D you'll want to send other kinds of messages (e.g.,
 // snapshots) on the applyCh, but set CommandValid to false for these
 // other uses.
-//
 type ApplyMsg struct {
 	CommandValid bool
 	Command      interface{}
@@ -79,19 +76,18 @@ type Raft struct {
 	heartbeat    time.Duration //如果为leader的心跳时间
 	// Your data here (2A, 2B, 2C).
 	//持久性状态
-	currentTerm int         //这个节点最新的term
-	votedFor    int         //当前任期的获得选票的candidate的id
+	currentTerm int //这个节点最新的term
+	votedFor    int //当前任期的获得选票的candidate的id
 	log         Log //日志
 
-	//所有节点的易失性状态
 	commitIndex int //这个节点已经提交的最大的index
 	lastApplied int //这个节点apply到状态机的最大index(应该是和kv server有关的)
-	//leader的不稳定状态
+
 	nextIndex  []int //对于每个服务器，要发送给该服务器的下一个日志条目的索引（初始化为领导者的最后一个日志索引+1）
 	matchIndex []int //对于每个服务器，已知在服务器上复制的最高日志条目的索引（初始化为0，单调增加）
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
-	logger *zap.SugaredLogger //采用zap日志收集框架记录raft运行日志
+	logger *zap.SugaredLogger //日志写入器
 }
 
 // GetState return currentTerm and whether this server
@@ -102,18 +98,16 @@ func (rf *Raft) GetState() (int, bool) {
 	var term int
 	var isleader bool
 	// Your code here (2A).
-	if rf.state==Leader{
+	if rf.state == Leader {
 		isleader = true
 	}
 	term = rf.currentTerm
 	return term, isleader
 }
 
-//
 // save Raft's persistent state to stable storage,
 // where it can later be retrieved after a crash and restart.
 // see paper's Figure 2 for a description of what should be persistent.
-//
 func (rf *Raft) persist() {
 	// Your code here (2C).
 	// Example:
@@ -125,9 +119,7 @@ func (rf *Raft) persist() {
 	// rf.persister.SaveRaftState(data)
 }
 
-//
 // restore previously persisted state.
-//
 func (rf *Raft) readPersist(data []byte) {
 	if data == nil || len(data) < 1 { // bootstrap without any state?
 		return
@@ -150,7 +142,6 @@ func (rf *Raft) readPersist(data []byte) {
 // CondInstallSnapshot
 // A service wants to switch to snapshot.  Only do so if Raft hasn't
 // have more recent info since it communicate the snapshot on applyCh.
-//
 func (rf *Raft) CondInstallSnapshot(lastIncludedTerm int, lastIncludedIndex int, snapshot []byte) bool {
 
 	// Your code here (2D).
@@ -159,7 +150,7 @@ func (rf *Raft) CondInstallSnapshot(lastIncludedTerm int, lastIncludedIndex int,
 }
 
 // Snapshot
-//the service says it has created a snapshot that has
+// the service says it has created a snapshot that has
 // all info up to and including index. this means the
 // service no longer needs the log through (and including)
 // that index. Raft should now trim its log as much as possible.
@@ -167,9 +158,6 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (2D).
 
 }
-
-
-
 
 // Start
 // the service using Raft (e.g. a k/v server) wants to start
@@ -184,33 +172,32 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 // if it's ever committed. the second return value is the current
 // term. the third return value is true if this server believes it is
 // the leader.
-//
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	index := -1
 	term := -1
-	isLeader := true
-
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	// Your code here (2B).
-	if rf.killed()==false{
-		if rf.state==Leader{
-			index = rf.log.LastIndex()+1
-			term = rf.currentTerm
-			newentry:=Entry{
-				Term: term,
-				Cmd: command,
-			}
-			rf.log.Append(newentry)
-		}else{
-			isLeader = false
+	if rf.state != Leader {
+		return -1, rf.currentTerm, false
+	} else {
+		index = rf.log.LastIndex() + 1
+		term = rf.currentTerm
+
+		newentry := Entry{
+			Term: term,
+			Cmd:  command,
 		}
-	}else{
-		isLeader = false
+		rf.log.Append(newentry)
+		rf.logger.Info("leader接收到新的cmd: ", newentry, "此时leader的日志:", rf.log.Print())
+
+		rf.LeaderAppendEntry(false)
+		return index, term, true
 	}
-	return index, term, isLeader
 }
 
 // Kill
-//the tester doesn't halt goroutines created by Raft after each test,
+// the tester doesn't halt goroutines created by Raft after each test,
 // but it does call the Kill() method. your code can use killed() to
 // check whether Kill() has been called. the use of atomic avoids the
 // need for a lock.
@@ -219,7 +206,6 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 // up CPU time, perhaps causing later tests to fail and generating
 // confusing debug output. any goroutine with a long-running loop
 // should call killed() to check whether it should stop.
-//
 func (rf *Raft) Kill() {
 	rf.logger.Info("节点死亡")
 	atomic.StoreInt32(&rf.dead, 1)
@@ -242,12 +228,12 @@ func (rf *Raft) ticker() {
 		if rf.state == Leader {
 			rf.mu.Lock()
 			rf.setElectionTime()
-			rf.LeaderAppendEntry()
+			rf.LeaderAppendEntry(true)
 			rf.mu.Unlock()
 		}
 
 		//这里直接比较now是否after就可以了因为follower在收到heartbeat的时候又会set一次electiontime
-		if time.Now().After(rf.electionTime){
+		if time.Now().After(rf.electionTime) {
 			rf.mu.Lock()
 			rf.setElectionTime()
 			rf.LeaderElection()
@@ -256,18 +242,45 @@ func (rf *Raft) ticker() {
 	}
 }
 
-//为该节点设置发起选举时间间隔(这个设置是以now为基准，提供发起election的时间)
+// 为该节点设置发起选举时间间隔(这个设置是以now为基准，提供发起election的时间)
 func (rf *Raft) setElectionTime() {
 	now := time.Now()
-	due:=rand.Intn(150)
+	due := rand.Intn(150)
 	duration := time.Duration(150+due) * time.Millisecond
 	rf.electionTime = now.Add(time.Duration(duration))
-	rf.logger.Info("节点更新发起选举时间为 ",due,"ms后")
+	rf.logger.Info("节点更新发起选举时间为" + strconv.Itoa(due) + "ms后")
 }
 
 // Applier 将日志提交到状态机(eg k-v server)
 func (rf *Raft) applier() {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 
+	for !rf.killed() {
+		if rf.commitIndex > rf.lastApplied && rf.lastApplied < rf.log.Len() {
+			rf.lastApplied++
+			applymgs := ApplyMsg{
+				CommandValid: true,
+				Command:      rf.log.EntryAt(rf.lastApplied).Cmd,
+				CommandIndex: rf.lastApplied,
+			}
+			//这里可以直接发channel吗？
+			rf.logger.Info("发送applymsg")
+			rf.applyCh <- applymgs
+			//
+
+		} else {
+			//applier等待
+			rf.applyCond.Wait()
+		}
+	}
+}
+
+// 唤醒挂起的applier
+func (rf *Raft) apply() {
+	//唤醒applier
+	rf.applyCond.Broadcast()
+	rf.logger.Info("开启cond广播")
 }
 
 // Make
@@ -280,7 +293,6 @@ func (rf *Raft) applier() {
 // tester or service expects Raft to send ApplyMsg messages.
 // Make() must return quickly, so it should start goroutines
 // for any long-running work.
-//
 func Make(peers []*labrpc.ClientEnd, me int,
 	persister *Persister, applyCh chan ApplyMsg) *Raft {
 	rf := &Raft{}
@@ -290,24 +302,20 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// Your initialization code here (2A, 2B, 2C).
 
-	rf.SetLogger()
-	rf.logger.Info("节点生成")
-
-
+	rf.LoggerInit()
+	rf.logger.Info("节点创建")
 
 	rf.dead = 0
+
 	rf.applyCh = applyCh
 	rf.state = Follower
 	rf.setElectionTime()
 	rf.heartbeat = 50 * time.Millisecond
 	rf.currentTerm = 0
 	rf.votedFor = -1 //这里需要初始化为-1
-	rf.log = Log{Entries: []*Entry{&Entry{1,"add"}}}
+	rf.log = Log{Entries: []Entry{Entry{0, -1}}}
 	rf.commitIndex = 0
 	rf.lastApplied = 0
-
-
-	
 
 	rf.applyCh = applyCh
 	rf.applyCond = sync.NewCond(&rf.mu)
@@ -323,25 +331,12 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 }
 
-//peer遇到了term更高的节点的行为,
-//更新自己的term为新term,
-//对于candidate：失去竞选资格(在是否晋升逻辑哪里体现)
-func (rf *Raft)MeetGreaterTerm(term int){
+// peer遇到了term更高的节点的行为,
+// 更新自己的term为新term,
+// 对于candidate：失去竞选资格(在是否晋升逻辑哪里体现)
+func (rf *Raft) MeetGreaterTerm(term int) {
 	rf.currentTerm = term
 	rf.state = Follower
 	rf.votedFor = -1
-	rf.logger.Info("节点更新term")
-}
-//节点初始化logger
-func (rf *Raft)SetLogger(){
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	filename:="./logs/"+strconv.Itoa(rf.me)+".log"
-	file,_:=os.Create(filename)
-	filewriter:=zapcore.AddSync(file)
-	config:=zap.NewProductionEncoderConfig()
-	config.EncodeTime = zapcore.ISO8601TimeEncoder
-	encoder:=zapcore.NewConsoleEncoder(config)
-	core:=zapcore.NewCore(encoder,filewriter,zapcore.DebugLevel)
-	rf.logger = zap.New(core,zap.AddCaller()).Sugar()
+	rf.logger.Info("节点遇到更高term,更新term为" + strconv.Itoa(term))
 }

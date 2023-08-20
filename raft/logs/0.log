@@ -1,312 +1,154 @@
-2023-08-16T17:09:47.886+0800	info	raft/raft.go:294	节点生成
-2023-08-16T17:09:47.886+0800	info	raft/raft.go:265	节点更新发起选举时间为 52ms后
-2023-08-16T17:09:48.076+0800	info	raft/election.go:41	收到 1 的投票邀请
-2023-08-16T17:09:48.076+0800	info	raft/raft.go:333	节点更新term
-2023-08-16T17:09:48.076+0800	info	raft/election.go:66	符合要求,投给 1
-2023-08-16T17:09:48.076+0800	info	raft/raft.go:265	节点更新发起选举时间为 83ms后
-2023-08-16T17:09:48.077+0800	info	raft/election.go:41	收到 4 的投票邀请
-2023-08-16T17:09:48.077+0800	info	raft/election.go:69	本节点已经投票给 1 故拒绝
-2023-08-16T17:09:48.078+0800	info	raft/appendentry.go:46	收到心跳,来自1
-2023-08-16T17:09:48.078+0800	info	raft/raft.go:265	节点更新发起选举时间为 143ms后
-2023-08-16T17:09:48.078+0800	info	raft/appendentry.go:46	收到心跳,来自1
-2023-08-16T17:09:48.078+0800	info	raft/raft.go:265	节点更新发起选举时间为 114ms后
-2023-08-16T17:09:48.139+0800	info	raft/appendentry.go:46	收到心跳,来自1
-2023-08-16T17:09:48.139+0800	info	raft/raft.go:265	节点更新发起选举时间为 90ms后
-2023-08-16T17:09:48.203+0800	info	raft/appendentry.go:46	收到心跳,来自1
-2023-08-16T17:09:48.203+0800	info	raft/raft.go:265	节点更新发起选举时间为 114ms后
-2023-08-16T17:09:48.266+0800	info	raft/appendentry.go:46	收到心跳,来自1
-2023-08-16T17:09:48.266+0800	info	raft/raft.go:265	节点更新发起选举时间为 18ms后
-2023-08-16T17:09:48.327+0800	info	raft/appendentry.go:46	收到心跳,来自1
-2023-08-16T17:09:48.327+0800	info	raft/raft.go:265	节点更新发起选举时间为 144ms后
-2023-08-16T17:09:48.327+0800	info	raft/election.go:41	收到 4 的投票邀请
-2023-08-16T17:09:48.327+0800	info	raft/raft.go:333	节点更新term
-2023-08-16T17:09:48.328+0800	info	raft/election.go:66	符合要求,投给 4
-2023-08-16T17:09:48.328+0800	info	raft/raft.go:265	节点更新发起选举时间为 147ms后
-2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.330+0800	info	raft/raft.go:265	节点更新发起选举时间为 119ms后
-2023-08-16T17:09:48.330+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.330+0800	info	raft/raft.go:265	节点更新发起选举时间为 15ms后
-2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.332+0800	info	raft/raft.go:265	节点更新发起选举时间为 148ms后
-2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.332+0800	info	raft/raft.go:265	节点更新发起选举时间为 98ms后
-2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.332+0800	info	raft/raft.go:265	节点更新发起选举时间为 65ms后
-2023-08-16T17:09:48.332+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.332+0800	info	raft/raft.go:265	节点更新发起选举时间为 6ms后
-2023-08-16T17:09:48.389+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.389+0800	info	raft/raft.go:265	节点更新发起选举时间为 1ms后
-2023-08-16T17:09:48.448+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.448+0800	info	raft/raft.go:265	节点更新发起选举时间为 33ms后
-2023-08-16T17:09:48.511+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.511+0800	info	raft/raft.go:265	节点更新发起选举时间为 60ms后
-2023-08-16T17:09:48.574+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.574+0800	info	raft/raft.go:265	节点更新发起选举时间为 41ms后
-2023-08-16T17:09:48.637+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.637+0800	info	raft/raft.go:265	节点更新发起选举时间为 107ms后
-2023-08-16T17:09:48.699+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.699+0800	info	raft/raft.go:265	节点更新发起选举时间为 68ms后
-2023-08-16T17:09:48.761+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.761+0800	info	raft/raft.go:265	节点更新发起选举时间为 60ms后
-2023-08-16T17:09:48.824+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.824+0800	info	raft/raft.go:265	节点更新发起选举时间为 121ms后
-2023-08-16T17:09:48.885+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:48.885+0800	info	raft/raft.go:265	节点更新发起选举时间为 40ms后
-2023-08-16T17:09:49.121+0800	info	raft/raft.go:265	节点更新发起选举时间为 93ms后
-2023-08-16T17:09:49.121+0800	info	raft/election.go:147	发起term为 3 的选举
-2023-08-16T17:09:49.371+0800	info	raft/raft.go:265	节点更新发起选举时间为 37ms后
-2023-08-16T17:09:49.371+0800	info	raft/election.go:147	发起term为 4 的选举
-2023-08-16T17:09:49.509+0800	info	raft/appendentry.go:23	收到新leader的心跳,放弃竞选
-2023-08-16T17:09:49.509+0800	info	raft/raft.go:333	节点更新term
-2023-08-16T17:09:49.509+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:49.509+0800	info	raft/raft.go:265	节点更新发起选举时间为 20ms后
-2023-08-16T17:09:49.570+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:49.570+0800	info	raft/raft.go:265	节点更新发起选举时间为 116ms后
-2023-08-16T17:09:49.631+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:49.631+0800	info	raft/raft.go:265	节点更新发起选举时间为 69ms后
-2023-08-16T17:09:49.694+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:49.694+0800	info	raft/raft.go:265	节点更新发起选举时间为 132ms后
-2023-08-16T17:09:49.757+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:49.757+0800	info	raft/raft.go:265	节点更新发起选举时间为 49ms后
-2023-08-16T17:09:49.817+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:49.817+0800	info	raft/raft.go:265	节点更新发起选举时间为 107ms后
-2023-08-16T17:09:49.881+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:49.881+0800	info	raft/raft.go:265	节点更新发起选举时间为 68ms后
-2023-08-16T17:09:49.947+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:49.948+0800	info	raft/raft.go:265	节点更新发起选举时间为 3ms后
-2023-08-16T17:09:50.009+0800	info	raft/election.go:41	收到 1 的投票邀请
-2023-08-16T17:09:50.009+0800	info	raft/raft.go:333	节点更新term
-2023-08-16T17:09:50.009+0800	info	raft/election.go:66	符合要求,投给 1
-2023-08-16T17:09:50.009+0800	info	raft/raft.go:265	节点更新发起选举时间为 46ms后
-2023-08-16T17:09:50.009+0800	info	raft/election.go:41	收到 5 的投票邀请
-2023-08-16T17:09:50.009+0800	info	raft/election.go:69	本节点已经投票给 1 故拒绝
-2023-08-16T17:09:50.195+0800	info	raft/election.go:41	收到 2 的投票邀请
-2023-08-16T17:09:50.195+0800	info	raft/raft.go:333	节点更新term
-2023-08-16T17:09:50.195+0800	info	raft/election.go:66	符合要求,投给 2
-2023-08-16T17:09:50.195+0800	info	raft/raft.go:265	节点更新发起选举时间为 138ms后
-2023-08-16T17:09:50.196+0800	info	raft/appendentry.go:46	收到心跳,来自2
-2023-08-16T17:09:50.196+0800	info	raft/raft.go:265	节点更新发起选举时间为 86ms后
-2023-08-16T17:09:50.196+0800	info	raft/appendentry.go:46	收到心跳,来自2
-2023-08-16T17:09:50.196+0800	info	raft/raft.go:265	节点更新发起选举时间为 20ms后
-2023-08-16T17:09:50.256+0800	info	raft/appendentry.go:46	收到心跳,来自2
-2023-08-16T17:09:50.256+0800	info	raft/raft.go:265	节点更新发起选举时间为 37ms后
-2023-08-16T17:09:50.320+0800	info	raft/appendentry.go:46	收到心跳,来自2
-2023-08-16T17:09:50.320+0800	info	raft/raft.go:265	节点更新发起选举时间为 140ms后
-2023-08-16T17:09:50.382+0800	info	raft/appendentry.go:46	收到心跳,来自2
-2023-08-16T17:09:50.382+0800	info	raft/raft.go:265	节点更新发起选举时间为 64ms后
-2023-08-16T17:09:50.656+0800	info	raft/raft.go:265	节点更新发起选举时间为 8ms后
-2023-08-16T17:09:50.656+0800	info	raft/election.go:147	发起term为 9 的选举
-2023-08-16T17:09:50.843+0800	info	raft/raft.go:265	节点更新发起选举时间为 65ms后
-2023-08-16T17:09:50.843+0800	info	raft/election.go:147	发起term为 10 的选举
-2023-08-16T17:09:51.092+0800	info	raft/raft.go:265	节点更新发起选举时间为 9ms后
-2023-08-16T17:09:51.092+0800	info	raft/election.go:147	发起term为 11 的选举
-2023-08-16T17:09:51.092+0800	info	raft/election.go:128	收到 3 的投票
-2023-08-16T17:09:51.092+0800	info	raft/election.go:128	收到 4 的投票
-2023-08-16T17:09:51.092+0800	info	raft/election.go:128	收到 5 的投票
-2023-08-16T17:09:51.092+0800	info	raft/election.go:168	节点成为leader
-2023-08-16T17:09:51.092+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.093+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.093+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.093+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.093+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.093+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.154+0800	info	raft/raft.go:265	节点更新发起选举时间为 133ms后
-2023-08-16T17:09:51.154+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.154+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.154+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.154+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.154+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.154+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.218+0800	info	raft/raft.go:265	节点更新发起选举时间为 63ms后
-2023-08-16T17:09:51.218+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.218+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.218+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.218+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.218+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.218+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.280+0800	info	raft/raft.go:265	节点更新发起选举时间为 141ms后
-2023-08-16T17:09:51.280+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.280+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.280+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.280+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.280+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.280+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.342+0800	info	raft/raft.go:265	节点更新发起选举时间为 16ms后
-2023-08-16T17:09:51.342+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.342+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.342+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.342+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.342+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.342+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.405+0800	info	raft/raft.go:265	节点更新发起选举时间为 101ms后
-2023-08-16T17:09:51.405+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.405+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.405+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.405+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.405+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.405+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.467+0800	info	raft/raft.go:265	节点更新发起选举时间为 148ms后
-2023-08-16T17:09:51.467+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.467+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.467+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.467+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.467+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.467+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.528+0800	info	raft/raft.go:265	节点更新发起选举时间为 142ms后
-2023-08-16T17:09:51.528+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.528+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.528+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.528+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.528+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.528+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.590+0800	info	raft/raft.go:265	节点更新发起选举时间为 139ms后
-2023-08-16T17:09:51.590+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.590+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.590+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.590+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.590+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.590+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.651+0800	info	raft/raft.go:265	节点更新发起选举时间为 49ms后
-2023-08-16T17:09:51.651+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.651+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.651+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.651+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.651+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.651+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.714+0800	info	raft/raft.go:265	节点更新发起选举时间为 41ms后
-2023-08-16T17:09:51.714+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.714+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.714+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.714+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.714+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.714+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.777+0800	info	raft/raft.go:265	节点更新发起选举时间为 61ms后
-2023-08-16T17:09:51.777+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.777+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.777+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.777+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.777+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.777+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.841+0800	info	raft/raft.go:265	节点更新发起选举时间为 109ms后
-2023-08-16T17:09:51.841+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.841+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.841+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.841+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.841+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.841+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.903+0800	info	raft/raft.go:265	节点更新发起选举时间为 52ms后
-2023-08-16T17:09:51.903+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.903+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.903+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.903+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.903+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:51.903+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.965+0800	info	raft/raft.go:265	节点更新发起选举时间为 5ms后
-2023-08-16T17:09:51.965+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:51.965+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:51.965+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:51.965+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:51.965+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:51.965+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:52.021+0800	info	raft/raft.go:265	节点更新发起选举时间为 34ms后
-2023-08-16T17:09:52.021+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:52.021+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:52.021+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:52.021+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:52.021+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:52.021+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:52.083+0800	info	raft/raft.go:265	节点更新发起选举时间为 124ms后
-2023-08-16T17:09:52.083+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:52.083+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:52.083+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:52.083+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:52.083+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:52.083+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:52.146+0800	info	raft/raft.go:265	节点更新发起选举时间为 129ms后
-2023-08-16T17:09:52.146+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:52.146+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:52.146+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:52.146+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:52.146+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:52.146+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:52.207+0800	info	raft/raft.go:265	节点更新发起选举时间为 120ms后
-2023-08-16T17:09:52.207+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:52.207+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:52.207+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:52.207+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:52.207+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:52.207+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:52.270+0800	info	raft/raft.go:265	节点更新发起选举时间为 35ms后
-2023-08-16T17:09:52.270+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:52.270+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:52.270+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:52.270+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:52.270+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:52.270+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:52.333+0800	info	raft/raft.go:265	节点更新发起选举时间为 79ms后
-2023-08-16T17:09:52.333+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:52.333+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:52.333+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:52.333+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:52.333+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:52.333+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:52.395+0800	info	raft/raft.go:265	节点更新发起选举时间为 36ms后
-2023-08-16T17:09:52.395+0800	info	raft/appendentry.go:62	给节点 6 发送心跳
-2023-08-16T17:09:52.395+0800	info	raft/appendentry.go:62	给节点 3 发送心跳
-2023-08-16T17:09:52.395+0800	info	raft/appendentry.go:62	给节点 1 发送心跳
-2023-08-16T17:09:52.395+0800	info	raft/appendentry.go:62	给节点 4 发送心跳
-2023-08-16T17:09:52.395+0800	info	raft/appendentry.go:62	给节点 5 发送心跳
-2023-08-16T17:09:52.395+0800	info	raft/appendentry.go:62	给节点 2 发送心跳
-2023-08-16T17:09:52.441+0800	info	raft/appendentry.go:34	收到新leader的心跳,leader下线
-2023-08-16T17:09:52.441+0800	info	raft/raft.go:333	节点更新term
-2023-08-16T17:09:52.441+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.441+0800	info	raft/raft.go:265	节点更新发起选举时间为 137ms后
-2023-08-16T17:09:52.503+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.503+0800	info	raft/raft.go:265	节点更新发起选举时间为 18ms后
-2023-08-16T17:09:52.559+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.559+0800	info	raft/raft.go:265	节点更新发起选举时间为 33ms后
-2023-08-16T17:09:52.623+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.623+0800	info	raft/raft.go:265	节点更新发起选举时间为 127ms后
-2023-08-16T17:09:52.684+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.684+0800	info	raft/raft.go:265	节点更新发起选举时间为 57ms后
-2023-08-16T17:09:52.749+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.749+0800	info	raft/raft.go:265	节点更新发起选举时间为 44ms后
-2023-08-16T17:09:52.811+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.811+0800	info	raft/raft.go:265	节点更新发起选举时间为 127ms后
-2023-08-16T17:09:52.873+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.873+0800	info	raft/raft.go:265	节点更新发起选举时间为 36ms后
-2023-08-16T17:09:52.936+0800	info	raft/appendentry.go:46	收到心跳,来自3
-2023-08-16T17:09:52.936+0800	info	raft/raft.go:265	节点更新发起选举时间为 66ms后
-2023-08-16T17:09:52.936+0800	info	raft/election.go:41	收到 5 的投票邀请
-2023-08-16T17:09:52.936+0800	info	raft/raft.go:333	节点更新term
-2023-08-16T17:09:52.936+0800	info	raft/election.go:66	符合要求,投给 5
-2023-08-16T17:09:52.936+0800	info	raft/raft.go:265	节点更新发起选举时间为 115ms后
-2023-08-16T17:09:52.936+0800	info	raft/appendentry.go:46	收到心跳,来自2
-2023-08-16T17:09:52.936+0800	info	raft/raft.go:265	节点更新发起选举时间为 76ms后
-2023-08-16T17:09:52.937+0800	info	raft/appendentry.go:46	收到心跳,来自5
-2023-08-16T17:09:52.937+0800	info	raft/raft.go:265	节点更新发起选举时间为 82ms后
-2023-08-16T17:09:52.998+0800	info	raft/appendentry.go:46	收到心跳,来自5
-2023-08-16T17:09:52.998+0800	info	raft/raft.go:265	节点更新发起选举时间为 7ms后
-2023-08-16T17:09:53.054+0800	info	raft/election.go:41	收到 4 的投票邀请
-2023-08-16T17:09:53.054+0800	info	raft/raft.go:333	节点更新term
-2023-08-16T17:09:53.054+0800	info	raft/election.go:66	符合要求,投给 4
-2023-08-16T17:09:53.054+0800	info	raft/raft.go:265	节点更新发起选举时间为 147ms后
-2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:46	收到心跳,来自5
-2023-08-16T17:09:53.055+0800	info	raft/raft.go:265	节点更新发起选举时间为 50ms后
-2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:53.055+0800	info	raft/raft.go:265	节点更新发起选举时间为 77ms后
-2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:53.055+0800	info	raft/raft.go:265	节点更新发起选举时间为 111ms后
-2023-08-16T17:09:53.055+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:53.055+0800	info	raft/raft.go:265	节点更新发起选举时间为 22ms后
-2023-08-16T17:09:53.116+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:53.116+0800	info	raft/raft.go:265	节点更新发起选举时间为 99ms后
-2023-08-16T17:09:53.180+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:53.180+0800	info	raft/raft.go:265	节点更新发起选举时间为 96ms后
-2023-08-16T17:09:53.241+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:53.241+0800	info	raft/raft.go:265	节点更新发起选举时间为 90ms后
-2023-08-16T17:09:53.305+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:53.305+0800	info	raft/raft.go:265	节点更新发起选举时间为 114ms后
-2023-08-16T17:09:53.369+0800	info	raft/appendentry.go:46	收到心跳,来自4
-2023-08-16T17:09:53.369+0800	info	raft/raft.go:265	节点更新发起选举时间为 31ms后
-2023-08-16T17:09:53.415+0800	info	raft/raft.go:224	节点死亡
+2023-08-20T16:32:26.730+0800	info	raft/raft.go:306	节点创建
+2023-08-20T16:32:26.730+0800	info	raft/raft.go:251	节点更新发起选举时间为58ms后
+2023-08-20T16:32:26.915+0800	info	raft/election.go:40	收到 2 的投票邀请,term为 1
+2023-08-20T16:32:26.915+0800	info	raft/raft.go:341	节点遇到更高term,更新term为1
+2023-08-20T16:32:26.915+0800	info	raft/election.go:69	符合要求,投给 2
+2023-08-20T16:32:26.915+0800	info	raft/raft.go:251	节点更新发起选举时间为117ms后
+2023-08-20T16:32:26.915+0800	info	raft/raft.go:251	节点更新发起选举时间为115ms后
+2023-08-20T16:32:26.915+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:26.915+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:26.976+0800	info	raft/raft.go:251	节点更新发起选举时间为97ms后
+2023-08-20T16:32:26.976+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:26.976+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.038+0800	info	raft/raft.go:251	节点更新发起选举时间为131ms后
+2023-08-20T16:32:27.038+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.038+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.100+0800	info	raft/raft.go:251	节点更新发起选举时间为19ms后
+2023-08-20T16:32:27.100+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.100+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.161+0800	info	raft/raft.go:251	节点更新发起选举时间为29ms后
+2023-08-20T16:32:27.161+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.161+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.223+0800	info	raft/raft.go:251	节点更新发起选举时间为27ms后
+2023-08-20T16:32:27.223+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.223+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.284+0800	info	raft/raft.go:251	节点更新发起选举时间为101ms后
+2023-08-20T16:32:27.284+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.284+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.347+0800	info	raft/raft.go:251	节点更新发起选举时间为145ms后
+2023-08-20T16:32:27.347+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.347+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.409+0800	info	raft/raft.go:251	节点更新发起选举时间为139ms后
+2023-08-20T16:32:27.409+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.409+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.472+0800	info	raft/raft.go:251	节点更新发起选举时间为18ms后
+2023-08-20T16:32:27.472+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.472+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.535+0800	info	raft/raft.go:251	节点更新发起选举时间为76ms后
+2023-08-20T16:32:27.535+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.535+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.597+0800	info	raft/raft.go:251	节点更新发起选举时间为39ms后
+2023-08-20T16:32:27.597+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.597+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.659+0800	info	raft/raft.go:251	节点更新发起选举时间为6ms后
+2023-08-20T16:32:27.659+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.659+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为121ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为56ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1}]
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为9ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1} {1 213712298}]
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为66ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1} {1 213712298} {1 1176484306} {1 1509767125} {1 470758345} {1 359469869} {1 789719638}]
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为9ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1} {1 213712298} {1 1176484306} {1 1509767125} {1 470758345}]
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为81ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1} {1 213712298} {1 1176484306}]
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为18ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1} {1 213712298} {1 1176484306} {1 1509767125}]
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为140ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1} {1 213712298} {1 1176484306} {1 1509767125} {1 470758345} {1 359469869}]
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 | 
+2023-08-20T16:32:27.721+0800	info	raft/raft.go:251	节点更新发起选举时间为8ms后
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1} {1 213712298} {1 1176484306} {1 1509767125} {1 470758345} {1 359469869} {1 789719638} {1 978644064}]
+2023-08-20T16:32:27.721+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 | 
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:251	节点更新发起选举时间为43ms后
+2023-08-20T16:32:27.722+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1176484306} {1 1509767125} {1 470758345} {1 359469869} {1 789719638} {1 978644064} {1 1975254125}]
+2023-08-20T16:32:27.722+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 | 
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:283	开启cond广播
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:251	节点更新发起选举时间为51ms后
+2023-08-20T16:32:27.722+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1176484306} {1 1509767125} {1 470758345} {1 359469869} {1 789719638} {1 978644064} {1 1975254125} {1 1690524692}]
+2023-08-20T16:32:27.722+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 | 
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:251	节点更新发起选举时间为88ms后
+2023-08-20T16:32:27.722+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1690524692} {1 1615413810}]
+2023-08-20T16:32:27.722+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 | 
+2023-08-20T16:32:27.722+0800	info	raft/raft.go:283	开启cond广播
+2023-08-20T16:32:27.723+0800	info	raft/raft.go:251	节点更新发起选举时间为45ms后
+2023-08-20T16:32:27.723+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 [{1 1615413810} {1 690947322}]
+2023-08-20T16:32:27.723+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:27.723+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.723+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.783+0800	info	raft/raft.go:251	节点更新发起选举时间为25ms后
+2023-08-20T16:32:27.783+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.783+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:27.783+0800	info	raft/raft.go:283	开启cond广播
+2023-08-20T16:32:27.783+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.783+0800	info	raft/raft.go:268	发送applymsg
+2023-08-20T16:32:27.845+0800	info	raft/raft.go:251	节点更新发起选举时间为133ms后
+2023-08-20T16:32:27.845+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.845+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:27.908+0800	info	raft/raft.go:251	节点更新发起选举时间为20ms后
+2023-08-20T16:32:27.908+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.908+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:27.970+0800	info	raft/raft.go:251	节点更新发起选举时间为15ms后
+2023-08-20T16:32:27.970+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:27.970+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.031+0800	info	raft/raft.go:251	节点更新发起选举时间为17ms后
+2023-08-20T16:32:28.031+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.031+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.093+0800	info	raft/raft.go:251	节点更新发起选举时间为50ms后
+2023-08-20T16:32:28.093+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.093+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.155+0800	info	raft/raft.go:251	节点更新发起选举时间为130ms后
+2023-08-20T16:32:28.155+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.155+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.217+0800	info	raft/raft.go:251	节点更新发起选举时间为107ms后
+2023-08-20T16:32:28.217+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.217+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.279+0800	info	raft/raft.go:251	节点更新发起选举时间为82ms后
+2023-08-20T16:32:28.279+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.279+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.340+0800	info	raft/raft.go:251	节点更新发起选举时间为15ms后
+2023-08-20T16:32:28.340+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.340+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.402+0800	info	raft/raft.go:251	节点更新发起选举时间为78ms后
+2023-08-20T16:32:28.402+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.402+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.465+0800	info	raft/raft.go:251	节点更新发起选举时间为42ms后
+2023-08-20T16:32:28.465+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.465+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.527+0800	info	raft/raft.go:251	节点更新发起选举时间为68ms后
+2023-08-20T16:32:28.527+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.527+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.589+0800	info	raft/raft.go:251	节点更新发起选举时间为81ms后
+2023-08-20T16:32:28.589+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.589+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.651+0800	info	raft/raft.go:251	节点更新发起选举时间为32ms后
+2023-08-20T16:32:28.651+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.651+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.714+0800	info	raft/raft.go:251	节点更新发起选举时间为94ms后
+2023-08-20T16:32:28.715+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.715+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.776+0800	info	raft/raft.go:251	节点更新发起选举时间为113ms后
+2023-08-20T16:32:28.776+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.776+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.837+0800	info	raft/raft.go:251	节点更新发起选举时间为14ms后
+2023-08-20T16:32:28.837+0800	info	raft/appendentry.go:67	收到权威leader心跳,来自 2args的entry为 []
+2023-08-20T16:32:28.837+0800	info	raft/appendentry.go:96	目前日志为 |  index:0 term:0 cmd:-1 |  index:1 term:1 cmd:1 |  index:2 term:1 cmd:213712298 |  index:3 term:1 cmd:1176484306 |  index:4 term:1 cmd:1509767125 |  index:5 term:1 cmd:470758345 |  index:6 term:1 cmd:359469869 |  index:7 term:1 cmd:789719638 |  index:8 term:1 cmd:978644064 |  index:9 term:1 cmd:1975254125 |  index:10 term:1 cmd:1690524692 |  index:11 term:1 cmd:1615413810 |  index:12 term:1 cmd:690947322 | 
+2023-08-20T16:32:28.837+0800	info	raft/raft.go:210	节点死亡
