@@ -1,9 +1,5 @@
 package raft
 
-import (
-	"strconv"
-)
-
 // AppendEntryArgs
 // append entry消息的定义
 type AppendEntryArgs struct {
@@ -28,7 +24,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 	defer rf.mu.Unlock()
 	if rf.state == Candidate {
 		if args.Term > rf.currentTerm {
-			rf.logger.Info("收到新leader的心跳,放弃竞选")
+			DPrintf("收到新leader %v 的心跳,放弃竞选", args.LeaderId)
 
 			rf.MeetGreaterTerm(args.Term)
 			reply.Term = rf.currentTerm
@@ -42,7 +38,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 	}
 	if rf.state == Leader {
 		if args.Term > rf.currentTerm {
-			rf.logger.Info("收到新leader" + strconv.Itoa(args.LeaderId) + "的心跳,leader下线")
+			DPrintf("收到新leader %v 的心跳,leader下线", args.LeaderId)
 			rf.MeetGreaterTerm(args.Term)
 			reply.Term = rf.currentTerm
 			reply.Success = true
@@ -64,12 +60,12 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 			reply.Success = false
 			reply.Conflict = false
 		} else {
-			rf.logger.Info("收到权威leader心跳,来自 "+strconv.Itoa(args.LeaderId), "args的entry为 ", args.Entries)
+			DPrintf("收到权威leader心跳,来自 %v ", args.LeaderId)
 			followerlastindex := rf.log.LastIndex()
 
 			//如果follower比leader日志落后
 			if followerlastindex < args.PrevLogIndex {
-				rf.logger.Info("发现log比leader落后")
+				DPrintf("发现log比leader %v 落后", args.LeaderId)
 				reply.Conflict = true
 				reply.Success = false
 				reply.Xindex = followerlastindex
@@ -79,7 +75,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 			}
 			//prelogindex不一致
 			if rf.log.EntryAt(args.PrevLogIndex).Term != args.PrevLogTerm {
-				rf.logger.Info("发现log和leader不一致")
+				DPrintf("发现log和leader %v 不一致", args.LeaderId)
 				reply.Conflict = true
 				reply.Success = false
 				reply.Xindex = followerlastindex
@@ -93,7 +89,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 			//好像都走了这一步了？
 			entry := append(rf.log.Entries[:args.PrevLogIndex+1], args.Entries...)
 			rf.log.Entries = entry
-			rf.logger.Info("目前日志为 ", rf.log.Print())
+			//DPrintf("目前日志为 ", rf.log.Print())
 			reply.Conflict = false
 			reply.Success = true
 			reply.Xindex = rf.log.LastIndex()
@@ -102,6 +98,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 				rf.commitIndex = min(args.LeaderCommit, rf.log.LastIndex())
 				rf.apply()
 			}
+			rf.persist()
 		}
 	}
 }
@@ -118,22 +115,21 @@ func (rf *Raft) LeaderAP(server int, args *AppendEntryArgs) {
 	reply := &AppendEntryReply{}
 	ok := rf.sendAppendEntry(server, args, reply)
 	if !ok {
-		rf.logger.Info("给节点" + strconv.Itoa(server) + "发送心跳失败")
+		DPrintf("给节点 %v 发送心跳失败", server)
 		return
 	}
-	rf.logger.Info("给节点" + strconv.Itoa(server) + "发送心跳成功")
-
+	DPrintf("给节点 %v 发送心跳成功", server)
 
 	if reply.Term > rf.currentTerm {
-		rf.logger.Info("遇到更大的term,leader下线")
+		DPrintf("遇到更大的term %v ,leader下线", reply.Term)
 		rf.MeetGreaterTerm(reply.Term)
 		return
 	}
 
-	if reply.Success{
+	if reply.Success {
 		//follower日志没有冲突且成功复制
 		if !reply.Conflict {
-			rf.logger.Info(server, " 日志没有冲突")
+			DPrintf(" %v 日志没有冲突", server)
 			if !reply.Conflict {
 				//这里可能会有争议
 				rf.nextIndex[server] = reply.Xindex + 1
@@ -143,12 +139,12 @@ func (rf *Raft) LeaderAP(server int, args *AppendEntryArgs) {
 			rf.LeaderTryCommit()
 		}
 
-	}else{
+	} else {
 		//由于日志冲突导致false
 		if reply.Conflict {
 			//follower日志缺少
 			if reply.Xterm == -1 {
-				rf.logger.Info(server, " 的日志落后")
+				DPrintf("%v 的日志落后", server)
 				rf.nextIndex[server] = reply.Xindex + 1
 			} else {
 				//follower 日志没对齐
@@ -215,7 +211,7 @@ func (rf *Raft) LeaderTryCommit() {
 		//日志在多数派peer中得到了match
 		if counter > len(rf.peers)/2 {
 			rf.commitIndex = N
-			rf.logger.Info("leader尝试发起commit ", N)
+			DPrintf("leader尝试发起commit N=%v", N)
 			rf.apply()
 			break
 		}

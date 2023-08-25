@@ -1,7 +1,5 @@
 package raft
 
-import "strconv"
-
 // RequestVoteArgs
 // example RequestVote RPC arguments structure.
 // field names must start with capital letters!
@@ -37,18 +35,18 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here (2A, 2B).
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	rf.logger.Info( "收到 "+strconv.Itoa(args.CandidateId)+" 的投票邀请,term为 ",args.Term)
-	
+	DPrintf("收到 %v 的投票邀请,term为 %v", args.CandidateId, args.Term)
+
 	if args.Term > rf.currentTerm {
 		rf.MeetGreaterTerm(args.Term)
 	}
 	if rf.state == Leader {
-		rf.logger.Info("本节点已经是权威节点，故拒绝")
+		DPrintf("节点 %v 已经是权威节点，故拒绝", rf.me)
 		reply.VoteGranted = false
 		reply.Term = rf.currentTerm
 	}
 	if rf.state == Candidate {
-		rf.logger.Info(strconv.Itoa(args.CandidateId)+"的term不大于本节点,故拒绝放弃竞选")
+		DPrintf("%v 的term不大于本节点,故拒绝放弃竞选", args.CandidateId)
 
 		reply.Term = rf.currentTerm
 		reply.VoteGranted = false
@@ -60,20 +58,21 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 
 		if args.Term < rf.currentTerm {
 			reply.VoteGranted = false
-			rf.logger.Info("由于candidate的term比本节点小,拒绝投票")
+			DPrintf("由于candidate %v 的term比本节点小,拒绝投票", args.CandidateId)
 
 		} else if rf.votedFor == -1 && isuptodate {
 			reply.VoteGranted = true
 			rf.votedFor = args.CandidateId
 
-			rf.logger.Info("符合要求,投给 "+strconv.Itoa(args.CandidateId))
+			DPrintf("符合要求,投给 %v ", args.CandidateId)
 
 			rf.setElectionTime()
+			rf.persist()
 		} else if rf.votedFor != -1 {
-			rf.logger.Info("本节点已经投票给 "+strconv.Itoa(rf.votedFor)+" 故拒绝")
+			DPrintf("本节点已经投票给 %v 故拒绝", rf.votedFor)
 			reply.VoteGranted = false
 		} else {
-			rf.logger.Info("不是uptodate,拒绝投票")
+			DPrintf("不是uptodate,拒绝投票给 %v", args.CandidateId)
 			reply.VoteGranted = false
 		}
 		reply.Term = rf.currentTerm
@@ -122,12 +121,12 @@ func (rf *Raft) RequestAndAdd(server int, args *RequestVoteArgs, vote *int) {
 	rf.sendRequestVote(server, args, &reply)
 
 	if reply.Term > rf.currentTerm {
-		rf.logger.Info("发现更高的term,放弃竞选")
+		DPrintf("发现更高的term : %v,放弃竞选", reply.Term)
 		rf.MeetGreaterTerm(reply.Term)
 	}
 	if reply.VoteGranted && rf.state == Candidate {
 		*vote++
-		rf.logger.Info("收到"+strconv.Itoa(server)+"的投票")
+		DPrintf("收到 %v 的投票", server)
 		//这里判定是否达到多数派的做法是在每一次发送request请求的时候都判断一下
 		if *vote > len(rf.peers)>>1 {
 			//判断一下term是否被修改了
@@ -146,8 +145,8 @@ func (rf *Raft) LeaderElection() {
 	rf.state = Candidate
 	rf.currentTerm++
 	rf.votedFor = rf.me
-	
-	rf.logger.Info("发起term为 "+strconv.Itoa(rf.currentTerm)+" 的选举")
+	rf.persist()
+	DPrintf("发起term为 %v 的选举", rf.currentTerm)
 
 	args := &RequestVoteArgs{
 		Term:         rf.currentTerm,
@@ -168,7 +167,7 @@ func (rf *Raft) UpGrade() {
 	if rf.state == Candidate {
 		rf.state = Leader
 	}
-	rf.logger.Info("节点成为leader")
+	DPrintf("节点 %v 成为leader", rf.me)
 
 	//初始化nextindex和matchindex
 	rf.entryIndexInitiallize()

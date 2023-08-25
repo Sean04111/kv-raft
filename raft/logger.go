@@ -47,6 +47,9 @@ type EsLogger struct {
 }
 
 // 初始化es日志器
+
+
+
 func InitEsLogger(index int) (EsLogger, error) {
 	c, e := elastic.NewClient(
 		elastic.SetURL(EsAddr),

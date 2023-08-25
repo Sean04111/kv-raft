@@ -18,8 +18,8 @@ package raft
 //
 
 import (
+	"bytes"
 	"math/rand"
-	"strconv"
 	"time"
 
 	//	"bytes"
@@ -27,6 +27,7 @@ import (
 	"sync/atomic"
 
 	//	"6.824/labgob"
+	"kv-raft/labgob"
 	"kv-raft/labrpc"
 
 	"go.uber.org/zap"
@@ -108,35 +109,37 @@ func (rf *Raft) GetState() (int, bool) {
 // save Raft's persistent state to stable storage,
 // where it can later be retrieved after a crash and restart.
 // see paper's Figure 2 for a description of what should be persistent.
+// 把Raft的持久化状态储存起来
 func (rf *Raft) persist() {
-	// Your code here (2C).
-	// Example:
-	// w := new(bytes.Buffer)
-	// e := labgob.NewEncoder(w)
-	// e.Encode(rf.xxx)
-	// e.Encode(rf.yyy)
-	// data := w.Bytes()
-	// rf.persister.SaveRaftState(data)
+	//DPrintf("储存状态")
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	e.Encode(rf.currentTerm)
+	e.Encode(rf.votedFor)
+	e.Encode(rf.log)
+	data := w.Bytes()
+	rf.persister.SaveRaftState(data)
 }
 
 // restore previously persisted state.
+// 读取状态
 func (rf *Raft) readPersist(data []byte) {
 	if data == nil || len(data) < 1 { // bootstrap without any state?
 		return
 	}
-	// Your code here (2C).
-	// Example:
-	// r := bytes.NewBuffer(data)
-	// d := labgob.NewDecoder(r)
-	// var xxx
-	// var yyy
-	// if d.Decode(&xxx) != nil ||
-	//    d.Decode(&yyy) != nil {
-	//   error...
-	// } else {
-	//   rf.xxx = xxx
-	//   rf.yyy = yyy
-	// }
+
+	r := bytes.NewBuffer(data)
+	d := labgob.NewDecoder(r)
+	var currentTerm int
+	var votedFor int
+	var log Log
+	if d.Decode(&currentTerm) != nil || d.Decode(&votedFor) != nil || d.Decode(&log) != nil {
+		//rf.logger.Error("decode错误")
+	} else {
+		rf.currentTerm = currentTerm
+		rf.votedFor = votedFor
+		rf.log = log
+	}
 }
 
 // CondInstallSnapshot
@@ -189,8 +192,8 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 			Cmd:  command,
 		}
 		rf.log.Append(newentry)
-		rf.logger.Info("leader接收到新的cmd: ", newentry, "此时leader的日志:", rf.log.Print())
-
+		//DPrintf("leader接收到新的cmd")
+		rf.persist()
 		rf.LeaderAppendEntry(false)
 		return index, term, true
 	}
@@ -207,7 +210,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 // confusing debug output. any goroutine with a long-running loop
 // should call killed() to check whether it should stop.
 func (rf *Raft) Kill() {
-	rf.logger.Info("节点死亡")
+	DPrintf("节点%v死亡", rf.me)
 	atomic.StoreInt32(&rf.dead, 1)
 	// Your code here, if desired.
 }
@@ -240,15 +243,16 @@ func (rf *Raft) ticker() {
 			rf.mu.Unlock()
 		}
 	}
+
 }
 
 // 为该节点设置发起选举时间间隔(这个设置是以now为基准，提供发起election的时间)
 func (rf *Raft) setElectionTime() {
 	now := time.Now()
-	due := rand.Intn(150)
+	due := rand.Intn(200)
 	duration := time.Duration(150+due) * time.Millisecond
 	rf.electionTime = now.Add(time.Duration(duration))
-	rf.logger.Info("节点更新发起选举时间为" + strconv.Itoa(due) + "ms后")
+	//DPrintf("节点更新发起选举时间为" + strconv.Itoa(due) + "ms后")
 }
 
 // Applier 将日志提交到状态机(eg k-v server)
@@ -265,7 +269,7 @@ func (rf *Raft) applier() {
 				CommandIndex: rf.lastApplied,
 			}
 			//这里可以直接发channel吗？
-			rf.logger.Info("发送applymsg")
+			//DPrintf("发送applymsg")
 			rf.applyCh <- applymgs
 			//
 
@@ -280,7 +284,7 @@ func (rf *Raft) applier() {
 func (rf *Raft) apply() {
 	//唤醒applier
 	rf.applyCond.Broadcast()
-	rf.logger.Info("开启cond广播")
+	//DPrintf("开启cond广播")
 }
 
 // Make
@@ -302,8 +306,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// Your initialization code here (2A, 2B, 2C).
 
-	rf.LoggerInit()
-	rf.logger.Info("节点创建")
+	//rf.LoggerInit()
+	DPrintf("节点 %v 创建", rf.me)
 
 	rf.dead = 0
 
@@ -338,5 +342,6 @@ func (rf *Raft) MeetGreaterTerm(term int) {
 	rf.currentTerm = term
 	rf.state = Follower
 	rf.votedFor = -1
-	rf.logger.Info("节点遇到更高term,更新term为" + strconv.Itoa(term))
+	rf.persist()
+	DPrintf("节点 %v 遇到更高term,更新term为 %v ", rf.me, term)
 }
