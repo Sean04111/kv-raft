@@ -59,15 +59,15 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 		if args.Term < rf.currentTerm {
 			reply.VoteGranted = false
 			DPrintf("由于candidate %v 的term比本节点小,拒绝投票", args.CandidateId)
-
-		} else if rf.votedFor == -1 && isuptodate {
+			return
+		} else if (rf.votedFor == -1 || rf.votedFor ==args.CandidateId) && isuptodate {
 			reply.VoteGranted = true
 			rf.votedFor = args.CandidateId
 
 			DPrintf("符合要求,投给 %v ", args.CandidateId)
+			rf.persist()
 
 			rf.setElectionTime()
-			rf.persist()
 		} else if rf.votedFor != -1 {
 			DPrintf("本节点已经投票给 %v 故拒绝", rf.votedFor)
 			reply.VoteGranted = false

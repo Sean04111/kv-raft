@@ -23,7 +23,7 @@ func (lg *Log) Append(x Entry) {
 
 //通过日志索引获取条目
 func (lg *Log) EntryAt(index int) Entry {
-	return lg.Entries[index]
+		return lg.Entries[index]
 }
 
 //获取去区间内的entry,左闭右开,开的新slice

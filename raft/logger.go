@@ -1,22 +1,10 @@
 package raft
 
-
-
 //系统日志的设计还需要进一步设计，这里实现了用es远程收集和zap本地磁盘文件写入的方法，
 //es远程收集太慢了，会影响系统的正确性
 //暂时用zap文件写入替代
-import (
-	"context"
-	"errors"
-	"os"
-	"strconv"
-	"time"
 
-	"github.com/olivere/elastic/v7"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
-)
-
+/*
 const EsAddr string = "http://43.143.238.162:9200/"
 const mapping = `
 {
@@ -30,7 +18,7 @@ const mapping = `
 	 }
 	 "event":{
 		"type":"keyword"
-	 } 
+	 }
     }
   }
 }`
@@ -101,3 +89,4 @@ func (rf *Raft) LoggerInit() {
 	core := zapcore.NewCore(encoder, filewriter, zapcore.DebugLevel)
 	rf.logger = zap.New(core, zap.AddCaller()).Sugar()
 }
+*/

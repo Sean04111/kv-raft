@@ -78,15 +78,21 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 				DPrintf("发现log和leader %v 不一致", args.LeaderId)
 				reply.Conflict = true
 				reply.Success = false
-				reply.Xindex = followerlastindex
+				
 				reply.Xterm = rf.log.EntryAt(args.PrevLogIndex).Term //为了区分落后和不一致两种情况
+				//这里xindex是返回Xterm中的第一个索引
+				//If a follower does have prevLogIndex in its log, but the term does not match, it should return conflictTerm = log[prevLogIndex].Term, and then search its log for the first index whose entry has term equal to conflictTerm.
+				//来自guide-book
+				for xindex:=args.PrevLogIndex;xindex>0;xindex--{
+					if rf.log.EntryAt(xindex-1).Term!=reply.Xterm{
+						reply.Xindex = xindex
+						break
+					}
+				}
 				return
 			}
 			//找到prelogindex,开始复制日志
-			//这个做法有点丑，因为普通的心跳也会执行这一步
-			//可能会产生bug
-			//这里需要考虑一下entry里面到底是否需要带index ?
-			//好像都走了这一步了？
+			//这里entry是批量复制的
 			entry := append(rf.log.Entries[:args.PrevLogIndex+1], args.Entries...)
 			rf.log.Entries = entry
 			//DPrintf("目前日志为 ", rf.log.Print())
@@ -99,6 +105,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 				rf.apply()
 			}
 			rf.persist()
+
 		}
 	}
 }
@@ -128,35 +135,50 @@ func (rf *Raft) LeaderAP(server int, args *AppendEntryArgs) {
 
 	if reply.Success {
 		//follower日志没有冲突且成功复制
-		if !reply.Conflict {
 			DPrintf(" %v 日志没有冲突", server)
 			if !reply.Conflict {
 				//这里可能会有争议
-				rf.nextIndex[server] = reply.Xindex + 1
-				rf.matchIndex[server] = reply.Xindex
+				match:=args.PrevLogIndex+len(args.Entries)
+				next:=match+1
+				rf.nextIndex[server] = max(rf.nextIndex[server],next)
+				rf.matchIndex[server] = max(rf.matchIndex[server],match)
+				rf.LeaderTryCommit()
+
 			}
 			//不存在seccuss为true conflict为true的情况
-			rf.LeaderTryCommit()
-		}
 
-	} else {
+	} else if reply.Conflict{
 		//由于日志冲突导致false
-		if reply.Conflict {
 			//follower日志缺少
 			if reply.Xterm == -1 {
 				DPrintf("%v 的日志落后", server)
 				rf.nextIndex[server] = reply.Xindex + 1
 			} else {
 				//follower 日志没对齐
-				//这里采用递减,其实可以优化减少rpc协商次数
-				rf.nextIndex[server]--
+				//prelog不一致
+				//这里采用搜寻做法其实可以优化减少rpc协商次数
+				lastindex:=rf.FindLastIndexofReplyTerm(reply.Xterm)
+				if lastindex>0{
+					rf.nextIndex[server] = lastindex + 1
+				}else{
+					rf.nextIndex[server] = reply.Xindex
+				}
 			}
-		}
 	}
 	//是不是只有success才try?
 
 }
-
+//为了减少日志同步的时候的协商次数
+//如果日志prelog和follower不一致，那么用此方法
+//找出在leader中最后一个一致的index
+func (rf *Raft)FindLastIndexofReplyTerm(replyterm int)int{
+	for i:=rf.log.LastIndex();i>0;i--{
+		if rf.log.EntryAt(i).Term==replyterm{
+			return i
+		}
+	}
+	return -1
+}
 // leader 发送AppendEntry消息,heatbeat看是否是心跳
 // 如果heartbeat为true的话，那么不用leader有新entry也会发送
 // 如果为false,那么只有leader有新entry才会发送
@@ -177,11 +199,21 @@ func (rf *Raft) LeaderAppendEntry(heartbeat bool) {
 				LeaderId:     rf.me,
 				LeaderCommit: rf.commitIndex,
 			}
-			//这里可能需要一个对nextindex的出界判断
-			args.PrevLogIndex = rf.nextIndex[k] - 1
+			//这里需要一个对nextindex的出界判断
+			nextindex:=rf.nextIndex[k]
+			if nextindex<=0{
+				nextindex = 1
+			}
+			if nextindex>rf.log.Len(){
+				nextindex = leaderlastlogindex
+			}
+			args.PrevLogIndex = nextindex - 1
 			args.PrevLogTerm = rf.log.EntryAt(args.PrevLogIndex).Term
 			//切片截取的时候是可以左边界是可以取到切片长度的
-			args.Entries = rf.log.EntrySlice(rf.nextIndex[k], rf.log.Len())
+			//这里其实就实现了no-op日志复制解决了幽灵日志
+			//初始化的时候nextindex会被初始化为len
+			//那么此时args的entry就是空的,也就是no-op
+			args.Entries = rf.log.EntrySlice(nextindex, rf.log.Len())
 			go rf.LeaderAP(k, args)
 		}
 	}
@@ -204,16 +236,17 @@ func (rf *Raft) LeaderTryCommit() {
 		}
 		counter := 1
 		for k, _ := range rf.peers {
-			if rf.matchIndex[k] >= N {
+			if rf.matchIndex[k] >= N && k != rf.me {
 				counter++
 			}
+			//日志在多数派peer中得到了match
+			if counter > len(rf.peers)/2 {
+				rf.commitIndex = N
+				DPrintf("leader尝试发起commit N=%v", N)
+				rf.apply()
+				break
+			}
 		}
-		//日志在多数派peer中得到了match
-		if counter > len(rf.peers)/2 {
-			rf.commitIndex = N
-			DPrintf("leader尝试发起commit N=%v", N)
-			rf.apply()
-			break
-		}
+
 	}
 }

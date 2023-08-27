@@ -701,6 +701,7 @@ func TestPersist32C(t *testing.T) {
 	cfg.start1((leader+1)%servers, cfg.applier)
 	cfg.connect((leader + 1) % servers)
 
+
 	cfg.one(104, servers, true)
 
 	cfg.end()
@@ -716,6 +717,7 @@ func TestPersist32C(t *testing.T) {
 // The leader in a new term may try to finish replicating log entries that
 // haven't been committed yet.
 //
+
 func TestFigure82C(t *testing.T) {
 	servers := 5
 	cfg := make_config(t, servers, false, false)

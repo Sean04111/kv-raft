@@ -223,7 +223,7 @@ func (rf *Raft) killed() bool {
 // The ticker go routine starts a new election if this peer hasn't received
 // heartsbeats recently.
 func (rf *Raft) ticker() {
-	for rf.killed() == false {
+	for !rf.killed() {
 		// Your code here to check if a leader election should
 		// be started and to randomize sleeping time using
 		// time.Sleep().
@@ -249,7 +249,7 @@ func (rf *Raft) ticker() {
 // 为该节点设置发起选举时间间隔(这个设置是以now为基准，提供发起election的时间)
 func (rf *Raft) setElectionTime() {
 	now := time.Now()
-	due := rand.Intn(200)
+	due := rand.Intn(150)
 	duration := time.Duration(150+due) * time.Millisecond
 	rf.electionTime = now.Add(time.Duration(duration))
 	//DPrintf("节点更新发起选举时间为" + strconv.Itoa(due) + "ms后")
@@ -261,7 +261,7 @@ func (rf *Raft) applier() {
 	defer rf.mu.Unlock()
 
 	for !rf.killed() {
-		if rf.commitIndex > rf.lastApplied && rf.lastApplied < rf.log.Len() {
+		if rf.commitIndex > rf.lastApplied && rf.lastApplied < rf.log.LastIndex() {
 			rf.lastApplied++
 			applymgs := ApplyMsg{
 				CommandValid: true,
@@ -270,8 +270,10 @@ func (rf *Raft) applier() {
 			}
 			//这里可以直接发channel吗？
 			//DPrintf("发送applymsg")
+			rf.mu.Unlock()
 			rf.applyCh <- applymgs
 			//
+			rf.mu.Lock()
 
 		} else {
 			//applier等待
