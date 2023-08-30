@@ -8,6 +8,7 @@ type Log struct {
 }
 type Entry struct {
 	Term int
+	Index int
 	Cmd  interface{}
 }
 

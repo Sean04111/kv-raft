@@ -1,6 +1,6 @@
 module kv-raft
 
-go 1.18
+go 1.21.0
 
 require go.uber.org/zap v1.25.0
 

@@ -1,20 +1,28 @@
 package raft
 
-import "log"
+import "time"
 
 // Debugging
 const Debug = false
 
-func DPrintf(format string, a ...interface{}) (n int, err error) {
+//系统日志的设计还需要进一步设计，这里实现了用es远程收集和zap本地磁盘文件写入的方法，
+//es远程收集太慢了，会影响系统的正确性
+
+func (rf *Raft) Record(eventtype string, event string) {
 	if Debug {
-		log.Printf(format, a...)
+		rf.logger.Info("  ", eventtype, "  ", event)
 	}
-	return
 }
-func max(a ,b int)int{
-	if a>b{
+func max(a, b int) int {
+	if a > b {
 		return a
-	}else{
+	} else {
 		return b
+	}
+}
+func (rf *Raft)LoggerRecorder(){
+	for !rf.killed(){
+		time.Sleep(rf.heartbeat)
+		rf.logger.Info(rf.log.Print())
 	}
 }

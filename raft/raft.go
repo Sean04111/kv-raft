@@ -19,7 +19,9 @@ package raft
 
 import (
 	"bytes"
+	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 
 	//	"bytes"
@@ -111,7 +113,7 @@ func (rf *Raft) GetState() (int, bool) {
 // see paper's Figure 2 for a description of what should be persistent.
 // 把Raft的持久化状态储存起来
 func (rf *Raft) persist() {
-	//DPrintf("储存状态")
+	//rf.Record("状态储存", "储存状态")
 	w := new(bytes.Buffer)
 	e := labgob.NewEncoder(w)
 	e.Encode(rf.currentTerm)
@@ -189,10 +191,11 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 
 		newentry := Entry{
 			Term: term,
+			Index: index,
 			Cmd:  command,
 		}
 		rf.log.Append(newentry)
-		//DPrintf("leader接收到新的cmd")
+		rf.Record("新日志", "leader接收到新的cmd")
 		rf.persist()
 		rf.LeaderAppendEntry(false)
 		return index, term, true
@@ -210,9 +213,10 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 // confusing debug output. any goroutine with a long-running loop
 // should call killed() to check whether it should stop.
 func (rf *Raft) Kill() {
-	DPrintf("节点%v死亡", rf.me)
 	atomic.StoreInt32(&rf.dead, 1)
 	// Your code here, if desired.
+	rf.Record("节点生命", fmt.Sprintf("节点%v死亡", rf.me))
+
 }
 
 func (rf *Raft) killed() bool {
@@ -252,7 +256,7 @@ func (rf *Raft) setElectionTime() {
 	due := rand.Intn(150)
 	duration := time.Duration(150+due) * time.Millisecond
 	rf.electionTime = now.Add(time.Duration(duration))
-	//DPrintf("节点更新发起选举时间为" + strconv.Itoa(due) + "ms后")
+	rf.Record("投票", "节点更新发起选举时间为"+strconv.Itoa(due)+"ms后")
 }
 
 // Applier 将日志提交到状态机(eg k-v server)
@@ -269,7 +273,7 @@ func (rf *Raft) applier() {
 				CommandIndex: rf.lastApplied,
 			}
 			//这里可以直接发channel吗？
-			//DPrintf("发送applymsg")
+			rf.Record("日志提交","index: "+strconv.Itoa(rf.lastApplied)+"cmd: "+strconv.Itoa(rf.log.EntryAt(rf.lastApplied).Cmd.(int)))
 			rf.mu.Unlock()
 			rf.applyCh <- applymgs
 			//
@@ -286,7 +290,7 @@ func (rf *Raft) applier() {
 func (rf *Raft) apply() {
 	//唤醒applier
 	rf.applyCond.Broadcast()
-	//DPrintf("开启cond广播")
+	rf.Record("日志应用", "开启cond广播")
 }
 
 // Make
@@ -308,8 +312,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// Your initialization code here (2A, 2B, 2C).
 
-	//rf.LoggerInit()
-	DPrintf("节点 %v 创建", rf.me)
+	rf.LoggerInit()
 
 	rf.dead = 0
 
@@ -319,7 +322,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.heartbeat = 50 * time.Millisecond
 	rf.currentTerm = 0
 	rf.votedFor = -1 //这里需要初始化为-1
-	rf.log = Log{Entries: []Entry{Entry{0, -1}}}
+	rf.log = Log{Entries: []Entry{Entry{0, 0,-1}}}
 	rf.commitIndex = 0
 	rf.lastApplied = 0
 
@@ -333,6 +336,10 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	go rf.ticker()
 	//负责提交日志的
 	go rf.applier()
+
+	//debug
+
+
 	return rf
 
 }
@@ -345,5 +352,5 @@ func (rf *Raft) MeetGreaterTerm(term int) {
 	rf.state = Follower
 	rf.votedFor = -1
 	rf.persist()
-	DPrintf("节点 %v 遇到更高term,更新term为 %v ", rf.me, term)
+	rf.Record("状态更新", fmt.Sprintf("节点 %v 遇到更高term,更新term为 %v ", rf.me, term))
 }
