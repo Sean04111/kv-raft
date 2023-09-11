@@ -41,7 +41,7 @@ func TestInitialElection2A(t *testing.T) {
 	time.Sleep(2 * RaftElectionTimeout)
 	term2 := cfg.checkTerms()
 	if term1 != term2 {
-		
+
 		fmt.Printf("warning: term changed even though there were no failures")
 	}
 
@@ -102,7 +102,7 @@ func TestManyElections2A(t *testing.T) {
 		i1 := rand.Int() % servers
 		i2 := rand.Int() % servers
 		i3 := rand.Int() % servers
-	//	fmt.Println("disconnect ",i1,i2,i3)
+		//	fmt.Println("disconnect ",i1,i2,i3)
 		cfg.disconnect(i1)
 		cfg.disconnect(i2)
 		cfg.disconnect(i3)
@@ -144,10 +144,8 @@ func TestBasicAgree2B(t *testing.T) {
 	cfg.end()
 }
 
-//
 // check, based on counting bytes of RPCs, that
 // each command is sent to each peer just once.
-//
 func TestRPCBytes2B(t *testing.T) {
 	servers := 3
 	cfg := make_config(t, servers, false, false)
@@ -702,7 +700,6 @@ func TestPersist32C(t *testing.T) {
 	cfg.start1((leader+1)%servers, cfg.applier)
 	cfg.connect((leader + 1) % servers)
 
-
 	cfg.one(104, servers, true)
 
 	cfg.end()
@@ -1067,25 +1064,24 @@ func snapcommon(t *testing.T, name string, disconnect bool, reliable bool, crash
 	}
 	cfg.end()
 }
-/*
-func TestSnapshotBasic2D(t *testing.T) {
-	snapcommon(t, "Test (2D): snapshots basic", false, true, false)
-}
 
-func TestSnapshotInstall2D(t *testing.T) {
-	snapcommon(t, "Test (2D): install snapshots (disconnect)", true, true, false)
-}
+//func TestSnapshotBasic2D(t *testing.T) {
+//	snapcommon(t, "Test (2D): snapshots basic", false, true, false)
+//}
 
-func TestSnapshotInstallUnreliable2D(t *testing.T) {
-	snapcommon(t, "Test (2D): install snapshots (disconnect+unreliable)",
-		true, false, false)
-}
-
-func TestSnapshotInstallCrash2D(t *testing.T) {
-	snapcommon(t, "Test (2D): install snapshots (crash)", false, true, true)
-}
-
-func TestSnapshotInstallUnCrash2D(t *testing.T) {
-	snapcommon(t, "Test (2D): install snapshots (unreliable+crash)", false, false, true)
-}
-*/
+//func TestSnapshotInstall2D(t *testing.T) {
+//	snapcommon(t, "Test (2D): install snapshots (disconnect)", true, true, false)
+//}
+//
+//func TestSnapshotInstallUnreliable2D(t *testing.T) {
+//	snapcommon(t, "Test (2D): install snapshots (disconnect+unreliable)",
+//		true, false, false)
+//}
+//
+//func TestSnapshotInstallCrash2D(t *testing.T) {
+//	snapcommon(t, "Test (2D): install snapshots (crash)", false, true, true)
+//}
+//
+//func TestSnapshotInstallUnCrash2D(t *testing.T) {
+//	snapcommon(t, "Test (2D): install snapshots (unreliable+crash)", false, false, true)
+//}

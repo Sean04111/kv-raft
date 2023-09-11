@@ -40,46 +40,45 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here (2A, 2B).
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	rf.Record("投票",fmt.Sprintf("收到 %v 的投票邀请,term为 %v", args.CandidateId, args.Term))
+	rf.Record("投票", fmt.Sprintf("收到 %v 的投票邀请,term为 %v", args.CandidateId, args.Term))
 
 	if args.Term > rf.currentTerm {
 		rf.MeetGreaterTerm(args.Term)
 	}
 
-	
 	if rf.state == Leader {
-		rf.Record("投票",fmt.Sprintf("节点 %v 已经是权威节点，故拒绝", rf.me))
+		rf.Record("投票", fmt.Sprintf("节点 %v 已经是权威节点，故拒绝", rf.me))
 		reply.VoteGranted = false
 		reply.Term = rf.currentTerm
 	}
 	if rf.state == Candidate {
-		rf.Record("投票",fmt.Sprintf("%v 的term不大于本节点,故拒绝放弃竞选", args.CandidateId))
+		rf.Record("投票", fmt.Sprintf("%v 的term不大于本节点,故拒绝放弃竞选", args.CandidateId))
 
 		reply.Term = rf.currentTerm
 		reply.VoteGranted = false
 	}
 	if rf.state == Follower {
-		myindex := rf.log.LastIndex()
-		myterm := rf.log.EntryAt(myindex).Term
+		myindex := rf.LastIndex()
+		myterm := rf.EntryAt(myindex).Term
 		isuptodate := args.LastLogTerm > myterm || (args.LastLogTerm == myterm && myindex <= args.LastLogIndex)
 
 		if args.Term < rf.currentTerm {
 			reply.VoteGranted = false
-			rf.Record("投票",fmt.Sprintf("由于candidate %v 的term比本节点小,拒绝投票", args.CandidateId))
+			rf.Record("投票", fmt.Sprintf("由于candidate %v 的term比本节点小,拒绝投票", args.CandidateId))
 			return
-		} else if (rf.votedFor == -1 || rf.votedFor ==args.CandidateId) && isuptodate {
+		} else if (rf.votedFor == -1 || rf.votedFor == args.CandidateId) && isuptodate {
 			reply.VoteGranted = true
 			rf.votedFor = args.CandidateId
 
-			rf.Record("投票",fmt.Sprintf("符合要求,投给 %v ", args.CandidateId))
+			rf.Record("投票", fmt.Sprintf("符合要求,投给 %v ", args.CandidateId))
 			rf.persist()
 
-			rf.setElectionTime()
+			rf.setElectionTimeUnlocked()
 		} else if rf.votedFor != -1 {
-			rf.Record("投票",fmt.Sprintf("本节点已经投票给 %v 故拒绝", rf.votedFor))
+			rf.Record("投票", fmt.Sprintf("本节点已经投票给 %v 故拒绝", rf.votedFor))
 			reply.VoteGranted = false
 		} else {
-			rf.Record("投票",fmt.Sprintf("不是uptodate,拒绝投票给 %v", args.CandidateId))
+			rf.Record("投票", fmt.Sprintf("不是uptodate,拒绝投票给 %v", args.CandidateId))
 			reply.VoteGranted = false
 		}
 		reply.Term = rf.currentTerm
@@ -123,30 +122,30 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 	return ok
 }
 
-func (rf *Raft) RequestAndAdd(server int, args *RequestVoteArgs, vote *int,upgrade *sync.Once) {
+func (rf *Raft) RequestAndAdd(server int, args *RequestVoteArgs, vote *int, upgrade *sync.Once) {
 	reply := RequestVoteReply{}
 	rf.sendRequestVote(server, args, &reply)
 
 	if reply.Term > rf.currentTerm {
-		rf.Record("投票",fmt.Sprintf("发现更高的term : %v,放弃竞选", reply.Term))
+		rf.Record("投票", fmt.Sprintf("发现更高的term : %v,放弃竞选", reply.Term))
 		rf.MeetGreaterTerm(reply.Term)
 		return
 	}
 	//来自过期的rpc
-	if reply.Term<rf.currentTerm{
+	if reply.Term < rf.currentTerm {
 		return
 	}
 
-	if reply.VoteGranted && rf.state == Candidate && rf.currentTerm==args.Term{
+	if reply.VoteGranted && rf.state == Candidate && rf.currentTerm == args.Term {
 		*vote++
-		rf.Record("投票",fmt.Sprintf("收到 %v 的投票", server))
+		rf.Record("投票", fmt.Sprintf("收到 %v 的投票", server))
 		//这里判定是否达到多数派的做法是在每一次发送request请求的时候都判断一下
 		if *vote > len(rf.peers)>>1 {
 			//判断一下term是否被修改了
 			//持有旧term的candidate是不能变成leader的
-				upgrade.Do(func ()  {
-					rf.UpGrade()	
-				})
+			upgrade.Do(func() {
+				rf.UpGrade()
+			})
 		}
 	}
 }
@@ -159,20 +158,20 @@ func (rf *Raft) LeaderElection() {
 	rf.currentTerm++
 	rf.votedFor = rf.me
 	rf.persist()
-	rf.Record("投票",fmt.Sprintf("发起term为 %v 的选举", rf.currentTerm))
+	rf.Record("投票", fmt.Sprintf("发起term为 %v 的选举", rf.currentTerm))
 
 	args := &RequestVoteArgs{
 		Term:         rf.currentTerm,
 		CandidateId:  rf.me,
-		LastLogIndex: rf.log.LastIndex(),
-		LastLogTerm:  rf.log.EntryAt(rf.log.LastIndex()).Term,
+		LastLogIndex: rf.LastIndex(),
+		LastLogTerm:  rf.EntryAt(rf.LastIndex()).Term,
 	}
 	//先给自己投一票
 	vote := 1
 	var upgrade sync.Once
 	for k, _ := range rf.peers {
 		if k != rf.me && rf.state == Candidate {
-			go rf.RequestAndAdd(k, args, &vote,&upgrade)
+			go rf.RequestAndAdd(k, args, &vote, &upgrade)
 		}
 	}
 }
@@ -181,13 +180,13 @@ func (rf *Raft) UpGrade() {
 	if rf.state == Candidate {
 		rf.state = Leader
 	}
-	rf.Record("投票",fmt.Sprintf("节点 %v 成为leader", rf.me))
+	rf.Record("投票", fmt.Sprintf("节点 %v 成为leader", rf.me))
 
 	//初始化nextindex和matchindex
 	rf.entryIndexInitiallize()
 
 	//发送ap消息
-	rf.LeaderAppendEntry(true)
+	rf.LeaderAppendEntryLocked(true)
 
 }
 
@@ -195,7 +194,7 @@ func (rf *Raft) UpGrade() {
 func (rf *Raft) entryIndexInitiallize() {
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
-	lastlogindex:=rf.log.LastIndex()
+	lastlogindex := rf.LastIndex()
 	for k, _ := range rf.nextIndex {
 		rf.matchIndex[k] = 0
 		rf.nextIndex[k] = lastlogindex + 1
