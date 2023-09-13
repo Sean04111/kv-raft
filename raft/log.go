@@ -20,7 +20,8 @@ type Entry struct {
 // 获取最后一个合法的日志索引
 // logic index
 func (rf *Raft) LastIndex() int {
-	return len(rf.log.Entries) - 1 + rf.lastincludeIndex
+	return rf.log.Entries[len(rf.log.Entries)-1].Index
+	//return len(rf.log.Entries) - 1 + rf.lastincludeIndex
 }
 
 // Append
@@ -32,6 +33,7 @@ func (rf *Raft) Append(x Entry) {
 // EntryAt
 // 通过日志索引获取条目
 // 这里根据2D做了修改
+// 通过逻辑索引获取
 func (rf *Raft) EntryAt(index int) Entry {
 	if index > rf.LastIndex() {
 		return rf.log.Entries[0]

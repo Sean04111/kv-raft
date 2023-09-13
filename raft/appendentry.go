@@ -68,7 +68,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 		if args.Term == rf.currentTerm {
 			rf.setElectionTimeUnlocked()
 
-			rf.Record("心跳", "收到权威leader心跳,来自 "+strconv.Itoa(args.LeaderId))
+			rf.Record("心跳", "收到权威leader心跳,来自 "+strconv.Itoa(args.LeaderId)+"   leader 的commit index为"+strconv.Itoa(args.LeaderCommit)+"我的commit index为"+strconv.Itoa(rf.commitIndex))
 
 			followerlastindex := rf.LastIndex()
 
@@ -228,12 +228,6 @@ func (rf *Raft) LeaderAppendEntryLocked(heartbeat bool) {
 			rf.setElectionTimeUnlocked()
 			continue
 		}
-		if rf.nextIndex[k]-1 < rf.lastincludeIndex {
-			//这里可以看出其实整个项目的锁结构是非常混乱的,而且锁的粒度还不小
-			//这里必须要优化一下
-			go rf.leaderSendInstallSnapshotLocked(k)
-			return
-		}
 		//heartbeat也需要承担日志对齐任务
 		//如果对齐了：leaderlastindex = rf.nextIndex[k]-1
 		//如果leader有新的：leaderlastindex >=rf.nextIndex[k]
@@ -243,13 +237,17 @@ func (rf *Raft) LeaderAppendEntryLocked(heartbeat bool) {
 				LeaderId:     rf.me,
 				LeaderCommit: rf.commitIndex,
 			}
+
 			//这里需要一个对nextindex的出界判断
 			nextindex := rf.nextIndex[k]
-			if nextindex <= rf.lastincludeIndex {
-				nextindex = rf.lastincludeIndex + 1
+			//peer要的nextindex消息leader已经打了快照找不到了
+			if nextindex < rf.lastincludeIndex+1 {
+				go rf.leaderSendInstallSnapshotLocked(k)
+				continue
 			}
-			if nextindex > rf.log.Len() {
-				nextindex = leaderlastlogindex
+			//如何只是简单的心跳，heartbeat为true的情况
+			if nextindex > rf.LastIndex() {
+				nextindex = leaderlastlogindex + 1
 			}
 			args.PrevLogIndex = nextindex - 1
 			args.PrevLogTerm = rf.EntryAt(args.PrevLogIndex).Term
@@ -275,7 +273,7 @@ func (rf *Raft) LeaderTryCommitUnlocked() {
 	}
 	//N的取值范围在commitindex和len(log)之间
 
-	for N := rf.lastincludeIndex + 1; N < rf.log.Len(); N++ {
+	for N := rf.commitIndex + 1; N <= rf.LastIndex(); N++ {
 		if rf.EntryAt(N).Term != rf.currentTerm {
 			continue
 		}

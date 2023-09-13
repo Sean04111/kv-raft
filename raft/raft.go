@@ -168,6 +168,7 @@ func (rf *Raft) CondInstallSnapshot(lastIncludedTerm int, lastIncludedIndex int,
 // This means the corresponding Raft peer no longer needs the log through (and including) index.
 // Your Raft implementation should trim its log as much as possible.
 // You must revise your Raft code to operate while storing only the tail of the log.
+// 这个index是本节点最后一个apply的index
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (2D).
 	if rf.killed() {
@@ -183,9 +184,9 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 		return
 	}
 	//更新日志/记录点
-	var newlog []Entry
+	//dummy head 从index开始
+	var newlog = []Entry{{rf.EntryAt(rf.LastIndex()).Term, index, -1}}
 	if index >= rf.LastIndex() {
-		newlog = []Entry{{rf.EntryAt(rf.LastIndex()).Term, index + 1, -1}}
 		rf.lastincludeTerm = rf.EntryAt(rf.LastIndex()).Term
 	} else {
 		for i := index + 1; i <= rf.LastIndex(); i++ {
@@ -194,14 +195,14 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 		rf.lastincludeTerm = rf.EntryAt(index).Term
 	}
 
-	rf.lastincludeIndex = index + 1
+	rf.lastincludeIndex = index
 
 	rf.log.Entries = newlog
 
-	rf.commitIndex = index + 1
-	rf.lastApplied = index + 1
+	rf.commitIndex = index
+	rf.lastApplied = index
 
-	rf.Record("snapshot", "安装snapshot,新的log为 : "+rf.log.Print())
+	rf.Record("snapshot", "收到的index为 "+strconv.Itoa(index)+" 安装snapshot,新的log为 : "+rf.log.Print())
 
 	//持久化
 	w := new(bytes.Buffer)
@@ -327,7 +328,7 @@ func (rf *Raft) applier() {
 				CommandIndex:  rf.lastApplied,
 			}
 			//这里可以直接发channel吗？
-			//rf.Record("日志提交", "index: "+strconv.Itoa(rf.lastApplied)+"cmd: "+strconv.Itoa(rf.log.EntryAt(rf.lastApplied).Cmd.(int)))
+			rf.Record("日志提交", "提交的index: "+strconv.Itoa(rf.lastApplied-1))
 			rf.mu.Unlock()
 			rf.applyCh <- applymgs
 			//
@@ -344,7 +345,6 @@ func (rf *Raft) applier() {
 func (rf *Raft) apply() {
 	//唤醒applier
 	rf.applyCond.Broadcast()
-	rf.Record("日志应用", "开启cond广播")
 }
 
 // Make
@@ -397,6 +397,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	//负责提交日志的
 	go rf.applier()
 
+	//日志采集线程
+	//go rf.DisplayLog(context.Background())
 	//debug
 	return rf
 

@@ -19,7 +19,7 @@ func (rf *Raft) DisplayLog(ctx context.Context) {
 		}
 	}(writer)
 	for !rf.killed() {
-		time.Sleep(rf.heartbeat)
+		time.Sleep(10 * time.Millisecond)
 		select {
 		case <-ctx.Done():
 			return
@@ -45,12 +45,15 @@ func (rf *Raft) VirtualizeLog() string {
 		}
 		log := "| " + strconv.Itoa(cure.Index) + " " + strconv.Itoa(cure.Term) + " " + command + " |"
 		var curs string
-		//这里先用绿色代表commit，apply先不管
+		//这里先用绿色代表commit
+		//红色为apply的
 		if rf.commitIndex == rf.log.Entries[i].Index {
-			curs = "<span style = 'color:#09e509;'>" + log + "</span>"
-		} else {
-			curs = log
+			log = "<span style = 'color:#09e509'>" + log + "</span>"
 		}
+		if rf.lastApplied == rf.log.Entries[i].Index {
+			log = "<span style = 'background-color:rgba(100,100,100,0.5);'>" + log + "</span>"
+		}
+		curs = log
 		logs += curs
 	}
 	return "<h4>" + logs + "</h4>"
