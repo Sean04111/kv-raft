@@ -91,7 +91,7 @@ func checkType(t reflect.Type) {
 			rune, _ := utf8.DecodeRuneInString(f.Name)
 			if unicode.IsUpper(rune) == false {
 				// ta da
-				//fmt.Printf("labgob error: lower-case field %v of %v in RPC or persist/snapshot will break your Raft\n",f.Name, t.Name())
+				fmt.Printf("labgob error: lower-case field %v of %v in RPC or persist/snapshot will break your Raft\n", f.Name, t.Name())
 				mu.Lock()
 				errorCount += 1
 				mu.Unlock()
@@ -111,13 +111,11 @@ func checkType(t reflect.Type) {
 	}
 }
 
-//
 // warn if the value contains non-default values,
 // as it would if one sent an RPC but the reply
 // struct was already modified. if the RPC reply
 // contains default values, GOB won't overwrite
 // the non-default value.
-//
 func checkDefault(value interface{}) {
 	if value == nil {
 		return

@@ -163,52 +163,57 @@ func (rf *Raft) CondInstallSnapshot(lastIncludedTerm int, lastIncludedIndex int,
 }
 
 // Snapshot
-// the service says it has created a snapshot that has
-// all info up to and including index. this means the
-// service no longer needs the log through (and including)
-// that index. Raft should now trim its log as much as possible.
-// snapshot是用于raft peer安装日志快照，index是该快照的最后一个index
-// raft peer应该要剪掉快照中的日志项，只是保留日志的末尾
-// peer的主动打快照
-// just like figure 12
+// A service calls Snapshot() to communicate the snapshot of its state to Raft.
+// The snapshot includes all info up to and including index.
+// This means the corresponding Raft peer no longer needs the log through (and including) index.
+// Your Raft implementation should trim its log as much as possible.
+// You must revise your Raft code to operate while storing only the tail of the log.
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (2D).
 	if rf.killed() {
 		return
 	}
 	rf.mu.Lock()
-	defer rf.mu.Unlock()
 	//如果index比peer的上一次快照点还落后
 	//或者index比peer的提交点还领先
 	//应该要放弃这次操作
+
 	if index <= rf.lastincludeIndex || index > rf.commitIndex {
+		rf.mu.Unlock()
 		return
 	}
-
 	//更新日志/记录点
 	var newlog []Entry
-	for i := index + 1; i <= rf.LastIndex(); i++ {
-		newlog = append(newlog, rf.EntryAt(i))
-	}
-	if index > rf.LastIndex() {
+	if index >= rf.LastIndex() {
+		newlog = []Entry{{rf.EntryAt(rf.LastIndex()).Term, index + 1, -1}}
 		rf.lastincludeTerm = rf.EntryAt(rf.LastIndex()).Term
 	} else {
+		for i := index + 1; i <= rf.LastIndex(); i++ {
+			newlog = append(newlog, rf.EntryAt(i))
+		}
 		rf.lastincludeTerm = rf.EntryAt(index).Term
 	}
-	rf.lastincludeIndex = index
+
+	rf.lastincludeIndex = index + 1
+
 	rf.log.Entries = newlog
 
-	//这里需要更新commitIndex和lastApplied吗？
-	//这里后面再说
-	if index > rf.commitIndex {
-		rf.commitIndex = index
-	}
-	if index > rf.lastApplied {
-		rf.lastApplied = index
-	}
+	rf.commitIndex = index + 1
+	rf.lastApplied = index + 1
+
+	rf.Record("snapshot", "安装snapshot,新的log为 : "+rf.log.Print())
+
 	//持久化
-	rf.persist()
-	rf.persister.SaveRaftState(snapshot)
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	e.Encode(rf.currentTerm)
+	e.Encode(rf.votedFor)
+	e.Encode(rf.log)
+	e.Encode(rf.lastincludeIndex)
+	e.Encode(rf.lastincludeTerm)
+	data := w.Bytes()
+	rf.mu.Unlock()
+	rf.persister.SaveStateAndSnapshot(data, snapshot)
 }
 
 // Start
@@ -242,7 +247,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 			Cmd:   command,
 		}
 		rf.Append(newentry)
-		rf.Record("新日志", "leader接收到新的cmd")
+		rf.Record("新日志", "leader接收到新的cmd,新的log为 : "+rf.log.Print())
 		rf.persist()
 		rf.LeaderAppendEntryLocked(false)
 		return index, term, true
@@ -384,6 +389,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 	if rf.lastincludeIndex > 0 {
+		rf.commitIndex = rf.lastincludeIndex
 		rf.lastApplied = rf.lastincludeIndex
 	}
 	// start ticker goroutine to start elections

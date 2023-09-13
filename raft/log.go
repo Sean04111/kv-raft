@@ -18,6 +18,7 @@ type Entry struct {
 
 // LastIndex
 // 获取最后一个合法的日志索引
+// logic index
 func (rf *Raft) LastIndex() int {
 	return len(rf.log.Entries) - 1 + rf.lastincludeIndex
 }
@@ -59,10 +60,10 @@ func (lg *Log) Print() string {
 	ans := "| "
 	for k, v := range lg.Entries {
 		if value, ok := v.Cmd.(string); ok {
-			ans = ans + " index:" + strconv.Itoa(k) + " term:" + strconv.Itoa(v.Term) + " cmd:" + value + " | "
+			ans = ans + " index:" + strconv.Itoa(lg.Entries[k].Index) + " term:" + strconv.Itoa(v.Term) + " cmd:" + value + " | "
 		}
 		if value, ok := v.Cmd.(int); ok {
-			ans = ans + " index:" + strconv.Itoa(k) + " term:" + strconv.Itoa(v.Term) + " cmd:" + strconv.Itoa(value) + " | "
+			ans = ans + " index:" + strconv.Itoa(lg.Entries[k].Index) + " term:" + strconv.Itoa(v.Term) + " cmd:" + strconv.Itoa(value) + " | "
 		}
 	}
 	return ans

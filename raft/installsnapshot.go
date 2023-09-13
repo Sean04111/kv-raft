@@ -1,5 +1,14 @@
 package raft
 
+import (
+	"bytes"
+	"kv-raft/labgob"
+)
+
+//加入2D后，需要注意日志的逻辑索引和物理索引
+//这两者的关系应该是:
+//logic index == physical index + rf.last_include_index
+
 // InstallSnapshotArgs
 // 这里的rpc消息实际上是leader和follower来交互更新快照的
 // 具体参见paper section 7
@@ -15,11 +24,20 @@ type InstallSnapshotReply struct {
 }
 
 // InstallSnapshot
-// peer收到installSnapshot消息了做出的反应
+
+// Usually the snapshot will contain new information
+//not already in the recipient’s log. In this case, the follower
+//discards its entire log; it is all superseded by the snapshot
+//and may possibly have uncommitted entries that conflict
+//with the snapshot. If instead the follower receives a snapshot
+//that describes a prefix of its log (due to retransmission or by mistake), then log entries covered by the snapshot are deleted but entries following the snapshot are still
+//valid and must be retained.
+
 func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
 	rf.mu.Lock()
-
 	reply.Term = rf.currentTerm
+
+	//deal with the time-out message
 	if args.Term < rf.currentTerm {
 		rf.mu.Unlock()
 		return
@@ -27,34 +45,53 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 		rf.MeetGreaterTerm(args.Term)
 	}
 
+	rf.Record("snapshot", "收到leader的snapshot")
+
 	reply.Term = rf.currentTerm
 
-	if rf.lastincludeIndex >= args.LastIncludedIndex {
-		return
+	//case 1 : the snapshot contain new information for the follower
+	//the follower should trim all log and apply the snapshot
+	if args.LastIncludedIndex >= rf.LastIndex() {
+		//the length of the log can't be 0
+		//so append a last_include_index entry
+		//"dummy head"
+		newlog := []Entry{{Term: args.LastIncludedTerm, Index: args.LastIncludedIndex + 1, Cmd: -1}}
+
+		rf.log.Entries = newlog
+
+		rf.commitIndex = args.LastIncludedIndex + 1
+		rf.lastApplied = args.LastIncludedIndex + 1
+		rf.lastincludeIndex = args.LastIncludedIndex + 1
+		rf.lastincludeTerm = args.LastIncludedTerm
+
+	}
+	//case 2 : the snapshot describes a prefix of the follower's log
+	//logs covered by the snapshot are deleted,and the rest are retained
+	if args.LastIncludedIndex < rf.LastIndex() {
+		//
+		newlog := []Entry{}
+		for i := args.LastIncludedIndex + 1; i <= rf.LastIndex(); i++ {
+			newlog = append(newlog, rf.EntryAt(i))
+		}
+
+		rf.log.Entries = newlog
+
+		rf.commitIndex = args.LastIncludedIndex + 1
+		rf.lastApplied = args.LastIncludedIndex + 1
+		rf.lastincludeIndex = args.LastIncludedIndex + 1
+		rf.lastincludeTerm = args.LastIncludedTerm
+
 	}
 
-	//开始修剪follower的日志
-	var newLog []Entry
-
-	newLog = append(newLog, rf.EntryAt(args.LastIncludedIndex))
-
-	for i := args.LastIncludedIndex + 1; i <= rf.LastIndex(); i++ {
-		newLog = append(newLog, rf.EntryAt(i))
-	}
-
-	rf.lastincludeIndex = args.LastIncludedIndex
-	rf.lastincludeTerm = args.LastIncludedTerm
-	rf.log.Entries = newLog
-
-	if args.LastIncludedIndex > rf.commitIndex {
-		rf.commitIndex = args.LastIncludedIndex
-	}
-	if args.LastIncludedIndex > rf.lastApplied {
-		rf.lastApplied = args.LastIncludedIndex
-	}
-
-	rf.persist()
-	rf.persister.SaveRaftState(args.Data)
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	e.Encode(rf.currentTerm)
+	e.Encode(rf.votedFor)
+	e.Encode(rf.log)
+	e.Encode(rf.lastincludeIndex)
+	e.Encode(rf.lastincludeTerm)
+	data := w.Bytes()
+	rf.persister.SaveStateAndSnapshot(data, args.Data)
 
 	msg := ApplyMsg{
 		SnapshotValid: true,
