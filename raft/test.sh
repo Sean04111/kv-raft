@@ -13,3 +13,5 @@ do
     fi
 done
 echo "Failure rate $((100 * count / 100)) %"
+
+
