@@ -19,7 +19,7 @@ func (rf *Raft) DisplayLog(ctx context.Context) {
 		}
 	}(writer)
 	for !rf.killed() {
-		time.Sleep(10 * time.Millisecond)
+		time.Sleep(1 * time.Millisecond)
 		select {
 		case <-ctx.Done():
 			return

@@ -2,6 +2,7 @@ package raft
 
 import (
 	"fmt"
+	"strconv"
 	"sync"
 )
 
@@ -58,8 +59,8 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 		reply.VoteGranted = false
 	}
 	if rf.state == Follower {
-		myindex := rf.LastIndex()
-		myterm := rf.EntryAt(myindex).Term
+		myindex := rf.log.Entries[len(rf.log.Entries)-1].Index
+		myterm := rf.log.Entries[len(rf.log.Entries)-1].Term
 		isuptodate := args.LastLogTerm > myterm || (args.LastLogTerm == myterm && myindex <= args.LastLogIndex)
 
 		if args.Term < rf.currentTerm {
@@ -124,6 +125,7 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 
 func (rf *Raft) RequestAndAdd(server int, args *RequestVoteArgs, vote *int, upgrade *sync.Once) {
 	reply := RequestVoteReply{}
+	rf.Record("投票", "向节点"+strconv.Itoa(server)+"发送投票邀请")
 	rf.sendRequestVote(server, args, &reply)
 
 	if reply.Term > rf.currentTerm {
@@ -154,6 +156,7 @@ func (rf *Raft) RequestAndAdd(server int, args *RequestVoteArgs, vote *int, upgr
 func (rf *Raft) LeaderElection() {
 	//首先state改为candidate
 	//并且term++
+	//这里尝试用prevote
 	rf.state = Candidate
 	rf.currentTerm++
 	rf.votedFor = rf.me
@@ -163,8 +166,8 @@ func (rf *Raft) LeaderElection() {
 	args := &RequestVoteArgs{
 		Term:         rf.currentTerm,
 		CandidateId:  rf.me,
-		LastLogIndex: rf.LastIndex(),
-		LastLogTerm:  rf.EntryAt(rf.LastIndex()).Term,
+		LastLogIndex: rf.log.Entries[len(rf.log.Entries)-1].Index,
+		LastLogTerm:  rf.log.Entries[len(rf.log.Entries)-1].Term,
 	}
 	//先给自己投一票
 	vote := 1
@@ -174,6 +177,7 @@ func (rf *Raft) LeaderElection() {
 			go rf.RequestAndAdd(k, args, &vote, &upgrade)
 		}
 	}
+
 }
 
 func (rf *Raft) UpGrade() {
@@ -194,9 +198,9 @@ func (rf *Raft) UpGrade() {
 func (rf *Raft) entryIndexInitiallize() {
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
-	lastlogindex := rf.LastIndex()
+	lastindex := rf.LastIndex()
 	for k, _ := range rf.nextIndex {
 		rf.matchIndex[k] = 0
-		rf.nextIndex[k] = lastlogindex + 1
+		rf.nextIndex[k] = lastindex + 1
 	}
 }

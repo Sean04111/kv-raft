@@ -183,24 +183,25 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 		rf.mu.Unlock()
 		return
 	}
+
 	//更新日志/记录点
-	//dummy head 从index开始
 	var newlog = []Entry{{rf.EntryAt(rf.LastIndex()).Term, index, -1}}
-	if index >= rf.LastIndex() {
-		rf.lastincludeTerm = rf.EntryAt(rf.LastIndex()).Term
-	} else {
+	if index < rf.LastIndex() {
 		for i := index + 1; i <= rf.LastIndex(); i++ {
 			newlog = append(newlog, rf.EntryAt(i))
 		}
-		rf.lastincludeTerm = rf.EntryAt(index).Term
 	}
 
 	rf.lastincludeIndex = index
-
 	rf.log.Entries = newlog
+	rf.lastincludeTerm = rf.log.Entries[0].Term
 
-	rf.commitIndex = index
-	rf.lastApplied = index
+	if index > rf.commitIndex {
+		rf.commitIndex = index
+	}
+	if index >= rf.lastApplied {
+		rf.lastApplied = index
+	}
 
 	rf.Record("snapshot", "收到的index为 "+strconv.Itoa(index)+" 安装snapshot,新的log为 : "+rf.log.Print())
 
@@ -310,7 +311,7 @@ func (rf *Raft) setElectionTimeUnlocked() {
 	due := rand.Intn(150)
 	duration := time.Duration(150+due) * time.Millisecond
 	rf.electionTime = now.Add(time.Duration(duration))
-	rf.Record("投票", "节点更新发起选举时间为"+strconv.Itoa(due)+"ms后")
+	//rf.Record("投票", "节点更新发起选举时间为"+strconv.Itoa(due)+"ms后")
 }
 
 // Applier 将日志提交到状态机(eg k-v server)

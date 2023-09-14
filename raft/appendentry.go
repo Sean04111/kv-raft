@@ -90,7 +90,8 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 
 				reply.Xterm = rf.EntryAt(args.PrevLogIndex).Term //为了区分落后和不一致两种情况
 				//这里xindex是返回Xterm中的第一个索引
-				//If a follower does have prevLogIndex in its log, but the term does not match, it should return conflictTerm = log[prevLogIndex].Term, and then search its log for the first index whose entry has term equal to conflictTerm.
+				//If a follower does have prevLogIndex in its log, but the term does not match, it should return conflictTerm = log[prevLogIndex].Term,
+				//and then search its log for the first index whose entry has term equal to conflictTerm.
 				//来自guide-book
 				for xindex := args.PrevLogIndex; xindex > rf.lastincludeIndex; xindex-- {
 					if rf.EntryAt(xindex-1).Term != reply.Xterm {
@@ -102,12 +103,16 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 			}
 			//找到prelogindex,开始复制日志
 			//这里entry是批量复制的
-			//这里需求是tun掉冲突entry的后面的所有的entry
+
 			for inx, entry := range args.Entries {
+				//case 1:如果leader发来的entry的logic index在peer的范围之内
+				//应该把这个logic index后面的entry全部都trim掉
 				if entry.Index <= rf.LastIndex() && entry.Term != rf.EntryAt(entry.Index).Term {
-					rf.log.Entries = rf.log.Entries[:entry.Index]
+					rf.log.Entries = rf.log.Entries[:entry.Index-rf.lastincludeIndex]
 					rf.persist()
 				}
+				//case 2:如果leader发来的entry的logic已经比peer的最大logic index还大了
+				//应该把这个entry后面的所有entry都append到peer
 				if entry.Index > rf.LastIndex() {
 					rf.log.Entries = append(rf.log.Entries, args.Entries[inx:]...)
 					rf.persist()
@@ -242,10 +247,17 @@ func (rf *Raft) LeaderAppendEntryLocked(heartbeat bool) {
 			nextindex := rf.nextIndex[k]
 			//peer要的nextindex消息leader已经打了快照找不到了
 			if nextindex < rf.lastincludeIndex+1 {
-				go rf.leaderSendInstallSnapshotLocked(k)
+				snapshotargs := InstallSnapshotArgs{
+					Term:              rf.currentTerm,
+					LeaderId:          rf.me,
+					LastIncludedIndex: rf.lastincludeIndex,
+					LastIncludedTerm:  rf.lastincludeTerm,
+					Data:              rf.persister.ReadSnapshot(),
+				}
+				go rf.leaderSendInstallSnapshotLocked(k, &snapshotargs)
 				continue
 			}
-			//如何只是简单的心跳，heartbeat为true的情况
+			//如果只是简单的心跳，heartbeat为true的情况
 			if nextindex > rf.LastIndex() {
 				nextindex = leaderlastlogindex + 1
 			}

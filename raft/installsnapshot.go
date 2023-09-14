@@ -40,13 +40,15 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 
 	//deal with the time-out message
 	if args.Term < rf.currentTerm {
+		rf.Record("leader_snapshot", "收到了leader的snapshot,但是我认为leader的term比我的小")
 		rf.mu.Unlock()
 		return
-	} else {
-		rf.MeetGreaterTerm(args.Term)
 	}
 
-	reply.Term = rf.currentTerm
+	if args.LastIncludedIndex <= rf.lastincludeIndex {
+		rf.mu.Unlock()
+		return
+	}
 
 	//start trim the log
 	//the length of the log can't be 0
@@ -57,31 +59,30 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 	//case 1 : the snapshot contain new information for the follower
 	//the follower should trim all log and apply the snapshot
 
-	if args.LastIncludedIndex >= rf.LastIndex() {
+	if args.LastIncludedIndex > rf.LastIndex() {
 
 		rf.log.Entries = newlog
-
-		rf.commitIndex = args.LastIncludedIndex
-		rf.lastApplied = args.LastIncludedIndex
-		rf.lastincludeIndex = args.LastIncludedIndex
-		rf.lastincludeTerm = args.LastIncludedTerm
 
 	}
 	//case 2 : the snapshot describes a prefix of the follower's log
 	//logs covered by the snapshot are deleted,and the rest are retained
-	if args.LastIncludedIndex < rf.LastIndex() {
+	if args.LastIncludedIndex <= rf.LastIndex() {
 		for i := args.LastIncludedIndex + 1; i <= rf.LastIndex(); i++ {
 			newlog = append(newlog, rf.EntryAt(i))
 		}
 
 		rf.log.Entries = newlog
 
-		rf.commitIndex = args.LastIncludedIndex
-		rf.lastApplied = args.LastIncludedIndex
-		rf.lastincludeIndex = args.LastIncludedIndex
-		rf.lastincludeTerm = args.LastIncludedTerm
-
 	}
+	if rf.commitIndex < args.LastIncludedIndex {
+		rf.commitIndex = args.LastIncludedIndex
+	}
+	if rf.lastApplied <= args.LastIncludedIndex {
+		rf.lastApplied = args.LastIncludedIndex
+	}
+	rf.lastincludeIndex = args.LastIncludedIndex
+	rf.lastincludeTerm = args.LastIncludedTerm
+
 	rf.Record("leader_snapshot", "收到的snapshot的index为"+strconv.Itoa(args.LastIncludedIndex)+"  现在我的log为"+rf.log.Print())
 
 	w := new(bytes.Buffer)
@@ -107,38 +108,29 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 // leaderSendInstallSnapshotLocked
 // leader给单个peer发送rpc消息并处理reply
 // 占有锁的
-func (rf *Raft) leaderSendInstallSnapshotLocked(server int) {
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	args := InstallSnapshotArgs{
-		Term:              rf.currentTerm,
-		LeaderId:          rf.me,
-		LastIncludedIndex: rf.lastincludeIndex,
-		LastIncludedTerm:  rf.lastincludeTerm,
-		Data:              rf.persister.ReadSnapshot(),
-	}
+func (rf *Raft) leaderSendInstallSnapshotLocked(server int, args *InstallSnapshotArgs) {
+
 	reply := InstallSnapshotReply{}
 
-	ok := rf.sendInstallSnapshot(server, &args, &reply)
+	ok := rf.sendInstallSnapshot(server, args, &reply)
 
-	if ok {
-		//处理过时RPC消息
-		if rf.state != Leader || args.Term != rf.currentTerm {
-			return
-		}
-
-		if reply.Term > rf.currentTerm {
-			rf.MeetGreaterTerm(reply.Term)
-			return
-		}
-
-		rf.matchIndex[server] = args.LastIncludedIndex
-		rf.nextIndex[server] = args.LastIncludedIndex + 1
-
+	if !ok {
+		rf.Record("snapshot", "给 "+strconv.Itoa(server)+" 发送snapshot RPC超时")
 		return
-	} else {
-		rf.Record("snapshot", "leader send InstallSnapshot error (RPC)")
+	}
+	//处理过时RPC消息
+	if rf.state != Leader || args.Term != rf.currentTerm {
 		return
+	}
+
+	if reply.Term > rf.currentTerm {
+		rf.MeetGreaterTerm(reply.Term)
+		return
+	}
+
+	if args.Term == rf.currentTerm {
+		rf.matchIndex[server] = max(args.LastIncludedIndex, rf.matchIndex[server])
+		rf.nextIndex[server] = max(args.LastIncludedIndex+1, rf.nextIndex[server])
 	}
 }
 
