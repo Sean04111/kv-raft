@@ -1,33 +1,74 @@
 package kvraft
 
+import (
+	"log"
+	"time"
+)
+
 const (
 	OK             = "OK"
 	ErrNoKey       = "ErrNoKey"
 	ErrWrongLeader = "ErrWrongLeader"
+	ErrTimeOut     = "ErrTimeOut"
 )
+
+const ExecuteTimeout = 500 * time.Millisecond
+const EmptyString = ""
+
+const Debug = false
+
+func DPrintf(format string, a ...interface{}) (n int, err error) {
+	if Debug {
+		log.Printf(format, a...)
+	}
+	return
+}
 
 type Err string
 
-// Put or Append
-type PutAppendArgs struct {
-	Key   string
+type Optype uint8
+
+const (
+	OpGet Optype = iota
+	OpPut
+	OpAppend
+)
+
+func (op Optype) Opstring(optype Optype) string {
+	switch op {
+	case OpGet:
+		return "get"
+	case OpPut:
+		return "put"
+	case OpAppend:
+		return "append"
+	}
+	return EmptyString
+}
+
+// CommandArgs
+// 这里使用command封装所有的请求，是为了更好的操作commandId
+type CommandArgs struct {
+	Key       string
+	Value     string
+	ClientId  int64
+	CommandId int64
+	Ops       Optype
+}
+type CommandReply struct {
 	Value string
-	Op    string // "Put" or "Append"
-	// You'll have to add definitions here.
-	// Field names must start with capital letters,
-	// otherwise RPC will break.
-}
-
-type PutAppendReply struct {
-	Err Err
-}
-
-type GetArgs struct {
-	Key string
-	// You'll have to add definitions here.
-}
-
-type GetReply struct {
 	Err   Err
-	Value string
+}
+
+// OperationContext
+// 为了保证幂等性，保留的命令提交的上下文
+type OperationContext struct {
+	lastCommandId int64
+	lastReply     *CommandReply
+}
+
+// Command
+// 为了发送而封装的cmd
+type Command struct {
+	*CommandArgs
 }

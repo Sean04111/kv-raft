@@ -49,7 +49,7 @@ type ApplyMsg struct {
 	CommandValid bool
 	Command      interface{}
 	CommandIndex int
-
+	CommandTerm  int
 	// For 2D:
 	SnapshotValid bool
 	Snapshot      []byte
@@ -327,6 +327,7 @@ func (rf *Raft) applier() {
 				SnapshotValid: false,
 				Command:       rf.EntryAt(rf.lastApplied).Cmd,
 				CommandIndex:  rf.lastApplied,
+				CommandTerm:   rf.currentTerm,
 			}
 			//这里可以直接发channel吗？
 			rf.Record("日志提交", "提交的index: "+strconv.Itoa(rf.lastApplied-1))

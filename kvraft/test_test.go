@@ -260,6 +260,7 @@ func GenericTest(t *testing.T, part string, nclients int, nservers int, unreliab
 				Put(cfg, myck, strconv.Itoa(cli), last, opLog, cli)
 			}
 			for atomic.LoadInt32(&done_clients) == 0 {
+				fmt.Println("one round")
 				var key string
 				if randomkeys {
 					key = strconv.Itoa(rand.Intn(nclients))
@@ -275,12 +276,14 @@ func GenericTest(t *testing.T, part string, nclients int, nservers int, unreliab
 					}
 					j++
 				} else if randomkeys && (rand.Int()%1000) < 100 {
+
 					// we only do this when using random keys, because it would break the
 					// check done after Get() operations
 					Put(cfg, myck, key, nv, opLog, cli)
 					j++
 				} else {
 					// log.Printf("%d: client new get %v\n", cli, key)
+
 					v := Get(cfg, myck, key, opLog, cli)
 					// the following check only makes sense when we're not using random keys
 					if !randomkeys && v != last {
@@ -289,7 +292,6 @@ func GenericTest(t *testing.T, part string, nclients int, nservers int, unreliab
 				}
 			}
 		})
-
 		if partitions {
 			// Allow the clients to perform some operations without interruption
 			time.Sleep(1 * time.Second)
@@ -330,6 +332,7 @@ func GenericTest(t *testing.T, part string, nclients int, nservers int, unreliab
 
 		// log.Printf("wait for clients\n")
 		for i := 0; i < nclients; i++ {
+			fmt.Println("一轮")
 			// log.Printf("read from clients %d\n", i)
 			j := <-clnts[i]
 			// if j < 10 {
