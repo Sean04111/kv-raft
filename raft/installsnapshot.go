@@ -31,7 +31,7 @@ type InstallSnapshotReply struct {
 //discards its entire log; it is all superseded by the snapshot
 //and may possibly have uncommitted entries that conflict
 //with the snapshot. If instead the follower receives a snapshot
-//that describes a prefix of its log (due to retransmission or by mistake), then log entries covered by the snapshot are deleted but entries following the snapshot are still
+//that describes a prefix of its log (due to retransmission or by mistake), then log entries covered by the snapshot are deleted but entries following the snapshot are still
 //valid and must be retained.
 
 func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
@@ -93,7 +93,7 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 	e.Encode(rf.lastincludeIndex)
 	e.Encode(rf.lastincludeTerm)
 	data := w.Bytes()
-	rf.persister.SaveStateAndSnapshot(data, args.Data)
+	rf.Persister.SaveStateAndSnapshot(data, args.Data)
 
 	msg := ApplyMsg{
 		SnapshotValid: true,

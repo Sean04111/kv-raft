@@ -252,7 +252,7 @@ func (rf *Raft) LeaderAppendEntryLocked(heartbeat bool) {
 					LeaderId:          rf.me,
 					LastIncludedIndex: rf.lastincludeIndex,
 					LastIncludedTerm:  rf.lastincludeTerm,
-					Data:              rf.persister.ReadSnapshot(),
+					Data:              rf.Persister.ReadSnapshot(),
 				}
 				go rf.leaderSendInstallSnapshotLocked(k, &snapshotargs)
 				continue
