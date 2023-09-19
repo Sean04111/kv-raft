@@ -260,7 +260,6 @@ func GenericTest(t *testing.T, part string, nclients int, nservers int, unreliab
 				Put(cfg, myck, strconv.Itoa(cli), last, opLog, cli)
 			}
 			for atomic.LoadInt32(&done_clients) == 0 {
-				fmt.Println("one round")
 				var key string
 				if randomkeys {
 					key = strconv.Itoa(rand.Intn(nclients))
@@ -332,7 +331,6 @@ func GenericTest(t *testing.T, part string, nclients int, nservers int, unreliab
 
 		// log.Printf("wait for clients\n")
 		for i := 0; i < nclients; i++ {
-			fmt.Println("一轮")
 			// log.Printf("read from clients %d\n", i)
 			j := <-clnts[i]
 			// if j < 10 {

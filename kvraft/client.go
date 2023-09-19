@@ -1,11 +1,10 @@
 package kvraft
 
 import (
-	"fmt"
+	"crypto/rand"
 	"kv-raft/labrpc"
+	"math/big"
 )
-import "crypto/rand"
-import "math/big"
 
 type Clerk struct {
 	servers []*labrpc.ClientEnd
@@ -79,7 +78,7 @@ func (ck *Clerk) Command(args *CommandArgs) string {
 	for {
 		var reply CommandReply
 		ok := ck.servers[ck.leaderId].Call("KVServer.Command", args, &reply)
-		fmt.Println(ck.clientId, "给", ck.leaderId, "发args,reply为", reply)
+		// fmt.Println(ck.clientId, "给", ck.leaderId, "发args,reply为", reply)
 		if !ok || reply.Err == ErrWrongLeader || reply.Err == ErrTimeOut {
 			ck.leaderId = (ck.leaderId + 1) % int64(len(ck.servers))
 			continue

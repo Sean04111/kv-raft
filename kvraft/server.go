@@ -1,7 +1,6 @@
 package kvraft
 
 import (
-	"fmt"
 	"kv-raft/labgob"
 	"kv-raft/labrpc"
 	"kv-raft/raft"
@@ -169,7 +168,7 @@ func (kv *KVServer) ApplytoStartMachine(cmd Command) (string, Err) {
 // command handler需要实现当底层raft没有把这条日志放到applychan之前，需要阻塞给clerk的回复
 // applier一直监听该kv的applychan
 func (kv *KVServer) Command(args *CommandArgs, reply *CommandReply) {
-	fmt.Println("收到", args.ClientId, "的args,opstype:", args.Ops)
+	// fmt.Println("收到", args.ClientId, "的args,opstype:", args.Ops)
 	if kv.killed() {
 		return
 	}
@@ -178,7 +177,7 @@ func (kv *KVServer) Command(args *CommandArgs, reply *CommandReply) {
 	//幂等性检查
 	//如果这个clerk的操作已经被执行过了
 	if kv.CheckExed(args) && args.Ops != OpGet {
-		fmt.Println("a")
+		// fmt.Println("a")
 		lastreply := kv.lastOps[args.ClientId].lastReply
 		reply.Value = lastreply.Value
 		reply.Err = lastreply.Err
@@ -191,7 +190,7 @@ func (kv *KVServer) Command(args *CommandArgs, reply *CommandReply) {
 	cmd := Command{args}
 
 	index, _, ok := kv.rf.Start(cmd)
-	fmt.Println(args.ClientId, "的这次index为", index)
+	// fmt.Println(args.ClientId, "的这次index为", index)
 	//如果当前service不是raft leader的service
 	if !ok {
 		reply.Err = ErrWrongLeader
