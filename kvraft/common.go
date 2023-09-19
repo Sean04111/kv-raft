@@ -63,8 +63,8 @@ type CommandReply struct {
 // OperationContext
 // 为了保证幂等性，保留的命令提交的上下文
 type OperationContext struct {
-	lastCommandId int64
-	lastReply     *CommandReply
+	LastCommandId int64
+	LastReply     *CommandReply
 }
 
 // Command

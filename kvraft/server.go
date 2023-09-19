@@ -1,6 +1,7 @@
 package kvraft
 
 import (
+	"bytes"
 	"kv-raft/labgob"
 	"kv-raft/labrpc"
 	"kv-raft/raft"
@@ -82,11 +83,11 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
 
 	// You may need initialization code here.
-	kv.lastapplied = 1
+	kv.lastapplied = 0
 	kv.kvDB = NewMKV()
 	kv.lastOps = map[int64]OperationContext{}
 	kv.notifychan = map[int64]chan *CommandReply{}
-
+	kv.RestoreSnapshot(persister.ReadSnapshot())
 	go kv.applier()
 
 	return kv
@@ -100,7 +101,7 @@ func (kv *KVServer) applier() {
 			if message.CommandValid {
 				kv.mu.Lock()
 				//如果拿到的信息是旧的，直接跳过
-				if message.CommandIndex < kv.lastapplied {
+				if message.CommandIndex <= kv.lastapplied {
 					kv.mu.Unlock()
 					continue
 				}
@@ -113,7 +114,7 @@ func (kv *KVServer) applier() {
 
 				//幂等性判断
 				if command.Ops != OpGet && kv.CheckExed(command.CommandArgs) {
-					reply = kv.lastOps[command.ClientId].lastReply
+					reply = kv.lastOps[command.ClientId].LastReply
 				} else {
 					//新的command,直接在DB中查询
 					reply.Value, reply.Err = kv.ApplytoStartMachine(command)
@@ -121,8 +122,8 @@ func (kv *KVServer) applier() {
 					//幂等性记录
 					if command.Ops != OpGet {
 						kv.lastOps[command.ClientId] = OperationContext{
-							lastCommandId: command.CommandId,
-							lastReply:     reply,
+							LastCommandId: command.CommandId,
+							LastReply:     reply,
 						}
 					}
 				}
@@ -132,10 +133,54 @@ func (kv *KVServer) applier() {
 					ch := kv.GetNotifyChan(int64(message.CommandIndex))
 					ch <- reply
 				}
+
+				//判断是否需要执行快照
+				if kv.NeedSnapShot() {
+					kv.TakeSnapShot(message.CommandIndex)
+				}
+				kv.mu.Unlock()
+			} else if message.SnapshotValid {
+				//如果applier接收到了leader要求打快照的信息
+				kv.mu.Lock()
+				kv.RestoreSnapshot(message.Snapshot)
+				kv.lastapplied = message.SnapshotIndex
 				kv.mu.Unlock()
 			}
 		}
 	}
+}
+
+// 当applier收到一个commandValid的时候,说明raft状态得到了更新
+// 判断一下是否需要打快照
+func (kv *KVServer) NeedSnapShot() bool {
+	return kv.maxraftstate != -1 && kv.rf.Persister.RaftStateSize() >= kv.maxraftstate
+}
+
+// kv server下的rf主动打快照
+func (kv *KVServer) TakeSnapShot(index int) {
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	e.Encode(kv.kvDB)
+	e.Encode(kv.lastOps)
+	kv.rf.Snapshot(index, w.Bytes())
+}
+
+// kv 安装快照
+func (kv *KVServer) RestoreSnapshot(snapshot []byte) {
+	if snapshot == nil || len(snapshot) == 0 {
+		return
+	}
+	r := bytes.NewBuffer(snapshot)
+	d := labgob.NewDecoder(r)
+	var NewDB MKV
+	var NewlastOps map[int64]OperationContext
+	if d.Decode(&NewDB) != nil || d.Decode(&NewlastOps) != nil {
+		panic("decode error !")
+	} else {
+		kv.kvDB = &NewDB
+		kv.lastOps = NewlastOps
+	}
+
 }
 
 // GetNotifyChan
@@ -178,7 +223,7 @@ func (kv *KVServer) Command(args *CommandArgs, reply *CommandReply) {
 	//如果这个clerk的操作已经被执行过了
 	if kv.CheckExed(args) && args.Ops != OpGet {
 		// fmt.Println("a")
-		lastreply := kv.lastOps[args.ClientId].lastReply
+		lastreply := kv.lastOps[args.ClientId].LastReply
 		reply.Value = lastreply.Value
 		reply.Err = lastreply.Err
 		kv.mu.RUnlock()
@@ -220,5 +265,5 @@ func (kv *KVServer) Command(args *CommandArgs, reply *CommandReply) {
 // 如果没有没执行，返回false
 func (kv *KVServer) CheckExed(args *CommandArgs) bool {
 	value, ok := kv.lastOps[args.ClientId]
-	return ok && args.CommandId <= value.lastCommandId
+	return ok && args.CommandId <= value.LastCommandId
 }

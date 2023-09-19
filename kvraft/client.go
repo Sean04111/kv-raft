@@ -26,7 +26,7 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck.servers = servers
 	// You'll have to add code here.
 	ck.clientId = nrand()
-	ck.commandId = 1 //这里注意起始位置是1，因为有dummy head log存在,在以后的debug中可能会有隐患！！！！
+	ck.commandId = 0 //这里注意起始位置是1，因为有dummy head log存在,在以后的debug中可能会有隐患！！！！
 	ck.leaderId = 0
 	return ck
 }
