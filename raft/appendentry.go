@@ -201,7 +201,6 @@ func (rf *Raft) LeaderAPUnlocked(server int, args *AppendEntryArgs) {
 		return
 	}
 
-	//是不是只有success才try?
 
 }
 
@@ -238,7 +237,7 @@ func (rf *Raft) LeaderAppendEntryLocked(heartbeat bool) {
 		//如果leader有新的：leaderlastindex >=rf.nextIndex[k]
 		if leaderlastlogindex >= rf.nextIndex[k] || heartbeat {
 			args := &AppendEntryArgs{
-				Term:         rf.currentTerm,
+				Term:         rf.currentTerm,	
 				LeaderId:     rf.me,
 				LeaderCommit: rf.commitIndex,
 			}

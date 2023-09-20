@@ -2,7 +2,7 @@ package kvraft
 
 // KVStateMachine
 // 对kv DB的抽象，但是数据不可能一直都存在内存里面，暂时用map
-// 这里后期会考虑使用LSM
+// 这里后期会考虑使用LSM架构
 type KVStateMachine interface {
 	Get(key string) (string, Err)
 	Put(key, value string) Err
