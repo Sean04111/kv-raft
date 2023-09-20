@@ -1,0 +1,4 @@
+{
+    "go.testEnvVars": {},
+    "go.testTimeout": "100s"
+}

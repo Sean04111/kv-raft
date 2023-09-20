@@ -1,0 +1,163 @@
+2023-09-19T21:28:40.434+0800	info	raft/util.go:13	  投票  收到 5 的投票邀请,term为 98
+2023-09-19T21:28:40.434+0800	info	raft/util.go:13	  投票  不是uptodate,拒绝投票给 5
+2023-09-19T21:28:40.465+0800	info	raft/util.go:13	  投票  发起term为 99 的选举
+2023-09-19T21:28:40.465+0800	info	raft/util.go:13	  投票  向节点6发送投票邀请
+2023-09-19T21:28:40.465+0800	info	raft/util.go:13	  投票  向节点0发送投票邀请
+2023-09-19T21:28:40.465+0800	info	raft/util.go:13	  投票  向节点2发送投票邀请
+2023-09-19T21:28:40.465+0800	info	raft/util.go:13	  投票  向节点3发送投票邀请
+2023-09-19T21:28:40.465+0800	info	raft/util.go:13	  投票  向节点4发送投票邀请
+2023-09-19T21:28:40.465+0800	info	raft/util.go:13	  投票  向节点5发送投票邀请
+2023-09-19T21:28:40.481+0800	info	raft/util.go:13	  投票  收到 4 的投票邀请,term为 99
+2023-09-19T21:28:40.481+0800	info	raft/util.go:13	  投票  4 的term不大于本节点,故拒绝放弃竞选
+2023-09-19T21:28:40.481+0800	info	raft/util.go:13	  投票  收到 0 的投票
+2023-09-19T21:28:40.481+0800	info	raft/util.go:13	  投票  收到 6 的投票
+2023-09-19T21:28:40.481+0800	info	raft/util.go:13	  投票  收到 2 的投票邀请,term为 99
+2023-09-19T21:28:40.481+0800	info	raft/util.go:13	  投票  2 的term不大于本节点,故拒绝放弃竞选
+2023-09-19T21:28:40.481+0800	info	raft/util.go:13	  投票  收到 5 的投票
+2023-09-19T21:28:40.481+0800	info	raft/util.go:13	  投票  节点 1 成为leader
+2023-09-19T21:28:40.496+0800	info	raft/util.go:13	  心跳  给节点 2 发送心跳成功
+2023-09-19T21:28:40.496+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-19T21:28:40.496+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-19T21:28:40.496+0800	info	raft/util.go:13	  心跳  给节点 6 发送心跳成功
+2023-09-19T21:28:40.496+0800	info	raft/util.go:13	  日志对齐  6 日志没有冲突
+2023-09-19T21:28:40.496+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-19T21:28:40.512+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-19T21:28:40.512+0800	info	raft/util.go:13	  日志对齐  3的日志落后
+2023-09-19T21:28:40.543+0800	info	raft/util.go:13	  心跳  给节点 2 发送心跳成功
+2023-09-19T21:28:40.543+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-19T21:28:40.543+0800	info	raft/util.go:13	  心跳  给节点 6 发送心跳成功
+2023-09-19T21:28:40.543+0800	info	raft/util.go:13	  日志对齐  6 日志没有冲突
+2023-09-19T21:28:40.558+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-19T21:28:40.558+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-19T21:28:40.558+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-19T21:28:40.558+0800	info	raft/util.go:13	  日志对齐  5的日志落后
+2023-09-19T21:28:40.605+0800	info	raft/util.go:13	  snapshot  给 5 发送snapshot RPC超时
+2023-09-19T21:28:40.605+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-19T21:28:40.605+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-19T21:28:40.620+0800	info	raft/util.go:13	  心跳  给节点 6 发送心跳成功
+2023-09-19T21:28:40.620+0800	info	raft/util.go:13	  日志对齐  6 日志没有冲突
+2023-09-19T21:28:40.620+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-19T21:28:40.620+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-19T21:28:40.666+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-19T21:28:40.666+0800	info	raft/util.go:13	  心跳  给节点 6 发送心跳成功
+2023-09-19T21:28:40.666+0800	info	raft/util.go:13	  日志对齐  6 日志没有冲突
+2023-09-19T21:28:40.666+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-19T21:28:40.666+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-19T21:28:40.676+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-19T21:28:40.676+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-19T21:28:40.722+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-19T21:28:40.722+0800	info	raft/util.go:13	  心跳  给节点 6 发送心跳成功
+2023-09-19T21:28:40.722+0800	info	raft/util.go:13	  日志对齐  6 日志没有冲突
+2023-09-19T21:28:40.722+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-19T21:28:40.722+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-19T21:28:40.737+0800	info	raft/util.go:13	  心跳  给节点 2 发送心跳成功
+2023-09-19T21:28:40.737+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-19T21:28:40.737+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-19T21:28:40.737+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-19T21:28:40.737+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-19T21:28:40.784+0800	info	raft/util.go:13	  心跳  给节点 2 发送心跳成功
+2023-09-19T21:28:40.784+0800	info	raft/util.go:13	  心跳  遇到更大的term,leader下线
+2023-09-19T21:28:40.784+0800	info	raft/util.go:13	  状态更新  节点 1 遇到更高term,更新term为 100 
+2023-09-19T21:28:40.784+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-19T21:28:40.784+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-19T21:28:40.784+0800	info	raft/util.go:13	  投票  收到 4 的投票邀请,term为 100
+2023-09-19T21:28:40.784+0800	info	raft/util.go:13	  投票  不是uptodate,拒绝投票给 4
+2023-09-19T21:28:40.799+0800	info	raft/util.go:13	  心跳  给节点 6 发送心跳成功
+2023-09-19T21:28:40.799+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-19T21:28:40.968+0800	info	raft/util.go:13	  投票  收到 3 的投票邀请,term为 101
+2023-09-19T21:28:40.968+0800	info	raft/util.go:13	  状态更新  节点 1 遇到更高term,更新term为 101 
+2023-09-19T21:28:40.968+0800	info	raft/util.go:13	  投票  符合要求,投给 3 
+2023-09-19T21:28:40.999+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2237我的commit index为2237
+2023-09-19T21:28:40.999+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2237 term:90 cmd:-1 | 
+2023-09-19T21:28:41.015+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2237我的commit index为2237
+2023-09-19T21:28:41.015+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2237 term:90 cmd:-1 | 
+2023-09-19T21:28:41.094+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2237我的commit index为2237
+2023-09-19T21:28:41.094+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2237 term:90 cmd:-1 | 
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2250我的commit index为2237
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2237 term:90 cmd:-1 | 
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志提交  提交的index: 2237
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志提交  提交的index: 2238
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  snapshot  收到的index为 2238 安装snapshot,新的log为 : |  index:2238 term:101 cmd:-1 | 
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志提交  提交的index: 2239
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志提交  提交的index: 2240
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志提交  提交的index: 2241
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志提交  提交的index: 2242
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志提交  提交的index: 2243
+2023-09-19T21:28:41.156+0800	info	raft/util.go:13	  日志提交  提交的index: 2244
+2023-09-19T21:28:41.157+0800	info	raft/util.go:13	  日志提交  提交的index: 2245
+2023-09-19T21:28:41.157+0800	info	raft/util.go:13	  日志提交  提交的index: 2246
+2023-09-19T21:28:41.157+0800	info	raft/util.go:13	  日志提交  提交的index: 2247
+2023-09-19T21:28:41.157+0800	info	raft/util.go:13	  日志提交  提交的index: 2248
+2023-09-19T21:28:41.157+0800	info	raft/util.go:13	  日志提交  提交的index: 2249
+2023-09-19T21:28:41.269+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2250我的commit index为2250
+2023-09-19T21:28:41.269+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2238 term:101 cmd:-1 | 
+2023-09-19T21:28:41.297+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2251我的commit index为2250
+2023-09-19T21:28:41.297+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2238 term:101 cmd:-1 | 
+2023-09-19T21:28:41.297+0800	info	raft/util.go:13	  日志提交  提交的index: 2250
+2023-09-19T21:28:41.297+0800	info	raft/util.go:13	  snapshot  收到的index为 2251 安装snapshot,新的log为 : |  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.327+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2252我的commit index为2251
+2023-09-19T21:28:41.327+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.327+0800	info	raft/util.go:13	  日志提交  提交的index: 2251
+2023-09-19T21:28:41.343+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2252我的commit index为2252
+2023-09-19T21:28:41.343+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.393+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2253我的commit index为2252
+2023-09-19T21:28:41.393+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.393+0800	info	raft/util.go:13	  日志提交  提交的index: 2252
+2023-09-19T21:28:41.393+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2253我的commit index为2253
+2023-09-19T21:28:41.393+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.472+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2254我的commit index为2253
+2023-09-19T21:28:41.472+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.472+0800	info	raft/util.go:13	  日志提交  提交的index: 2253
+2023-09-19T21:28:41.518+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2254我的commit index为2254
+2023-09-19T21:28:41.518+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.596+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2254我的commit index为2254
+2023-09-19T21:28:41.596+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.642+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2254我的commit index为2254
+2023-09-19T21:28:41.642+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.703+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2254我的commit index为2254
+2023-09-19T21:28:41.703+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.734+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2254我的commit index为2254
+2023-09-19T21:28:41.734+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.779+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2255我的commit index为2254
+2023-09-19T21:28:41.779+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.779+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2255我的commit index为2255
+2023-09-19T21:28:41.779+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.779+0800	info	raft/util.go:13	  日志提交  提交的index: 2254
+2023-09-19T21:28:41.811+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2256我的commit index为2255
+2023-09-19T21:28:41.811+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.811+0800	info	raft/util.go:13	  日志提交  提交的index: 2255
+2023-09-19T21:28:41.842+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2256我的commit index为2256
+2023-09-19T21:28:41.842+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.872+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2257我的commit index为2256
+2023-09-19T21:28:41.872+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:41.872+0800	info	raft/util.go:13	  日志提交  提交的index: 2256
+2023-09-19T21:28:41.933+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2257我的commit index为2257
+2023-09-19T21:28:41.933+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.025+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2257我的commit index为2257
+2023-09-19T21:28:42.025+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.087+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2258我的commit index为2257
+2023-09-19T21:28:42.087+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.087+0800	info	raft/util.go:13	  日志提交  提交的index: 2257
+2023-09-19T21:28:42.101+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2259我的commit index为2258
+2023-09-19T21:28:42.101+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.101+0800	info	raft/util.go:13	  日志提交  提交的index: 2258
+2023-09-19T21:28:42.131+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2260我的commit index为2259
+2023-09-19T21:28:42.131+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.132+0800	info	raft/util.go:13	  日志提交  提交的index: 2259
+2023-09-19T21:28:42.193+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2261我的commit index为2260
+2023-09-19T21:28:42.193+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.193+0800	info	raft/util.go:13	  日志提交  提交的index: 2260
+2023-09-19T21:28:42.228+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2262我的commit index为2261
+2023-09-19T21:28:42.228+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.228+0800	info	raft/util.go:13	  日志提交  提交的index: 2261
+2023-09-19T21:28:42.256+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2263我的commit index为2262
+2023-09-19T21:28:42.256+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.256+0800	info	raft/util.go:13	  日志提交  提交的index: 2262
+2023-09-19T21:28:42.318+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2264我的commit index为2263
+2023-09-19T21:28:42.318+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.318+0800	info	raft/util.go:13	  日志提交  提交的index: 2263
+2023-09-19T21:28:42.381+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2264我的commit index为2264
+2023-09-19T21:28:42.381+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.381+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为2264我的commit index为2264
+2023-09-19T21:28:42.381+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:2251 term:101 cmd:-1 | 
+2023-09-19T21:28:42.393+0800	info	raft/util.go:13	  节点生命  节点1死亡
