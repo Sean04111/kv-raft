@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"os"
+	"path"
 	"sync"
 )
 
@@ -14,7 +15,8 @@ type wal struct {
 	sync.Locker
 }
 //初始化并且load
-func(wal *wal)Init(path string)*BST{
+func(wal *wal)Init(dir string)*BST{
+	path:=path.Join(dir,"wal.log")
 	newf,err:=os.OpenFile(path,os.O_RDWR|os.O_CREATE|os.O_APPEND,0666)
 	if err!=nil{
 		panic(err)

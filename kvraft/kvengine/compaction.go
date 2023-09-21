@@ -11,7 +11,7 @@ import (
 //检查这个table tree是否需要压缩
 func (tt *tabletree)CheckCompaction(){
 	for level:=range tt.levels{
-		levelsize:=tt.GetLevelSize(level)
+		levelsize:=tt.GetLevelSize(level)/1000/1000
 		levelnum:=tt.GetLevelNum(level)
 		con:=GetConfig()
 		//判断当前level是否需要压缩
@@ -20,7 +20,7 @@ func (tt *tabletree)CheckCompaction(){
 		}
 	}
 }
-
+//
 //压缩当前level文件到下一层
 //合并的思路是使用bst
 func (tt *tabletree)Compaction(level int){

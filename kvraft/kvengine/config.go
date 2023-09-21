@@ -20,8 +20,8 @@ var once *sync.Once = &sync.Once{}
 // 常驻内存
 var config Config
 
-// Init 初始化数据库配置
-func Init(con Config) {
+// ConfigInit 初始化数据库配置
+func ConfigInit(con Config) {
 	once.Do(func() {
 		config = con
 	})

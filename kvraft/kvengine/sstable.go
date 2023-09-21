@@ -28,7 +28,7 @@ type metaInfo struct {
 
 // 储存value的block的位置信息
 // 在sstable中map和key对应
-type position struct {
+type Position struct {
 	Start   int64
 	Len     int64
 	Deleted bool
@@ -36,7 +36,7 @@ type position struct {
 
 // sstable磁盘文件
 type sstable struct {
-	mu sync.Locker
+	mu sync.Mutex
 	//文件句柄
 	f        *os.File
 	filepath string
@@ -44,14 +44,13 @@ type sstable struct {
 	//元数据
 	tablemeta metaInfo
 	//索引
-	parseindexmap map[string]position
+	parseindexmap map[string]Position
 	//排好序的key列表
 	sortedkeys []string
 }
 
 func (t *sstable) Init(path string) {
 	t.filepath = path
-	t.mu = &sync.Mutex{}
 	f, err := os.OpenFile(path, os.O_RDONLY, 0666)
 	if err != nil {
 		panic(err)
@@ -61,20 +60,18 @@ func (t *sstable) Init(path string) {
 	//只需要meta和index就可以推出data的区域
 	//顺序不能变
 	t.LoadMeta()
+
 	t.LoadIndex()
 }
 
 func (t *sstable) LoadIndex() {
 	bytes := make([]byte, t.tablemeta.indexlen)
-
 	t.f.Seek(t.tablemeta.indexstart, 0)
 	_, err := t.f.Read(bytes)
 	if err != nil {
 		panic(err)
 	}
-
-	t.parseindexmap = map[string]position{}
-
+	t.parseindexmap = map[string]Position{}
 	err = json.Unmarshal(bytes, &t.parseindexmap)
 	if err != nil {
 		panic(err)
@@ -120,7 +117,7 @@ func (t *sstable) LoadMeta() {
 	}
 
 	t.f.Seek(info.Size()-8, 0)
-	err = binary.Read(t.f, binary.LittleEndian, &t.tablemeta.datalen)
+	err = binary.Read(t.f, binary.LittleEndian, &t.tablemeta.indexlen)
 	if err != nil {
 		panic(err)
 	}
@@ -200,14 +197,17 @@ func (tt *tabletree) Insert(table *sstable, level int) int {
 // 把value插入到合适的level
 func (tt *tabletree) CreateSstableAtLevel(val []Value, level int) *sstable {
 	keys := []string{}
-	parsedindex := map[string]position{}
+	parsedindex := map[string]Position{}
 
 	//数据区
 	dataarea := make([]byte, 0)
 	for _, v := range val {
-		data, _ := json.Marshal(v)
+		data, err := json.Marshal(v)
+		if err != nil {
+			panic(err)
+		}
 		keys = append(keys, v.Key)
-		pos := position{}
+		pos := Position{}
 		pos.Deleted = v.Deleted
 		pos.Len = int64(len(data))
 		pos.Start = int64(len(dataarea))
@@ -227,7 +227,7 @@ func (tt *tabletree) CreateSstableAtLevel(val []Value, level int) *sstable {
 		version:    0,
 		datastart:  0,
 		datalen:    int64(len(dataarea)),
-		indexstart: int64(len(dataarea)) + 1,
+		indexstart: int64(len(dataarea)),
 		indexlen:   int64(len(indexarea)),
 	}
 
@@ -239,7 +239,8 @@ func (tt *tabletree) CreateSstableAtLevel(val []Value, level int) *sstable {
 
 	index := tt.Insert(newsstable, level)
 	//sstable文件以level.index.db命名
-	filepath := "./sstables/" + strconv.Itoa(level) + "." + strconv.Itoa(index) + ".db"
+	con := GetConfig()
+	filepath := con.DataDir + "/" + strconv.Itoa(level) + "." + strconv.Itoa(index) + ".db"
 	//把数据写入文件
 	WirteTODBFile(filepath, dataarea, indexarea, meta)
 
@@ -296,6 +297,29 @@ func (tt *tabletree) LoadDBFile(path string) {
 	}
 	currnode.next = newnode
 	return
+}
+
+func (tt *tabletree) Search(key string) (Value, Status) {
+	tt.mu.Lock()
+	defer tt.mu.Unlock()
+	for _, node := range tt.levels {
+		tables := make([]*sstable, 0)
+		for node != nil {
+			tables = append(tables, node.sstable)
+			node = node.next
+		}
+		// 查找的时候要从最后一个 SSTable 开始查找
+		for i := len(tables) - 1; i >= 0; i-- {
+			value, searchResult := tables[i].Search(key)
+			// 未找到，则查找下一个 SSTable 表
+			if searchResult == SearchNone {
+				continue
+			} else { // 如果找到或已被删除，则返回结果
+				return value, searchResult
+			}
+		}
+	}
+	return Value{}, SearchNone
 }
 
 func GetLevel(path string) (level int, index int) {

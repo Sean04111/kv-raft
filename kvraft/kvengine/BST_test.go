@@ -15,9 +15,7 @@ func TestBasic(t *testing.T) {
 	fmt.Println(testbst.Search("1"))
 	fmt.Println(testbst.Search("10"))
 	fmt.Println(testbst.Delete("1"))
-	fmt.Println(testbst.Search("1").Deleted)
 	testbst.Set(Value{"1", []byte("new1"), false})
-	fmt.Println(testbst.Search("1").Deleted)
 }
 func TestMany(t *testing.T) {
 	testbst := NewBST()

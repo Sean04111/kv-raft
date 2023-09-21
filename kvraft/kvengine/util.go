@@ -5,19 +5,18 @@ type Status string
 const (
 	//BST status
 	nilBST           = "nilBST"
-	SetSuccess  = "SetSuccess"
-	SetFailed = "SetFailed"
+	SetSuccess       = "SetSuccess"
+	SetFailed        = "SetFailed"
 	DeleteSuccess    = "DeleteSuccess"
 	DeleteDeletedVal = "DeleteDeletedVal"
 	DeleteNotFound   = "DeleteNotFound"
 
 	//WAL status
-	WriteFailed = "WriteFailed"
+	WriteFailed  = "WriteFailed"
 	WriteSuccess = "WriteSuccess"
 
-
-	//sstable search status
-	SStableSearchDeleted = "SStableSearchDeleted"
-	SStableSearchNone = "SStableSearchNone"
-	SStableSearchSuccess = "SStableSearchSuccess"
+	//search status
+	SearchDeleted = "SearchDeleted"
+	SearchNone    = "SearchNone"
+	SearchSuccess = "SearchSuccess"
 )

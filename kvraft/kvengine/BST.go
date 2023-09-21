@@ -81,16 +81,20 @@ func (bst *BST) Set(kv Value) Status {
 // 搜索一个key
 // 这里不能用递归,如果树的深度很深的话
 // 压栈受不了
-func (bst *BST) Search(key string) *Value {
+func (bst *BST) Search(key string) (*Value, Status) {
 	bst.mu.RLock()
 	defer bst.mu.RUnlock()
 	if bst == nil {
-		return nil
+		return nil, SearchNone
 	}
 	currnode := bst.root
 	for currnode != nil {
 		if currnode.Val.Key == key {
-			return &currnode.Val
+			if currnode.Val.Deleted {
+				return nil, SearchDeleted
+			} else {
+				return &currnode.Val, SearchSuccess
+			}
 		}
 		if currnode.Val.Key < key {
 			currnode = currnode.Right
@@ -98,7 +102,7 @@ func (bst *BST) Search(key string) *Value {
 			currnode = currnode.Left
 		}
 	}
-	return nil
+	return nil, SearchNone
 }
 
 // 这里的删除只是改变字段，不是真的删除
@@ -149,11 +153,11 @@ func (bst *BST) GetAll() []Value {
 }
 
 //内存表交换内存
-func (bst *BST)Swap()*BST{
+func (bst *BST) Swap() *BST {
 	bst.mu.Lock()
 	defer bst.mu.Unlock()
 
-	newbst:=NewBST()
+	newbst := NewBST()
 	newbst.root = bst.root
 	bst.root = nil
 	bst.count = 0
