@@ -10,7 +10,7 @@ import (
 
 //把数据写入db文件
 func WirteTODBFile(filepath string,dataarea,indexarea []byte,meta metaInfo){
-	f,err:=os.OpenFile(filepath, os.O_WRONLY|os.O_CREATE, 0666)
+	f,err:=os.OpenFile(filepath, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
 	defer f.Close()
 	if err!=nil{
 		panic(err)

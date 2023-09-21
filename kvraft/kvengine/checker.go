@@ -9,8 +9,8 @@ import "time"
 
 func (DB *Database)Checker() {
 	con := GetConfig()
-	ticker := time.Tick(time.Duration(con.CheckInterval) * time.Millisecond)
-	for _ = range ticker {
+	for {
+		time.Sleep(time.Duration(con.CheckInterval)*time.Second)
 		DB.MemCheck()
 		DB.tabletree.CheckCompaction()
 	}

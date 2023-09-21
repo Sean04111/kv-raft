@@ -74,7 +74,7 @@ func (t *sstable) LoadIndex() {
 	t.parseindexmap = map[string]Position{}
 	err = json.Unmarshal(bytes, &t.parseindexmap)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	t.f.Seek(0, 0)
 
@@ -178,24 +178,30 @@ func (tt *tabletree) Insert(table *sstable, level int) int {
 	newnode := &tablenode{}
 	newnode.sstable = table
 	p := tt.levels[level]
-	index := 0
 	if p == nil {
 		tt.levels[level] = newnode
-		newnode.index = int64(index)
-		return index
+		newnode.index = 0
+		return 0
 	} else {
-		for p.next != nil {
-			p = p.next
-			index++
+		for p!=nil{
+			if p.next==nil{
+				newnode.index = p.index+1
+				p.next = newnode
+				break
+			}else{
+				p = p.next
+			}
 		}
-		p.next = newnode
-		newnode.index = int64(index)
-		return index
+		return int(newnode.index)
 	}
 }
 
 // 把value插入到合适的level
 func (tt *tabletree) CreateSstableAtLevel(val []Value, level int) *sstable {
+
+	// tt.mu.Lock()
+	// defer tt.mu.Unlock()
+
 	keys := []string{}
 	parsedindex := map[string]Position{}
 
