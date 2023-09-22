@@ -1,0 +1,295 @@
+2023-09-22T14:45:13.490+0800	info	raft/util.go:13	  投票  收到 3 的投票邀请,term为 1
+2023-09-22T14:45:13.490+0800	info	raft/util.go:13	  状态更新  节点 6 遇到更高term,更新term为 1 
+2023-09-22T14:45:13.490+0800	info	raft/util.go:13	  投票  符合要求,投给 3 
+2023-09-22T14:45:13.490+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:13.490+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:13.551+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:13.551+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:13.614+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:13.614+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:13.681+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:13.681+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:13.743+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 3   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:13.743+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:14.048+0800	info	raft/util.go:13	  投票  发起term为 2 的选举
+2023-09-22T14:45:14.048+0800	info	raft/util.go:13	  投票  向节点5发送投票邀请
+2023-09-22T14:45:14.048+0800	info	raft/util.go:13	  投票  向节点1发送投票邀请
+2023-09-22T14:45:14.048+0800	info	raft/util.go:13	  投票  向节点3发送投票邀请
+2023-09-22T14:45:14.048+0800	info	raft/util.go:13	  投票  向节点4发送投票邀请
+2023-09-22T14:45:14.048+0800	info	raft/util.go:13	  投票  向节点2发送投票邀请
+2023-09-22T14:45:14.048+0800	info	raft/util.go:13	  投票  向节点0发送投票邀请
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  发起term为 3 的选举
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  向节点5发送投票邀请
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  向节点0发送投票邀请
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  向节点1发送投票邀请
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  向节点2发送投票邀请
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  向节点3发送投票邀请
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  向节点4发送投票邀请
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  收到 5 的投票
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  收到 1 的投票
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  收到 3 的投票
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  投票  节点 6 成为leader
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:14.368+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:14.432+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:14.432+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:14.432+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:14.432+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:14.432+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:14.432+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:14.483+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:14.483+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:14.483+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:14.483+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:14.483+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:14.483+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:14.544+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:14.544+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:14.544+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:14.544+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:14.544+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:14.544+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:14.596+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:14.596+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:14.596+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:14.596+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:14.596+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:14.596+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:14.650+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:14.650+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:14.650+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:14.650+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:14.650+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:14.650+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:14.716+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:14.716+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:14.716+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:14.716+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:14.716+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:14.716+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:14.781+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:14.781+0800	info	raft/util.go:13	  心跳  遇到更大的term,leader下线
+2023-09-22T14:45:14.781+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:14.781+0800	info	raft/util.go:13	  状态更新  节点 6 遇到更高term,更新term为 4 
+2023-09-22T14:45:14.781+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:14.840+0800	info	raft/util.go:13	  投票  收到 4 的投票邀请,term为 5
+2023-09-22T14:45:14.840+0800	info	raft/util.go:13	  状态更新  节点 6 遇到更高term,更新term为 5 
+2023-09-22T14:45:14.840+0800	info	raft/util.go:13	  投票  符合要求,投给 4 
+2023-09-22T14:45:14.840+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 4   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:14.840+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:14.895+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 4   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:14.895+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:14.947+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 4   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:14.947+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.004+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 4   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.004+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.066+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 4   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.066+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.118+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 4   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.118+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.169+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 4   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.169+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.221+0800	info	raft/util.go:13	  投票  收到 2 的投票邀请,term为 7
+2023-09-22T14:45:15.221+0800	info	raft/util.go:13	  状态更新  节点 6 遇到更高term,更新term为 7 
+2023-09-22T14:45:15.221+0800	info	raft/util.go:13	  投票  符合要求,投给 2 
+2023-09-22T14:45:15.221+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.221+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.273+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.273+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.339+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.339+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.400+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.400+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.452+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.452+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.509+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.509+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.566+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.566+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.628+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.628+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.694+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 2   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:15.694+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:15.860+0800	info	raft/util.go:13	  投票  发起term为 8 的选举
+2023-09-22T14:45:15.860+0800	info	raft/util.go:13	  投票  向节点5发送投票邀请
+2023-09-22T14:45:15.860+0800	info	raft/util.go:13	  投票  向节点4发送投票邀请
+2023-09-22T14:45:15.860+0800	info	raft/util.go:13	  投票  向节点3发送投票邀请
+2023-09-22T14:45:15.860+0800	info	raft/util.go:13	  投票  向节点0发送投票邀请
+2023-09-22T14:45:15.860+0800	info	raft/util.go:13	  投票  向节点1发送投票邀请
+2023-09-22T14:45:15.860+0800	info	raft/util.go:13	  投票  向节点2发送投票邀请
+2023-09-22T14:45:16.085+0800	info	raft/util.go:13	  投票  发起term为 9 的选举
+2023-09-22T14:45:16.085+0800	info	raft/util.go:13	  投票  向节点5发送投票邀请
+2023-09-22T14:45:16.085+0800	info	raft/util.go:13	  投票  向节点0发送投票邀请
+2023-09-22T14:45:16.085+0800	info	raft/util.go:13	  投票  向节点1发送投票邀请
+2023-09-22T14:45:16.085+0800	info	raft/util.go:13	  投票  向节点2发送投票邀请
+2023-09-22T14:45:16.085+0800	info	raft/util.go:13	  投票  向节点3发送投票邀请
+2023-09-22T14:45:16.085+0800	info	raft/util.go:13	  投票  向节点4发送投票邀请
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  发起term为 10 的选举
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  向节点5发送投票邀请
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  向节点0发送投票邀请
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  向节点2发送投票邀请
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  向节点3发送投票邀请
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  向节点4发送投票邀请
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  向节点1发送投票邀请
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  收到 0 的投票
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  收到 3 的投票
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  收到 4 的投票
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  投票  节点 6 成为leader
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.268+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.329+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.329+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.329+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.329+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.329+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.329+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.329+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.329+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.380+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.380+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.380+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.380+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.380+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.380+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.380+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.380+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.444+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.444+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.444+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.444+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.444+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.444+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.444+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.444+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.510+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.510+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.510+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.510+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.510+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.510+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.510+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.510+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.570+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.570+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.570+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.570+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.570+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.570+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.570+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.570+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.636+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.636+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.636+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.636+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.636+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.636+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.636+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.636+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.698+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.698+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.698+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.698+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.698+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.698+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.698+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.698+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.758+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.758+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.758+0800	info	raft/util.go:13	  心跳  给节点 0 发送心跳成功
+2023-09-22T14:45:16.758+0800	info	raft/util.go:13	  日志对齐  0 日志没有冲突
+2023-09-22T14:45:16.758+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.758+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:16.758+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.758+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.818+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:16.818+0800	info	raft/util.go:13	  心跳  遇到更大的term,leader下线
+2023-09-22T14:45:16.818+0800	info	raft/util.go:13	  状态更新  节点 6 遇到更高term,更新term为 11 
+2023-09-22T14:45:16.818+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.818+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.818+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  发起term为 12 的选举
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  向节点5发送投票邀请
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  向节点1发送投票邀请
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  收到 3 的投票邀请,term为 11
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  3 的term不大于本节点,故拒绝放弃竞选
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  收到 1 的投票
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  收到 5 的投票
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  向节点2发送投票邀请
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  向节点0发送投票邀请
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  向节点3发送投票邀请
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  向节点4发送投票邀请
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  收到 3 的投票
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  投票  节点 6 成为leader
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:16.997+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:17.059+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:17.059+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:17.059+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:17.059+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:17.059+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:17.059+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:17.059+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:17.059+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:17.125+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:17.125+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:17.125+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:17.125+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:17.125+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:17.125+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:17.125+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:17.125+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:17.191+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:17.191+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:17.191+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:17.191+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:17.191+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:17.191+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:17.191+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:17.191+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:17.251+0800	info	raft/util.go:13	  心跳  给节点 1 发送心跳成功
+2023-09-22T14:45:17.251+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:17.251+0800	info	raft/util.go:13	  心跳  给节点 4 发送心跳成功
+2023-09-22T14:45:17.251+0800	info	raft/util.go:13	  日志对齐  4 日志没有冲突
+2023-09-22T14:45:17.251+0800	info	raft/util.go:13	  心跳  给节点 3 发送心跳成功
+2023-09-22T14:45:17.251+0800	info	raft/util.go:13	  日志对齐  3 日志没有冲突
+2023-09-22T14:45:17.251+0800	info	raft/util.go:13	  日志对齐  1 日志没有冲突
+2023-09-22T14:45:17.251+0800	info	raft/util.go:13	  日志对齐  5 日志没有冲突
+2023-09-22T14:45:18.306+0800	info	raft/util.go:13	  心跳  收到新leader1的心跳,leader下线
+2023-09-22T14:45:18.306+0800	info	raft/util.go:13	  状态更新  节点 6 遇到更高term,更新term为 14 
+2023-09-22T14:45:18.306+0800	info	raft/util.go:13	  心跳  给节点 5 发送心跳成功
+2023-09-22T14:45:18.358+0800	info	raft/util.go:13	  投票  收到 0 的投票邀请,term为 16
+2023-09-22T14:45:18.358+0800	info	raft/util.go:13	  状态更新  节点 6 遇到更高term,更新term为 16 
+2023-09-22T14:45:18.358+0800	info	raft/util.go:13	  投票  符合要求,投给 0 
+2023-09-22T14:45:18.358+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 0   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:18.358+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:18.408+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 0   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:18.408+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:18.479+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 0   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:18.479+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:18.534+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 0   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:18.534+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:18.600+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 0   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:18.600+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:18.651+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 0   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:18.651+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:18.703+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 0   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:18.703+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:18.755+0800	info	raft/util.go:13	  心跳  收到权威leader心跳,来自 0   leader 的commit index为0我的commit index为0
+2023-09-22T14:45:18.755+0800	info	raft/util.go:13	  日志对齐  本节点日志和leader已经对齐,本节点日志为|  index:0 term:0 cmd:-1 | 
+2023-09-22T14:45:18.755+0800	info	raft/util.go:13	  节点生命  节点6死亡
