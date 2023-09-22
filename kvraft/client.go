@@ -2,6 +2,7 @@ package kvraft
 
 import (
 	"crypto/rand"
+	"kv-raft/common"
 	"kv-raft/labrpc"
 	"math/big"
 )
@@ -79,7 +80,7 @@ func (ck *Clerk) Command(args *CommandArgs) string {
 		var reply CommandReply
 		ok := ck.servers[ck.leaderId].Call("KVServer.Command", args, &reply)
 		// fmt.Println(ck.clientId, "给", ck.leaderId, "发args,reply为", reply)
-		if !ok || reply.Err == ErrWrongLeader || reply.Err == ErrTimeOut {
+		if !ok || reply.Err == common.ErrWrongLeader || reply.Err == common.ErrTimeOut {
 			ck.leaderId = (ck.leaderId + 1) % int64(len(ck.servers))
 			continue
 		} else {

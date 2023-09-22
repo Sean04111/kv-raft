@@ -1,19 +1,13 @@
 package kvraft
 
 import (
+	"kv-raft/common"
 	"log"
 	"time"
 )
 
-const (
-	OK             = "OK"
-	ErrNoKey       = "ErrNoKey"
-	ErrWrongLeader = "ErrWrongLeader"
-	ErrTimeOut     = "ErrTimeOut"
-)
-
 const ExecuteTimeout = 500 * time.Millisecond
-const EmptyString = ""
+
 
 const Debug = false
 
@@ -23,8 +17,6 @@ func DPrintf(format string, a ...interface{}) (n int, err error) {
 	}
 	return
 }
-
-type Err string
 
 type Optype uint8
 
@@ -43,7 +35,7 @@ func (op Optype) Opstring(optype Optype) string {
 	case OpAppend:
 		return "append"
 	}
-	return EmptyString
+	return common.EmptyString
 }
 
 // CommandArgs
@@ -57,7 +49,7 @@ type CommandArgs struct {
 }
 type CommandReply struct {
 	Value string
-	Err   Err
+	Err   common.Err
 }
 
 // OperationContext
