@@ -1,7 +1,6 @@
 package kvengine
 
 import (
-	"encoding/json"
 	"fmt"
 	"kv-raft/kvraft"
 	"os"
@@ -59,7 +58,7 @@ func (db *Database) Get(key string) (string, kvraft.Err) {
 	return kvraft.EmptyString, kvraft.ErrNoKey
 }
 func (db *Database) Put(key, value string) kvraft.Err {
-	data, _ := json.Marshal(value)
+	data := []byte(value)
 	db.memtable.Set(Value{Key: key, Value: data, Deleted: false})
 
 	db.wal.Write(Value{Key: key, Value: data, Deleted: false})
@@ -67,9 +66,7 @@ func (db *Database) Put(key, value string) kvraft.Err {
 }
 func (db *Database) Append(key, value string) kvraft.Err {
 	val, _ := db.Get(key)
-	newval := fmt.Sprintf("%s%s",val,value)
-	fmt.Println("get",val)
-	fmt.Println("newval", newval)
+	newval := fmt.Sprintf("%s%s", val, value)
 	db.Put(key, newval)
 	return kvraft.OK
 }
