@@ -2,9 +2,12 @@ package kvraft
 
 import (
 	"bytes"
+	"kv-raft/common"
+	"kv-raft/kvengine"
 	"kv-raft/labgob"
 	"kv-raft/labrpc"
 	"kv-raft/raft"
+	"strconv"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -84,7 +87,14 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 	// You may need initialization code here.
 	kv.lastapplied = 0
-	kv.kvDB = NewMKV()
+	kv.kvDB = kvengine.Start(kvengine.Config{
+		DataDir:       "./datas-serivce" + strconv.Itoa(kv.me),
+		Level0Size:    100,
+		PartSize:      4,
+		Threshold:     30,
+		CheckInterval: 3,
+	})
+	// kv.kvDB = NewMKV()
 	kv.lastOps = map[int64]OperationContext{}
 	kv.notifychan = map[int64]chan *CommandReply{}
 	kv.RestoreSnapshot(persister.ReadSnapshot())
@@ -195,18 +205,18 @@ func (kv *KVServer) GetNotifyChan(index int64) chan *CommandReply {
 }
 
 // ApplytoStartMachine service 在DB上读写操作
-func (kv *KVServer) ApplytoStartMachine(cmd Command) (string, Err) {
+func (kv *KVServer) ApplytoStartMachine(cmd Command) (string, common.Err) {
 	switch cmd.Ops {
 	case OpGet:
 		return kv.kvDB.Get(cmd.Key)
 	case OpPut:
 		err := kv.kvDB.Put(cmd.Key, cmd.Value)
-		return EmptyString, err
+		return common.EmptyString, err
 	case OpAppend:
 		err := kv.kvDB.Append(cmd.Key, cmd.Value)
-		return EmptyString, err
+		return common.EmptyString, err
 	}
-	return EmptyString, EmptyString
+	return common.EmptyString, common.EmptyString
 }
 
 // Command handler
@@ -238,8 +248,8 @@ func (kv *KVServer) Command(args *CommandArgs, reply *CommandReply) {
 	// fmt.Println(args.ClientId, "的这次index为", index)
 	//如果当前service不是raft leader的service
 	if !ok {
-		reply.Err = ErrWrongLeader
-		reply.Value = EmptyString
+		reply.Err = common.ErrWrongLeader
+		reply.Value = common.EmptyString
 		return
 	}
 
@@ -251,8 +261,8 @@ func (kv *KVServer) Command(args *CommandArgs, reply *CommandReply) {
 		reply.Value = msg.Value
 		reply.Err = msg.Err
 	case <-time.After(ExecuteTimeout):
-		reply.Err = ErrTimeOut
-		reply.Value = EmptyString
+		reply.Err = common.ErrTimeOut
+		reply.Value = common.EmptyString
 	}
 	go func() {
 		kv.mu.Lock()

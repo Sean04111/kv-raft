@@ -580,12 +580,13 @@ func TestPersistPartitionUnreliable3A(t *testing.T) {
 	// Test: unreliable net, restarts, partitions, many clients (3A) ...
 	GenericTest(t, "3A", 5, 5, true, true, true, -1, false)
 }
-
+//由于lsm引擎启动的时候有一定概率发生串行化异常
 func TestPersistPartitionUnreliableLinearizable3A(t *testing.T) {
 	// Test: unreliable net, restarts, partitions, random keys, many clients (3A) ...
 	GenericTest(t, "3A", 15, 7, true, true, true, -1, true)
 }
 
+//3B测试由于decode不能decode小写字段,所以3B测试的时候使用map测试就可以了
 // if one server falls behind, then rejoins, does it
 // recover by using the InstallSnapshot RPC?
 // also checks that majority discards committed log entries
