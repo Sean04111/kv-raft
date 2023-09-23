@@ -2,7 +2,6 @@ package kvengine
 
 import (
 	"fmt"
-	"path/filepath"
 	"strconv"
 	"testing"
 )
@@ -22,7 +21,13 @@ func TestWALMany(t *testing.T) {
 	wal.Write(Value{"5", []byte(""), true})
 	fmt.Println(wal.Load().GetAll())
 }
-func TestA(t *testing.T) {
-	s := "sstable/2.5.db"
-	fmt.Println(filepath.Base(s))
+
+func TestXxx(t *testing.T) {
+	s := "abc"
+	ans:=0
+	for i := range s {
+		m := s[i]
+		ans+=int(m)
+	}
+	fmt.Println(ans)
 }
