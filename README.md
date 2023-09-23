@@ -1,9 +1,44 @@
 # 基于 raft 共识协议和 LSM 架构引擎的 key-value 储存服务系统
 
-实现了 mit 6.824 的 lab 2、3 并通过所有测试
-同时使用了 LSM 架构的数据库系统来为 lab3 提供的数据储存服务
+## 项目架构
+
+项目在架构上使用了基于 mit6.824 的 raft 协议实现，使用 raft 协议来实现项目的共识，使用了 lsm tree 来实现数据储存服务。
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/11e093fd22d7461398199ca3c467d06f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1825&h=1200&s=118639&e=png&b=fdf8f6)
+
+## 项目模块
+
+### Raft
+
+项目的 raft 模块使用了基于 mit 6.824 lab2 的 raft 实现思路，具体的实现参照 raft-extended 论文实现；
+实现了 raft 协议中的 leader 选举，日志复制、日志对齐、日志压缩快照等功能，实现了基本的共识协商；
+
+> 不足之处：
+> 这里没有实现对于集群中成员变更的情况下的共识的实现
+> 统一使用的是粒度比较大的 mutex，可以考虑使用粒度更小的 atomic
+
+### KV service&clerk
+
+基于 lab3 实现了一个基本的 kv 客户端和服务端的交互，
+实现了基本的 client 端和 server 端之间的交互，同时保证了命令的顺序一致性和强一致性；
+
+> 不足之处:
+> 为了方便地实现顺序一致性，让读请求也只能通过 leader 来实现，这样效率有点低，可以划分事务请求的方式，让非写请求在所有节点都可以访问，而写请求只能在 leader 节点访问，这样效率会更高；
+
+### lsm tree
+
+基于 lsm Tree 的思想为系统实现了数据存储功能，实现了内存表的读写，预写日志防止内存表丢失，内存表向磁盘 sstable 转移，以及 sstable 在磁盘中的分层管理；
+源码流程图：
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f0ad4921f744dffafbf74cdc0922c41~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2377&h=1004&s=166882&e=png&b=fdf8f6)
+
+> 不足之处:
+> 对于内存表使用的还是简单的 bst，容易出现性能退化的情况，所以优化的话可以采用红黑树或者跳表实现；
+> 对于内存表中的数据没有实现过期策略，可以通过 LRU 缓存技术来实现内存淘汰；
+
+ps:<br> 1.系统为了实现多种极端情况下的测试，暂定没有实现 RPC,任然使用的 labrpc,这样可以更方便的测试,如果要实现部署使用,可以使用 gRPC 等成熟的 RPC 解决方案实现;<br>2.暂时只支持 string:string 的储存.
+
+## 项目测试
+
+项目已经通过所有 mit 测试,代码覆盖率都在 90%以上
 
 ![屏幕截图 2023-09-22 145222.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fdd84964a3ec40878936d2f2a582bc87~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=907&h=1024&s=163004&e=png&b=1e2030)
 ![屏幕截图 2023-09-22 145204.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f80626c2c864691981b5ac1a599dc06~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=901&h=1063&s=195305&e=png&b=1e2030)
-
-ps:<br> 1.系统为了实现多种极端情况下的测试，暂定没有实现 RPC,任然使用的 labrpc,这样可以更方便的测试,如果要实现部署使用,可以使用 gRPC 等成熟的 RPC 解决方案实现;<br>2.暂时只支持 string:string 的储存.
