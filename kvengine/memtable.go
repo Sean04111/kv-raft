@@ -5,7 +5,9 @@ package kvengine
 
 type Memtable interface {
 	Set(kv Value) Status
-	Search(key string) *Value
+	Search(key string) (*Value, Status)
 	Delete(key string) Status
 	GetAll() []Value
+	GetCount() int
+	Swap() Memtable
 }

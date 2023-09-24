@@ -11,7 +11,7 @@ import (
 //这里作为实现statemachine的接口
 
 type Database struct {
-	Memtable  *BST
+	Memtable  Memtable
 	Tabletree *tabletree
 	Wal       *wal
 }

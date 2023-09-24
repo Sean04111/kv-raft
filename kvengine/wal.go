@@ -16,7 +16,7 @@ type wal struct {
 }
 
 // 初始化并且load
-func (wal *wal) Init(dir string) *BST {
+func (wal *wal) Init(dir string) Memtable {
 	path := path.Join(dir, "wal.log")
 	newf, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
@@ -46,12 +46,13 @@ func (wal *wal) Write(kv Value) Status {
 	return WriteSuccess
 }
 
-// 把wal文件中的数据load到bst中
-func (wal *wal) Load() *BST {
+// 这里采用的删除策略可能对跳表有异常
+// 把wal文件中的数据load到memtable中
+func (wal *wal) Load() Memtable {
 	wal.Locker.Lock()
 	defer wal.Locker.Unlock()
 
-	bst := NewBST()
+	NewMem := NewSkipList()
 
 	//获取wal文件的信息
 	info, _ := os.Stat(wal.Path)
@@ -59,7 +60,7 @@ func (wal *wal) Load() *BST {
 
 	//如果wal文件是空的
 	if size == 0 {
-		return bst
+		return NewMem
 	}
 
 	//把读头标到文件开头
@@ -99,19 +100,19 @@ func (wal *wal) Load() *BST {
 		//把数据放到bst中
 
 		if val.Deleted {
-			bst.Delete(val.Key)
+			NewMem.Delete(val.Key)
 		} else {
-			bst.Set(val)
+			NewMem.Set(val)
 		}
 		index = index + datalen
 	}
-	return bst
+	return NewMem
 }
 
 // 清空wal文件,前提是已经load了
 func (wal *wal) Reset() {
 	wal.Locker.Lock()
-	wal.Locker.Unlock()
+	defer wal.Locker.Unlock()
 	err := wal.F.Close()
 	if err != nil {
 		panic(err)

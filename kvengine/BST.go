@@ -152,8 +152,8 @@ func (bst *BST) GetAll() []Value {
 	return res
 }
 
-//内存表交换内存
-func (bst *BST) Swap() *BST {
+// 内存表交换内存
+func (bst *BST) Swap() Memtable {
 	bst.Mu.Lock()
 	defer bst.Mu.Unlock()
 
@@ -162,4 +162,11 @@ func (bst *BST) Swap() *BST {
 	bst.Root = nil
 	bst.Count = 0
 	return newbst
+}
+
+func (bst *BST) GetCount() int {
+	bst.Mu.RLock()
+	ans := bst.Count
+	bst.Mu.RUnlock()
+	return ans
 }

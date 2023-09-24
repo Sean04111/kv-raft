@@ -29,7 +29,7 @@ func TestMuch(t *testing.T) {
 		DataDir:       "./dbfiles",
 		Level0Size:    5,
 		PartSize:      2,
-		Threshold:     300,
+		Threshold:     5000,
 		CheckInterval: 3,
 	})
 	for i := 0; i < 200000; i++ {
@@ -62,7 +62,7 @@ func TestHotStart(t *testing.T) {
 		Threshold:     3000,
 		CheckInterval: 3,
 	})
-	fmt.Println(db.Get("56462"))
+	fmt.Println(db.Get("52133"))
 }
 
 // 测试序列化编码
@@ -86,6 +86,22 @@ func TestAppend(t *testing.T) {
 		Threshold:     300,
 		CheckInterval: 3,
 	})
-	db.Append("append","this is append")
+	db.Append("append", "this is append")
 	fmt.Println(db.Get("append"))
+}
+
+// 数据查询QPS测试
+func Benchmark_QPS_Find(b *testing.B) {
+	//这里memtable内存设置的比较大，是为了放大跳表和BST的差距
+	db := Start(Config{
+		DataDir:       "./dbfiles",
+		Level0Size:    5,
+		PartSize:      2,
+		Threshold:     500,
+		CheckInterval: 3,
+	})
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		db.Get(strconv.Itoa(i))
+	}
 }

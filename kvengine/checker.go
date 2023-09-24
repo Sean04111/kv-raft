@@ -17,9 +17,9 @@ func (DB *Database) Checker() {
 }
 func (DB *Database) MemCheck() {
 	con := GetConfig()
-	if DB.Memtable.Count > con.Threshold {
-		newbst := DB.Memtable.Swap()
-		DB.Tabletree.CreateTable(newbst.GetAll())
+	if DB.Memtable.GetCount() > con.Threshold {
+		newmemtable := DB.Memtable.Swap()
+		DB.Tabletree.CreateTable(newmemtable.GetAll())
 		DB.Wal.Reset()
 	}
 }

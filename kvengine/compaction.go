@@ -24,8 +24,6 @@ func (tt *tabletree) CheckCompaction() {
 
 // 压缩当前level文件到下一层
 // 合并的思路是使用bst
-// 数据合并有问题
-// 这个合并操作只能做一次,第二次就会打乱数据
 func (tt *tabletree) Compaction(level int) {
 	tablecache := make([]byte, levelMaxSize[level])
 	currnode := tt.Levels[level]
@@ -85,7 +83,6 @@ func (tt *tabletree) Compaction(level int) {
 }
 
 // 清除这一level
-// 会报错：0.0db正在被占用
 func (tt *tabletree) ClearLevel(node *tablenode) {
 	tt.Mu.Lock()
 	defer tt.Mu.Unlock()
