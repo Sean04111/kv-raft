@@ -27,12 +27,19 @@
 ### lsm tree
 
 基于 lsm Tree 的思想为系统实现了数据存储功能，实现了内存表的读写，预写日志防止内存表丢失，内存表向磁盘 sstable 转移，以及 sstable 在磁盘中的分层管理；
+
 源码流程图：
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f0ad4921f744dffafbf74cdc0922c41~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2377&h=1004&s=166882&e=png&b=fdf8f6)
 
+后面这里用了跳表来优化,(没有选择红黑树是因为实现太复杂了,性能收益不大),从benchmark来看,从读取的性能能优化25%左右：<br>
+<br>基于BST的:
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5eed481552ba48649bf53ea033ce4846~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1304&h=360&s=50683&e=png&b=1e2030)
+<br>基于跳表的：
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1628da535194d73ba84b6733611db1c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1354&h=493&s=76879&e=png&b=1e2030)
+
 > 不足之处:
-> 对于内存表使用的还是简单的 bst，容易出现性能退化的情况，所以优化的话可以采用红黑树或者跳表实现；
-> 对于内存表中的数据没有实现过期策略，可以通过 LRU 缓存技术来实现内存淘汰；
+> 对于内存表中的数据没有实现过期策略，可以通过 LRU 缓存技术来实现内存淘汰；<br>
+>跳表的锁粒度太大了（这里还是使用的读写锁），可以换成左边界锁来优化
 
 ps:<br> 1.系统为了实现多种极端情况下的测试，暂定没有实现 RPC,任然使用的 labrpc,这样可以更方便的测试,如果要实现部署使用,可以使用 gRPC 等成熟的 RPC 解决方案实现;<br>2.暂时只支持 string:string 的储存.
 
