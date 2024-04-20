@@ -82,7 +82,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 				//这里直接结束了，交给下一轮
 				return
 			}
-			//lastincludedIndex永远在是日志中的最后一项
+			//lastincludedIndex永远在是日志中的第一项
 			//prelogindex不一致
 			if rf.EntryAt(args.PrevLogIndex).Term != args.PrevLogTerm {
 				rf.Record("日志对齐", "发现log和leader不一致")
@@ -92,7 +92,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 				//这里xindex是返回Xterm中的第一个索引
 				//If a follower does have prevLogIndex in its log, but the term does not match, it should return conflictTerm = log[prevLogIndex].Term,
 				//and then search its log for the first index whose entry has term equal to conflictTerm.
-				//来自guide-book
+				//来自guide-book（从上一个 term 开始重新匹配）
 				for xindex := args.PrevLogIndex; xindex > rf.lastincludeIndex; xindex-- {
 					if rf.EntryAt(xindex-1).Term != reply.Xterm {
 						reply.Xindex = xindex
@@ -172,7 +172,7 @@ func (rf *Raft) LeaderAPUnlocked(server int, args *AppendEntryArgs) {
 				rf.nextIndex[server] = next
 				rf.matchIndex[server] = match
 			}
-			//不存在seccuss为true conflict为true的情况
+			//不存在success为true conflict为true的情况
 
 		} else if reply.Conflict {
 			//由于日志冲突导致false
@@ -200,7 +200,6 @@ func (rf *Raft) LeaderAPUnlocked(server int, args *AppendEntryArgs) {
 	} else {
 		return
 	}
-
 
 }
 
@@ -237,7 +236,7 @@ func (rf *Raft) LeaderAppendEntryLocked(heartbeat bool) {
 		//如果leader有新的：leaderlastindex >=rf.nextIndex[k]
 		if leaderlastlogindex >= rf.nextIndex[k] || heartbeat {
 			args := &AppendEntryArgs{
-				Term:         rf.currentTerm,	
+				Term:         rf.currentTerm,
 				LeaderId:     rf.me,
 				LeaderCommit: rf.commitIndex,
 			}
