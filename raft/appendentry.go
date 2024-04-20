@@ -16,7 +16,7 @@ type AppendEntryArgs struct {
 }
 type AppendEntryReply struct {
 	Term     int  //follower的current term
-	Success  bool //true：f包含prevLogIndex和prevLogTerm
+	Success  bool //true：follower包含prevLogIndex和prevLogTerm
 	Conflict bool //follower和leader日志是否冲突
 	Xindex   int  //follower匹配的index
 	Xterm    int  //follower的匹配的term
