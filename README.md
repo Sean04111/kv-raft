@@ -38,7 +38,6 @@
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1628da535194d73ba84b6733611db1c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1354&h=493&s=76879&e=png&b=1e2030)
 
 > 不足之处:
-> 对于内存表中的数据没有实现过期策略，可以通过 LRU 缓存技术来实现内存淘汰；<br>
 >跳表的锁粒度太大了（这里还是使用的读写锁），可以换成左边界锁来优化
 
 ps:<br> 1.系统为了实现多种极端情况下的测试，暂定没有实现 RPC,任然使用的 labrpc,这样可以更方便的测试,如果要实现部署使用,可以使用 gRPC 等成熟的 RPC 解决方案实现;<br>2.暂时只支持 string:string 的储存.

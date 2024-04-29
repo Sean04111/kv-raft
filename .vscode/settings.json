@@ -1,4 +1,6 @@
 {
     "go.testEnvVars": {},
-    "go.testTimeout": "100000s"
+    "go.testTimeout": "100000s",
+    "go.coverOnTestPackage": false,
+    "go.coverOnSingleTestFile": true
 }

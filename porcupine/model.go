@@ -48,6 +48,10 @@ type Model struct {
 	DescribeState func(state interface{}) string
 }
 
+func Move(elements []historyElement) [][]Operation {
+	ops := [][]Operation{}
+	return ops
+}
 func NoPartition(history []Operation) [][]Operation {
 	return [][]Operation{history}
 }
